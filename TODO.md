@@ -1,0 +1,28 @@
+# TODO
+
+- [x] Fix the TTLs according to the following pattern
+	- For short trial duration
+		- Trial onset
+		- T1 on T1 trials
+			- Correct
+			- Incorrect
+		- T1 on T2 trials
+			- Correct
+			- Incorrect
+		- T2 
+			- Correct
+			- Incorrect
+		- Trial offset
+	- For long trial duration
+		- Trial onset
+		- T1 on T1 trials
+			- Correct
+			- Incorrect
+		- T1 on T2 trials
+			- Correct
+			- Incorrect
+		- T2 
+			- Correct
+			- Incorrect
+		- Trial offset
+	- **NOTE** There is no indicator of if the response was correct or not, but it does keep track of the stimuli presented and the responses given. It also marks the beginning and end of the presentation phase, which can be used to determine if the given trial is a T1 or a T2.

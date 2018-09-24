@@ -1,0 +1,4 @@
+block.thisRepN,block.thisTrialN,block.thisN,block.thisIndex,trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,stim.thisRepN,stim.thisTrialN,stim.thisN,stim.thisIndex,trial,sep_dur,cond,Tx,stimulus,block,usr_input_t1.keys,usr_input_t1.rt,usr_input_t2.keys,usr_input_t2.rt,date,frameRate,expName,session,participant,
+0,0,0,0,0,0,0,0,,,,,,,,,,,5,0.300147452487,7,0.116854774074,2018_Mar_12_1227,60.0004292045,test_experiment,001,6,
+0,0,0,0,1,0,1,0,,,,,,,,,,,3,0.31682317489,6,0.21689262467,2018_Mar_12_1227,60.0004292045,test_experiment,001,6,
+0,0,0,0,2,0,2,0,,,,,,,,,,,4,0.316793006379,5,0.0835129707493,2018_Mar_12_1227,60.0004292045,test_experiment,001,6,

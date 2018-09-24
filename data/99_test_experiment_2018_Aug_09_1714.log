@@ -1,0 +1,33 @@
+10.8329 	WARNING 	psychopy.parallel has been imported but no parallel port driver found. Install either inpout32 or dlportio
+17.4386 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, args=UNKNOWN, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color=u'white', colorSpace='named', fullscr=UNKNOWN, gamma=None, kwargs=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x1E3009D0>, multiSample=False, name='window1', numSamples=2, pos=[1420, 880], screen=0, size=array([400, 400]), stereo=False, units=u'norm', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType=u'pyglet')
+17.4386 	EXP 	window1: recordFrameIntervals = False
+17.5938 	EXP 	window1: recordFrameIntervals = True
+17.7777 	EXP 	window1: recordFrameIntervals = False
+18.7620 	EXP 	Created instruct_p1 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='black', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, name='instruct_p1', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 0.,  0.,  0.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+18.7812 	EXP 	Created ready = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='black', colorSpace='named', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='ready', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 0.,  0.,  0.]), text='default text', units=u'norm', win=Window(...), wrapWidth=1)
+18.7885 	EXP 	Created go = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='black', colorSpace='named', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='go', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 0.,  0.,  0.]), text='GO', units=u'norm', win=Window(...), wrapWidth=1)
+18.7892 	EXP 	Created gap = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-3.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='gap', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='', units=u'norm', win=Window(...), wrapWidth=1)
+19.0968 	EXP 	Created text = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='grey', colorSpace='named', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=2, italic=False, name='text', opacity=0.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 128.,  128.,  128.]), text='default text', units=u'norm', win=Window(...), wrapWidth=1)
+19.1129 	EXP 	Created text_2 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='black', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='text_2', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 0.,  0.,  0.]), text='default text', units=u'norm', win=Window(...), wrapWidth=1)
+19.1189 	EXP 	Created mask = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='mask', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=' ', units=u'norm', win=Window(...), wrapWidth=1)
+19.1526 	EXP 	Created Probe_t1 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='black', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='Probe_t1', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 0.,  0.,  0.]), text='What numbers did you see?', units=u'norm', win=Window(...), wrapWidth=1)
+19.1706 	EXP 	Created Probe_t2 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='black', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='Probe_t2', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 0.,  0.,  0.]), text='What numbers did you see?', units=u'norm', win=Window(...), wrapWidth=1)
+19.1714 	EXP 	Created blank = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='blank', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='', units=u'norm', win=Window(...), wrapWidth=1)
+19.1902 	EXP 	instruct_p1: autoDraw = True
+22.7291 	DATA 	Mouse: Left button down, pos=(221,267)
+22.8117 	DATA 	Mouse:  Left button up, pos=(221,267)
+22.8955 	DATA 	Mouse: Left button down, pos=(221,267)
+22.9627 	DATA 	Mouse:  Left button up, pos=(221,267)
+26.4124 	DATA 	Keypress: space
+26.4129 	EXP 	Created sequence: random, trialTypes=1, nReps=2, seed=None
+26.4132 	EXP 	New trial (rep=0, index=0): None
+26.4298 	EXP 	instruct_p1: autoDraw = False
+26.4298 	EXP 	ready: text = 'Block 1\n\nReady?'
+26.4298 	EXP 	ready: autoDraw = True
+27.4273 	EXP 	ready: autoDraw = False
+27.4437 	EXP 	go: autoDraw = True
+27.9272 	EXP 	go: autoDraw = False
+27.9454 	EXP 	gap: autoDraw = True
+28.1151 	EXP 	Created sequence: random, trialTypes=1, nReps=528, seed=None
+28.1174 	EXP 	New trial (rep=0, index=0): None
+28.1667 	EXP 	window1: mouseVisible = True
