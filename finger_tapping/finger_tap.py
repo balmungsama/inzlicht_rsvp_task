@@ -2,16 +2,19 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy2 Experiment Builder (v1.90.3),
-    on September 24, 2018, at 13:37
+    on September 24, 2018, at 15:17
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
     Peirce, JW (2009) Generating stimuli for neuroscience using PsychoPy.
         Frontiers in Neuroinformatics, 2:10. doi: 10.3389/neuro.11.010.2008
+
+TTL 10  = practice press
+TTL 100 = space bar press
 """
 
 from __future__ import absolute_import, division
-from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock, parallel
+from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 import numpy as np  # whole numpy lib is available, prepend 'np.'
@@ -20,6 +23,14 @@ from numpy import (sin, cos, tan, log, log10, pi, average,
 from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
+
+sendTTL = False
+parallelPortAddress = 61368 #49168
+
+if sendTTL:
+    from psychopy import parallel
+    port = parallel.ParallelPort(address = parallelPortAddress)
+    port.setData(0) #make sure all pins are low
 
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemencoding())
@@ -268,10 +279,17 @@ for thisTrain_loop in train_loop:
             train_press.status = STOPPED
         if train_press.status == STARTED:
             theseKeys = event.getKeys(keyList=['space'])
-            
+
             # check for quit:
             if "escape" in theseKeys:
                 endExpNow = True
+            # send practice TTL
+            if "space" in theseKeys:
+                if sendTTL:
+                    port.setData(int(10))
+                else:
+                    print "TTL {}".format(int(10))
+
         # start/stop tick
         if t >= 0.0 and tick.status == NOT_STARTED:
             # keep track of start time/frame for later
@@ -311,7 +329,7 @@ t = 0
 pressingClock.reset()  # clock
 frameN = -1
 continueRoutine = True
-routineTimer.add(24.000000)
+routineTimer.add(120.000000)
 # update component parameters for each repeat
 button_press = event.BuilderKeyResponse()
 # keep track of which components have finished
@@ -336,7 +354,7 @@ while continueRoutine and routineTimer.getTime() > 0:
         # keyboard checking is just starting
         win.callOnFlip(button_press.clock.reset)  # t=0 on next screen flip
         event.clearEvents(eventType='keyboard')
-    frameRemains = 0.0 + 24- win.monitorFramePeriod * 0.75  # most of one frame period left
+    frameRemains = 0.0 + 120- win.monitorFramePeriod * 0.75  # most of one frame period left
     if button_press.status == STARTED and t >= frameRemains:
         button_press.status = STOPPED
     if button_press.status == STARTED:
@@ -348,6 +366,11 @@ while continueRoutine and routineTimer.getTime() > 0:
         if len(theseKeys) > 0:  # at least one key was pressed
             button_press.keys.extend(theseKeys)  # storing all keys
             button_press.rt.append(button_press.clock.getTime())
+            if sendTTL:
+                port.setData(int(100))
+            else:
+                print "TTL {}".format(int(100))
+                    
     
     # check if all components have finished
     if not continueRoutine:  # a component has requested a forced-end of Routine
