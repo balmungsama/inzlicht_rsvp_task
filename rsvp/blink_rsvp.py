@@ -11,10 +11,27 @@ If you publish work using this script please cite the PsychoPy publications:
         Journal of Neuroscience Methods, 162(1-2), 8-13.
     Peirce, JW (2009) Generating stimuli for neuroscience using PsychoPy.
         Frontiers in Neuroinformatics, 2:10. doi: 10.3389/neuro.11.010.2008
+
+TTL 4: a short-seperation trial is beginning
+TTL 8: a long-seperation trial is beginning
+
+TTL 11-19: The T1 stimulus +10 (the first number indicates which target stimulus it is)
+TTL 21-29: The T2 stimulus +20 (the first number indicates which target stimulus it is)
+
+TTL 254: Marks the end of the stimulus presentation phase
+
+TTL 111-119: Participant's indicated T1 
+TTL 121-129: Participant's indicated T2
+
+TTL 210: Participant's T1 response was incorrect
+TTL 211: Participant's T1 response was correct
+
+TTL 220: Participant's T2 response was incorrect
+TTL 221: Participant's T2 response was correct
 '''
 
 from __future__ import absolute_import, division
-from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock
+from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock, parallel
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 import numpy as np  # whole numpy lib is available, prepend 'np.'
@@ -24,13 +41,12 @@ from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
-sendTTL = False
+sendTTL = True
 parallelPortAddress = 61368 #49168
 
 if sendTTL:
     port = parallel.ParallelPort(address = parallelPortAddress)
     port.setData(0) #make sure all pins are low
-    from psychopy import parallel
 
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemencoding())
@@ -64,7 +80,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
 # Setup the Window
 win = visual.Window(
-    size=[3240, 2160], fullscr=True, screen=0,
+    size=[400, 400], fullscr=True, screen=0,
     allowGUI=True, allowStencil=False,
     monitor=u'testMonitor', color=u'white', colorSpace='rgb',
     blendMode='avg', useFBO=True)
