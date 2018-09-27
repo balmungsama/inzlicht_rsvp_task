@@ -24,7 +24,7 @@ from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
-sendTTL = False
+sendTTL = True
 parallelPortAddress = 61368 #49168
 
 if sendTTL:
