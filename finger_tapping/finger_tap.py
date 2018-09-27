@@ -329,7 +329,7 @@ t = 0
 pressingClock.reset()  # clock
 frameN = -1
 continueRoutine = True
-routineTimer.add(120.000000)
+routineTimer.add(240.000000)
 # update component parameters for each repeat
 button_press = event.BuilderKeyResponse()
 # keep track of which components have finished
@@ -354,7 +354,7 @@ while continueRoutine and routineTimer.getTime() > 0:
         # keyboard checking is just starting
         win.callOnFlip(button_press.clock.reset)  # t=0 on next screen flip
         event.clearEvents(eventType='keyboard')
-    frameRemains = 0.0 + 120- win.monitorFramePeriod * 0.75  # most of one frame period left
+    frameRemains = 0.0 + 240- win.monitorFramePeriod * 0.75  # most of one frame period left
     if button_press.status == STARTED and t >= frameRemains:
         button_press.status = STOPPED
     if button_press.status == STARTED:

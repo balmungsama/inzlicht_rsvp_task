@@ -1,6 +1,6 @@
 import_tap <- function(filename) {
 
-  filename <- "/mnt/c/Users/enter/OneDrive - University of Toronto/Labs/Inzlicht Lab/outside_project/experiment/finger_tapping/data/123_finger_tap_2018_Sep_24_1431.csv"
+  # filename <- "/mnt/c/Users/enter/OneDrive - University of Toronto/Labs/Inzlicht Lab/outside_project/experiment/finger_tapping/data/1_finger_tap_2018_Sep_27_1132.csv"
   
   data <- read.csv(filename, stringsAsFactors = F)
   
