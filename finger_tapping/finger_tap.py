@@ -95,7 +95,7 @@ blank_iti = visual.TextStim(win=win, name='blank_iti',
 
 # Initialize components for Routine "training"
 trainingClock = core.Clock()
-tick = sound.Sound(u'C:\\Users\\enter\\OneDrive - University of Toronto\\Labs\\Inzlicht Lab\\outside_project\\experiment\\finger_tapping\\clock-tick1.wav', secs=0.1)
+tick = sound.Sound(u'clock-tick1.wav', secs=0.1)
 tick.setVolume(1)
 
 # Initialize components for Routine "pressing"
@@ -313,6 +313,7 @@ for thisTrain_loop in train_loop:
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
+            port.setData(int(0))
     
     # -------Ending Routine "training"-------
     for thisComponent in trainingComponents:
@@ -388,6 +389,7 @@ while continueRoutine and routineTimer.getTime() > 0:
     # refresh the screen
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
         win.flip()
+        port.setData(int(0))
 
 # -------Ending Routine "pressing"-------
 for thisComponent in pressingComponents:

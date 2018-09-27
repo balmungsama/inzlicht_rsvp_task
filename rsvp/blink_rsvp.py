@@ -31,7 +31,7 @@ TTL 221: Participant's T2 response was correct
 '''
 
 from __future__ import absolute_import, division
-from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock, parallel
+from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 import numpy as np  # whole numpy lib is available, prepend 'np.'
@@ -41,10 +41,11 @@ from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
-sendTTL = True
+sendTTL = False
 parallelPortAddress = 61368 #49168
 
 if sendTTL:
+    from psychopy import parallel
     port = parallel.ParallelPort(address = parallelPortAddress)
     port.setData(0) #make sure all pins are low
 
@@ -80,7 +81,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
 # Setup the Window
 win = visual.Window(
-    size=[400, 400], fullscr=True, screen=0,
+    size=[3240, 2160], fullscr=True, screen=0,
     allowGUI=True, allowStencil=False,
     monitor=u'testMonitor', color=u'white', colorSpace='rgb',
     blendMode='avg', useFBO=True)
@@ -161,7 +162,6 @@ gap = visual.TextStim(win=win, name='gap',
 
 # Initialize components for Routine "trial_def"
 trial_defClock = core.Clock()
-
 text = visual.TextStim(win=win, name='text',
     text='default text',
     font='Arial',
