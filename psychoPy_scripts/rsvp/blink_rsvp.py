@@ -138,6 +138,15 @@ instruct_p1 = visual.TextStim(win=win, name='instruct_p1',
     color='black', colorSpace='rgb', opacity=1,
     depth=0.0);
 
+# Initialize components for Routine "instructions"
+exp_endedClock = core.Clock()
+ending_p1 = visual.TextStim(win=win, name='ending_p1',
+    text='This part is done. Please inform the experimenter.',
+    font='Arial',
+    pos=(0, 0), height=0.05, wrapWidth=None, ori=0,
+    color='black', colorSpace='rgb', opacity=1,
+    depth=0.0);
+
 # Initialize components for Routine "ready_block"
 ready_blockClock = core.Clock()
 
@@ -939,6 +948,94 @@ for thisBlock in block:
     thisExp.nextEntry()
 
 # completed 2 repeats of 'block'
+
+# ------Prepare to start Routine "exp_ended"-------
+t = 0
+exp_endedClock.reset()  # clock
+frameN = -1
+continueRoutine = True
+# update component parameters for each repeat
+adv_p1 = event.BuilderKeyResponse()
+# keep track of which components have finished
+exp_endedComponents = [instruct_p1, adv_p1]
+for thisComponent in exp_endedComponents:
+    if hasattr(thisComponent, 'status'):
+        thisComponent.status = NOT_STARTED
+
+# -------Start Routine "exp_ended"-------
+while continueRoutine:
+    # get current time
+    t = exp_endedClock.getTime()
+    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+    # update/draw components on each frame
+
+    # *ending_p1* updates
+    if t >= 0.0 and ending_p1.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        ending_p1.tStart = t
+        ending_p1.frameNStart = frameN  # exact frame index
+        instruct_p1.setAutoDraw(True)
+
+    # *adv_p1* updates
+    if t >= 0.0 and adv_p1.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        adv_p1.tStart = t
+        adv_p1.frameNStart = frameN  # exact frame index
+        adv_p1.status = STARTED
+        # keyboard checking is just starting
+        event.clearEvents(eventType='keyboard')
+    if adv_p1.status == STARTED:
+        theseKeys = event.getKeys(keyList=['space'])
+
+        # check for quit:
+        if "escape" in theseKeys:
+            endExpNow = True
+        if len(theseKeys) > 0:  # at least one key was pressed
+            # a response ends the routine
+            continueRoutine = False
+
+    # check if all components have finished
+    if not continueRoutine:  # a component has requested a forced-end of Routine
+        break
+    continueRoutine = False  # will revert to True if at least one component still running
+    for thisComponent in exp_endedComponents:
+        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+            continueRoutine = True
+            break  # at least one component has not yet finished
+
+    # check for quit (the Esc key)
+    if endExpNow or event.getKeys(keyList=["escape"]):
+        core.quit()
+
+    # refresh the screen
+    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+        win.flip()
+
+# -------Ending Routine "exp_ended"-------
+for thisComponent in exp_endedComponents:
+    if hasattr(thisComponent, "setAutoDraw"):
+        thisComponent.setAutoDraw(False)
+# the Routine "exp_ended" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
+
+# set up handler to look after randomisation of conditions etc
+block = data.TrialHandler(nReps=2, method='random',
+    extraInfo=expInfo, originPath=-1,
+    trialList=[None],
+    seed=None, name='block')
+thisExp.addLoop(block)  # add the loop to the experiment
+thisBlock = block.trialList[0]  # so we can initialise stimuli with some values
+# abbreviate parameter names if possible (e.g. rgb = thisBlock.rgb)
+if thisBlock != None:
+    for paramName in thisBlock:
+        exec('{} = thisBlock[paramName]'.format(paramName))
+
+for thisBlock in block:
+    currentLoop = block
+    # abbreviate parameter names if possible (e.g. rgb = thisBlock.rgb)
+    if thisBlock != None:
+        for paramName in thisBlock:
+            exec('{} = thisBlock[paramName]'.format(paramName))
 
 
 
