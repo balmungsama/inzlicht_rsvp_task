@@ -1,0 +1,84 @@
+2.8394 	WARNING 	psychopy.parallel has been imported but no parallel port driver found. Install either inpout32 or dlportio
+5.3554 	WARNING 	User requested fullscreen with size [2160 1440], but screen is actually [3240, 2160]. Using actual size
+6.5166 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, args=UNKNOWN, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color=u'white', colorSpace='named', fullscr=UNKNOWN, gamma=None, kwargs=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x1F6493D0>, multiSample=False, name='window1', numSamples=2, pos=[0, 0], screen=0, size=array([3240, 2160]), stereo=False, units=u'norm', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType=u'pyglet')
+6.5167 	EXP 	window1: recordFrameIntervals = False
+6.6827 	EXP 	window1: recordFrameIntervals = True
+6.8643 	EXP 	window1: recordFrameIntervals = False
+7.2148 	EXP 	Created instructions_text = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color=u'black', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='instructions_text', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 0.,  0.,  0.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+7.2427 	EXP 	Sound  set volume 1.000
+7.2582 	EXP 	instructions_text: autoDraw = True
+7.5855 	DATA 	Keypress: space
+7.5878 	EXP 	Created sequence: random, trialTypes=1, nReps=17, seed=None
+7.5890 	EXP 	New trial (rep=0, index=0): None
+7.6011 	EXP 	instructions_text: autoDraw = False
+8.1858 	EXP 	New trial (rep=1, index=0): None
+8.5180 	DATA 	Keypress: space
+8.7886 	EXP 	New trial (rep=2, index=0): None
+9.0698 	DATA 	Keypress: space
+9.3849 	EXP 	New trial (rep=3, index=0): None
+9.6168 	DATA 	Keypress: space
+9.9820 	EXP 	New trial (rep=4, index=0): None
+10.2699 	DATA 	Keypress: space
+10.5862 	EXP 	New trial (rep=5, index=0): None
+10.7866 	DATA 	Keypress: space
+11.1861 	EXP 	New trial (rep=6, index=0): None
+11.3655 	DATA 	Keypress: space
+11.7861 	EXP 	New trial (rep=7, index=0): None
+11.9845 	DATA 	Keypress: space
+12.3864 	EXP 	New trial (rep=8, index=0): None
+12.5846 	DATA 	Keypress: space
+12.9834 	EXP 	New trial (rep=9, index=0): None
+13.2026 	DATA 	Keypress: space
+13.5860 	EXP 	New trial (rep=10, index=0): None
+13.7008 	DATA 	Keypress: space
+14.1866 	EXP 	New trial (rep=11, index=0): None
+14.3384 	DATA 	Keypress: space
+14.7834 	EXP 	New trial (rep=12, index=0): None
+14.9860 	DATA 	Keypress: space
+15.3879 	EXP 	New trial (rep=13, index=0): None
+15.5545 	DATA 	Keypress: space
+15.9841 	EXP 	New trial (rep=14, index=0): None
+16.1684 	DATA 	Keypress: space
+16.5903 	EXP 	New trial (rep=15, index=0): None
+16.8205 	DATA 	Keypress: space
+17.1879 	EXP 	New trial (rep=16, index=0): None
+17.3855 	DATA 	Keypress: space
+18.0209 	DATA 	Keypress: space
+18.6653 	DATA 	Keypress: space
+19.3010 	DATA 	Keypress: space
+19.8988 	DATA 	Keypress: space
+20.5180 	DATA 	Keypress: space
+21.1189 	DATA 	Keypress: space
+23.7332 	DATA 	Keypress: space
+24.2852 	DATA 	Keypress: space
+25.1186 	DATA 	Keypress: space
+25.6357 	DATA 	Keypress: space
+26.2188 	DATA 	Keypress: space
+26.7874 	DATA 	Keypress: space
+27.3866 	DATA 	Keypress: space
+27.9523 	DATA 	Keypress: space
+28.5888 	DATA 	Keypress: space
+29.1881 	DATA 	Keypress: space
+29.7679 	DATA 	Keypress: space
+30.3716 	DATA 	Keypress: space
+30.9512 	DATA 	Keypress: space
+31.5381 	DATA 	Keypress: space
+32.0866 	DATA 	Keypress: space
+32.6370 	DATA 	Keypress: space
+33.1865 	DATA 	Keypress: space
+33.7031 	DATA 	Keypress: space
+34.2545 	DATA 	Keypress: space
+34.8179 	DATA 	Keypress: space
+35.3879 	DATA 	Keypress: space
+35.9544 	DATA 	Keypress: space
+36.5377 	DATA 	Keypress: space
+37.1034 	DATA 	Keypress: space
+37.6702 	DATA 	Keypress: space
+38.2212 	DATA 	Keypress: space
+38.8215 	DATA 	Keypress: space
+39.3390 	DATA 	Keypress: space
+39.8531 	DATA 	Keypress: space
+40.4025 	DATA 	Keypress: space
+40.9737 	DATA 	Keypress: space
+41.5546 	DATA 	Keypress: space
+41.8752 	EXP 	window1: mouseVisible = True

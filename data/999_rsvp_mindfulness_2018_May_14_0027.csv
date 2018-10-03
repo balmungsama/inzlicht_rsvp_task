@@ -1,3 +1,0 @@
-block,trial,sep_dur,Tx,stim_count,stimulus,cond,block.thisRepN,block.thisTrialN,block.thisN,block.thisIndex,trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,stim.thisRepN,stim.thisTrialN,stim.thisN,stim.thisIndex,date,frameRate,expName,session,participant,
-1,1,long,t2,1,I,distractor,0,0,0,0,0,0,0,0,0,0,0,0,2018_May_14_0027,60.219208449029864,rsvp_mindfulness,001,999,
-1,1,long,t2,2,T,distractor,0,0,0,0,0,0,0,0,0,1,1,1,2018_May_14_0027,60.219208449029864,rsvp_mindfulness,001,999,
