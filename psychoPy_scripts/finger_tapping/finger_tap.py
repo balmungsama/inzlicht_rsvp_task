@@ -253,7 +253,7 @@ for thisTrain_loop in train_loop:
     routineTimer.add(0.600000)
     # update component parameters for each repeat
     train_press = event.BuilderKeyResponse()
-    tick.setSound(u'C:\\Users\\enter\\OneDrive - University of Toronto\\Labs\\Inzlicht Lab\\outside_project\\experiment\\finger_tapping\\clock-tick1.wav', secs=0.1)
+    tick.setSound(u'clock-tick1.wav', secs=0.1)
     # keep track of which components have finished
     trainingComponents = [train_press, tick]
     for thisComponent in trainingComponents:
