@@ -24,8 +24,13 @@ from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
-sendTTL = True
-parallelPortAddress = 61368 #49168
+# user prefs
+sendTTL    = True
+duration_s = 240     # how long the task lasts in seconds (not including training)
+colFont    = 'white' # font colour (rgb space)
+colBkgd    = 'black' # background colour (rgb space)
+
+parallelPortAddress = 61368 
 
 if sendTTL:
     from psychopy import parallel
@@ -66,7 +71,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 win = visual.Window(
     size=[2160, 1440], fullscr=True, screen=0,
     allowGUI=False, allowStencil=False,
-    monitor=u'testMonitor', color=u'white', colorSpace='rgb',
+    monitor=u'testMonitor', color=colBkgd, colorSpace='rgb',
     blendMode='avg', useFBO=True)
 # store frame rate of monitor if we can measure it
 expInfo['frameRate'] = win.getActualFrameRate()
@@ -81,7 +86,7 @@ instructions_text = visual.TextStim(win=win, name='instructions_text',
     text=u'For this next task, you will be asked to press the space bar once every 600 ms (0.6 seconds). A metronome sound will be played during the first 10 seconds to help you establish a rythm. Afterwards, you are to continue this rythm to the best of your ability for 4 minutes.\n\nPress Space to continue.',
     font=u'Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
-    color=u'black', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
 
 # Initialize components for Routine "inter_stimulus"
@@ -90,8 +95,16 @@ blank_iti = visual.TextStim(win=win, name='blank_iti',
     text=None,
     font=u'Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
-    color=u'white', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
+
+# define crosshair
+crosshair = visual.TextStim(win, 
+    text='+', 
+    font='', 
+    color=colFont, 
+    name='crosshair');
+crosshair_Clock = core.Clock()
 
 # Initialize components for Routine "training"
 trainingClock = core.Clock()
@@ -238,13 +251,29 @@ if thisTrain_loop != None:
     for paramName in thisTrain_loop:
         exec('{} = thisTrain_loop[paramName]'.format(paramName))
 
+# setup crosshair
+completeFrameN = -1
+crosshair_Clock.reset()
+
 for thisTrain_loop in train_loop:
+    completeFrameN += 1
+
+    # *crosshair* updates
+    t = crosshair_Clock.getTime()
+    if t >= 0.0 and crosshair.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        crosshair.tStart = t
+        crosshair.frameNStart = completeFrameN  # exact frame index
+        crosshair.setAutoDraw(True)
+    
     currentLoop = train_loop
     # abbreviate parameter names if possible (e.g. rgb = thisTrain_loop.rgb)
     if thisTrain_loop != None:
         for paramName in thisTrain_loop:
             exec('{} = thisTrain_loop[paramName]'.format(paramName))
     
+    crosshair.setAutoDraw(True)
+
     # ------Prepare to start Routine "training"-------
     t = 0
     trainingClock.reset()  # clock
@@ -313,7 +342,8 @@ for thisTrain_loop in train_loop:
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
-            port.setData(int(0))
+            if sendTTL:
+                port.setData(int(0))
     
     # -------Ending Routine "training"-------
     for thisComponent in trainingComponents:
@@ -330,7 +360,7 @@ t = 0
 pressingClock.reset()  # clock
 frameN = -1
 continueRoutine = True
-routineTimer.add(240.000000)
+routineTimer.add(duration_s)
 # update component parameters for each repeat
 button_press = event.BuilderKeyResponse()
 # keep track of which components have finished
@@ -355,7 +385,7 @@ while continueRoutine and routineTimer.getTime() > 0:
         # keyboard checking is just starting
         win.callOnFlip(button_press.clock.reset)  # t=0 on next screen flip
         event.clearEvents(eventType='keyboard')
-    frameRemains = 0.0 + 240- win.monitorFramePeriod * 0.75  # most of one frame period left
+    frameRemains = 0.0 + duration_s - win.monitorFramePeriod * 0.75  # most of one frame period left
     if button_press.status == STARTED and t >= frameRemains:
         button_press.status = STOPPED
     if button_press.status == STARTED:
@@ -389,7 +419,8 @@ while continueRoutine and routineTimer.getTime() > 0:
     # refresh the screen
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
         win.flip()
-        port.setData(int(0))
+        if sendTTL:
+            port.setData(int(0))
 
 # -------Ending Routine "pressing"-------
 for thisComponent in pressingComponents:
