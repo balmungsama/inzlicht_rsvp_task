@@ -24,7 +24,7 @@ from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
-sendTTL = False
+sendTTL = True
 parallelPortAddress = 61368 #49168
 
 if sendTTL:
@@ -63,7 +63,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
 # Setup the Window
 win = visual.Window(
-    size=[400, 400], fullscr=False, screen=0,
+    size=[400, 400], fullscr=True, screen=0,
     allowGUI=True, allowStencil=False,
     monitor=u'testMonitor', color=u'white', colorSpace='rgb',
     blendMode='avg', useFBO=True)

@@ -1,0 +1,515 @@
+5.3366 	WARNING 	User requested fullscreen with size [2160 1440], but screen is actually [3240, 2160]. Using actual size
+6.8987 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, args=UNKNOWN, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color=u'white', colorSpace='named', fullscr=UNKNOWN, gamma=None, kwargs=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x21C38ED0>, multiSample=False, name='window1', numSamples=2, pos=[0, 0], screen=0, size=array([3240, 2160]), stereo=False, units=u'norm', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType=u'pyglet')
+6.8988 	EXP 	window1: recordFrameIntervals = False
+7.0645 	EXP 	window1: recordFrameIntervals = True
+7.2483 	EXP 	window1: recordFrameIntervals = False
+7.5833 	EXP 	Created instructions_text = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color=u'black', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='instructions_text', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 0.,  0.,  0.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+7.5838 	EXP 	Created blank_iti = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color=u'white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='blank_iti', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='', units=u'norm', win=Window(...), wrapWidth=1)
+7.6154 	EXP 	Sound  set volume 1.000
+7.6332 	EXP 	instructions_text: autoDraw = True
+8.1930 	DATA 	Keypress: space
+8.2147 	EXP 	instructions_text: autoDraw = False
+8.2147 	EXP 	blank_iti: autoDraw = True
+9.1835 	EXP 	Created sequence: random, trialTypes=1, nReps=17, seed=None
+9.2044 	EXP 	Created crosshair = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='black', colorSpace='named', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.1, italic=False, name='crosshair', opacity=1.0, ori=0.0, pos=array([ 0.,  0.]), rgb=array([ 0.,  0.,  0.]), text='+', units=u'norm', win=Window(...), wrapWidth=1)
+9.2051 	EXP 	New trial (rep=0, index=0): None
+9.2183 	EXP 	blank_iti: autoDraw = False
+9.2183 	EXP 	blank_iti: autoDraw = False
+9.2183 	EXP 	crosshair: autoDraw = True
+9.2183 	EXP 	crosshair: autoDraw = True
+9.5309 	DATA 	Keypress: space
+9.7997 	EXP 	New trial (rep=1, index=0): None
+9.8177 	EXP 	crosshair: autoDraw = True
+10.0023 	DATA 	Keypress: space
+10.3994 	EXP 	New trial (rep=2, index=0): None
+10.4164 	EXP 	crosshair: autoDraw = True
+10.5310 	DATA 	Keypress: space
+10.9996 	EXP 	New trial (rep=3, index=0): None
+11.0165 	EXP 	crosshair: autoDraw = True
+11.1362 	DATA 	Keypress: space
+11.5988 	EXP 	New trial (rep=4, index=0): None
+11.6282 	EXP 	crosshair: autoDraw = True
+11.7331 	DATA 	Keypress: space
+12.1996 	EXP 	New trial (rep=5, index=0): None
+12.2166 	EXP 	crosshair: autoDraw = True
+12.3340 	DATA 	Keypress: space
+12.7995 	EXP 	New trial (rep=6, index=0): None
+12.8163 	EXP 	crosshair: autoDraw = True
+12.9308 	DATA 	Keypress: space
+13.3999 	EXP 	New trial (rep=7, index=0): None
+13.4171 	EXP 	crosshair: autoDraw = True
+13.5009 	DATA 	Keypress: space
+13.9989 	EXP 	New trial (rep=8, index=0): None
+14.0147 	EXP 	crosshair: autoDraw = True
+14.0654 	DATA 	Keypress: space
+14.5990 	EXP 	New trial (rep=9, index=0): None
+14.6151 	EXP 	crosshair: autoDraw = True
+14.6510 	DATA 	Keypress: space
+15.1998 	EXP 	New trial (rep=10, index=0): None
+15.2175 	EXP 	crosshair: autoDraw = True
+15.2661 	DATA 	Keypress: space
+15.7974 	EXP 	New trial (rep=11, index=0): None
+15.8135 	EXP 	crosshair: autoDraw = True
+15.8138 	DATA 	Keypress: space
+16.4008 	EXP 	New trial (rep=12, index=0): None
+16.4179 	EXP 	crosshair: autoDraw = True
+16.4656 	DATA 	Keypress: space
+16.9981 	EXP 	New trial (rep=13, index=0): None
+17.0001 	DATA 	Keypress: space
+17.0146 	EXP 	crosshair: autoDraw = True
+17.5495 	DATA 	Keypress: space
+17.5999 	EXP 	New trial (rep=14, index=0): None
+17.6175 	EXP 	crosshair: autoDraw = True
+18.1375 	DATA 	Keypress: space
+18.2262 	EXP 	New trial (rep=15, index=0): None
+18.2418 	EXP 	crosshair: autoDraw = True
+18.7146 	DATA 	Keypress: space
+18.8002 	EXP 	New trial (rep=16, index=0): None
+18.8177 	EXP 	crosshair: autoDraw = True
+19.2830 	DATA 	Keypress: space
+19.9817 	DATA 	Keypress: space
+20.5175 	DATA 	Keypress: space
+21.0484 	DATA 	Keypress: space
+21.6342 	DATA 	Keypress: space
+22.2002 	DATA 	Keypress: space
+22.7652 	DATA 	Keypress: space
+23.3168 	DATA 	Keypress: space
+23.8657 	DATA 	Keypress: space
+24.4208 	DATA 	Keypress: space
+24.9666 	DATA 	Keypress: space
+25.5340 	DATA 	Keypress: space
+26.0833 	DATA 	Keypress: space
+26.6693 	DATA 	Keypress: space
+27.1839 	DATA 	Keypress: space
+27.7337 	DATA 	Keypress: space
+28.2820 	DATA 	Keypress: space
+28.8502 	DATA 	Keypress: space
+29.4031 	DATA 	Keypress: space
+30.0334 	DATA 	Keypress: space
+30.5991 	DATA 	Keypress: space
+31.1527 	DATA 	Keypress: space
+31.6656 	DATA 	Keypress: space
+32.2175 	DATA 	Keypress: space
+32.7490 	DATA 	Keypress: space
+33.3170 	DATA 	Keypress: space
+33.8848 	DATA 	Keypress: space
+34.4173 	DATA 	Keypress: space
+34.9680 	DATA 	Keypress: space
+35.5636 	DATA 	Keypress: space
+36.1041 	DATA 	Keypress: space
+36.6525 	DATA 	Keypress: space
+37.2346 	DATA 	Keypress: space
+37.8188 	DATA 	Keypress: space
+38.3347 	DATA 	Keypress: space
+38.8690 	DATA 	Keypress: space
+39.4679 	DATA 	Keypress: space
+40.0500 	DATA 	Keypress: space
+40.6828 	DATA 	Keypress: space
+41.2498 	DATA 	Keypress: space
+41.7870 	DATA 	Keypress: space
+42.3016 	DATA 	Keypress: space
+42.8861 	DATA 	Keypress: space
+43.4682 	DATA 	Keypress: space
+44.0685 	DATA 	Keypress: space
+44.6185 	DATA 	Keypress: space
+45.1380 	DATA 	Keypress: space
+45.7331 	DATA 	Keypress: space
+46.2866 	DATA 	Keypress: space
+46.8019 	DATA 	Keypress: space
+47.4188 	DATA 	Keypress: space
+47.9543 	DATA 	Keypress: space
+48.6200 	DATA 	Keypress: space
+49.1523 	DATA 	Keypress: space
+49.6527 	DATA 	Keypress: space
+50.2689 	DATA 	Keypress: space
+50.7669 	DATA 	Keypress: space
+51.2514 	DATA 	Keypress: space
+51.7700 	DATA 	Keypress: space
+52.3182 	DATA 	Keypress: space
+52.8038 	DATA 	Keypress: space
+53.3862 	DATA 	Keypress: space
+53.8883 	DATA 	Keypress: space
+54.4379 	DATA 	Keypress: space
+54.8856 	DATA 	Keypress: space
+55.3700 	DATA 	Keypress: space
+55.9681 	DATA 	Keypress: space
+56.5373 	DATA 	Keypress: space
+57.0532 	DATA 	Keypress: space
+57.5870 	DATA 	Keypress: space
+58.5385 	DATA 	Keypress: space
+59.1343 	DATA 	Keypress: space
+59.6368 	DATA 	Keypress: space
+60.1367 	DATA 	Keypress: space
+60.6844 	DATA 	Keypress: space
+61.2196 	DATA 	Keypress: space
+61.7533 	DATA 	Keypress: space
+62.3250 	DATA 	Keypress: space
+62.8698 	DATA 	Keypress: space
+63.4041 	DATA 	Keypress: space
+63.9183 	DATA 	Keypress: space
+64.4533 	DATA 	Keypress: space
+64.9684 	DATA 	Keypress: space
+65.4849 	DATA 	Keypress: space
+66.0026 	DATA 	Keypress: space
+66.5373 	DATA 	Keypress: space
+67.0036 	DATA 	Keypress: space
+67.5415 	DATA 	Keypress: space
+68.1706 	DATA 	Keypress: space
+68.6525 	DATA 	Keypress: space
+69.1535 	DATA 	Keypress: space
+69.6868 	DATA 	Keypress: space
+70.1883 	DATA 	Keypress: space
+70.7185 	DATA 	Keypress: space
+71.3224 	DATA 	Keypress: space
+71.9224 	DATA 	Keypress: space
+72.4373 	DATA 	Keypress: space
+73.0746 	DATA 	Keypress: space
+73.6048 	DATA 	Keypress: space
+74.1542 	DATA 	Keypress: space
+74.6700 	DATA 	Keypress: space
+75.1722 	DATA 	Keypress: space
+75.6860 	DATA 	Keypress: space
+76.2375 	DATA 	Keypress: space
+76.7193 	DATA 	Keypress: space
+77.1863 	DATA 	Keypress: space
+77.8026 	DATA 	Keypress: space
+78.3078 	DATA 	Keypress: space
+78.8245 	DATA 	Keypress: space
+79.3068 	DATA 	Keypress: space
+79.8221 	DATA 	Keypress: space
+80.3053 	DATA 	Keypress: space
+80.8360 	DATA 	Keypress: space
+81.3582 	DATA 	Keypress: space
+81.9056 	DATA 	Keypress: space
+82.4046 	DATA 	Keypress: space
+82.8711 	DATA 	Keypress: space
+83.3882 	DATA 	Keypress: space
+83.9054 	DATA 	Keypress: space
+84.4396 	DATA 	Keypress: space
+84.9882 	DATA 	Keypress: space
+85.5264 	DATA 	Keypress: space
+86.0920 	DATA 	Keypress: space
+86.5898 	DATA 	Keypress: space
+86.9876 	DATA 	Keypress: space
+87.5570 	DATA 	Keypress: space
+88.0760 	DATA 	Keypress: space
+88.6435 	DATA 	Keypress: space
+89.1723 	DATA 	Keypress: space
+89.6524 	DATA 	Keypress: space
+90.1555 	DATA 	Keypress: space
+90.6207 	DATA 	Keypress: space
+91.1097 	DATA 	Keypress: space
+91.6231 	DATA 	Keypress: space
+92.1053 	DATA 	Keypress: space
+92.5899 	DATA 	Keypress: space
+93.1085 	DATA 	Keypress: space
+93.6087 	DATA 	Keypress: space
+94.0579 	DATA 	Keypress: space
+94.6072 	DATA 	Keypress: space
+95.1413 	DATA 	Keypress: space
+95.6879 	DATA 	Keypress: space
+96.1572 	DATA 	Keypress: space
+96.6565 	DATA 	Keypress: space
+97.2570 	DATA 	Keypress: space
+97.7746 	DATA 	Keypress: space
+98.2891 	DATA 	Keypress: space
+98.7929 	DATA 	Keypress: space
+99.3731 	DATA 	Keypress: space
+99.8828 	DATA 	Keypress: space
+100.3930 	DATA 	Keypress: space
+100.9558 	DATA 	Keypress: space
+101.5062 	DATA 	Keypress: space
+102.0255 	DATA 	Keypress: space
+102.5586 	DATA 	Keypress: space
+103.0884 	DATA 	Keypress: space
+103.5582 	DATA 	Keypress: space
+104.1901 	DATA 	Keypress: space
+104.7088 	DATA 	Keypress: space
+105.2076 	DATA 	Keypress: space
+105.7546 	DATA 	Keypress: space
+106.3233 	DATA 	Keypress: space
+106.8075 	DATA 	Keypress: space
+107.4432 	DATA 	Keypress: space
+107.9115 	DATA 	Keypress: space
+108.4090 	DATA 	Keypress: space
+108.9570 	DATA 	Keypress: space
+109.5263 	DATA 	Keypress: space
+110.0566 	DATA 	Keypress: space
+110.5731 	DATA 	Keypress: space
+111.1222 	DATA 	Keypress: space
+111.6740 	DATA 	Keypress: space
+112.1751 	DATA 	Keypress: space
+112.6073 	DATA 	Keypress: space
+113.2087 	DATA 	Keypress: space
+113.7744 	DATA 	Keypress: space
+114.2755 	DATA 	Keypress: space
+114.8578 	DATA 	Keypress: space
+115.3574 	DATA 	Keypress: space
+115.8890 	DATA 	Keypress: space
+116.3580 	DATA 	Keypress: space
+116.8917 	DATA 	Keypress: space
+117.4578 	DATA 	Keypress: space
+118.0411 	DATA 	Keypress: space
+118.5260 	DATA 	Keypress: space
+119.0116 	DATA 	Keypress: space
+119.4895 	DATA 	Keypress: space
+120.0083 	DATA 	Keypress: space
+120.4667 	DATA 	Keypress: space
+121.0414 	DATA 	Keypress: space
+121.5770 	DATA 	Keypress: space
+122.1255 	DATA 	Keypress: space
+122.6932 	DATA 	Keypress: space
+123.2455 	DATA 	Keypress: space
+123.8748 	DATA 	Keypress: space
+124.4784 	DATA 	Keypress: space
+125.0418 	DATA 	Keypress: space
+125.6736 	DATA 	Keypress: space
+126.3260 	DATA 	Keypress: space
+126.9095 	DATA 	Keypress: space
+127.4732 	DATA 	Keypress: space
+128.0262 	DATA 	Keypress: space
+128.5786 	DATA 	Keypress: space
+129.1237 	DATA 	Keypress: space
+129.6916 	DATA 	Keypress: space
+130.2609 	DATA 	Keypress: space
+130.8906 	DATA 	Keypress: space
+131.4751 	DATA 	Keypress: space
+132.0583 	DATA 	Keypress: space
+132.6440 	DATA 	Keypress: space
+133.1925 	DATA 	Keypress: space
+133.7759 	DATA 	Keypress: space
+134.2957 	DATA 	Keypress: space
+134.8586 	DATA 	Keypress: space
+135.4091 	DATA 	Keypress: space
+135.9578 	DATA 	Keypress: space
+136.5305 	DATA 	Keypress: space
+137.0944 	DATA 	Keypress: space
+137.6441 	DATA 	Keypress: space
+138.1927 	DATA 	Keypress: space
+138.7428 	DATA 	Keypress: space
+139.3263 	DATA 	Keypress: space
+139.8434 	DATA 	Keypress: space
+140.4267 	DATA 	Keypress: space
+140.9646 	DATA 	Keypress: space
+141.5599 	DATA 	Keypress: space
+142.1282 	DATA 	Keypress: space
+142.6262 	DATA 	Keypress: space
+143.1267 	DATA 	Keypress: space
+143.7930 	DATA 	Keypress: space
+144.3278 	DATA 	Keypress: space
+145.2100 	DATA 	Keypress: space
+145.7588 	DATA 	Keypress: space
+146.2919 	DATA 	Keypress: space
+146.8277 	DATA 	Keypress: space
+147.3936 	DATA 	Keypress: space
+147.9643 	DATA 	Keypress: space
+148.5127 	DATA 	Keypress: space
+149.0771 	DATA 	Keypress: space
+149.6103 	DATA 	Keypress: space
+150.0931 	DATA 	Keypress: space
+150.6595 	DATA 	Keypress: space
+151.2285 	DATA 	Keypress: space
+151.7772 	DATA 	Keypress: space
+152.2923 	DATA 	Keypress: space
+152.8773 	DATA 	Keypress: space
+153.4272 	DATA 	Keypress: space
+153.9444 	DATA 	Keypress: space
+154.4807 	DATA 	Keypress: space
+155.0108 	DATA 	Keypress: space
+155.5765 	DATA 	Keypress: space
+156.0966 	DATA 	Keypress: space
+156.6280 	DATA 	Keypress: space
+157.1455 	DATA 	Keypress: space
+157.7274 	DATA 	Keypress: space
+158.2942 	DATA 	Keypress: space
+158.8109 	DATA 	Keypress: space
+159.3795 	DATA 	Keypress: space
+159.8280 	DATA 	Keypress: space
+160.3597 	DATA 	Keypress: space
+160.8927 	DATA 	Keypress: space
+161.4265 	DATA 	Keypress: space
+161.9476 	DATA 	Keypress: space
+162.5620 	DATA 	Keypress: space
+163.1277 	DATA 	Keypress: space
+163.6273 	DATA 	Keypress: space
+164.1616 	DATA 	Keypress: space
+164.6984 	DATA 	Keypress: space
+165.2145 	DATA 	Keypress: space
+165.7766 	DATA 	Keypress: space
+166.2785 	DATA 	Keypress: space
+166.8450 	DATA 	Keypress: space
+167.3625 	DATA 	Keypress: space
+167.8798 	DATA 	Keypress: space
+168.4107 	DATA 	Keypress: space
+168.9484 	DATA 	Keypress: space
+169.4617 	DATA 	Keypress: space
+169.9945 	DATA 	Keypress: space
+170.5288 	DATA 	Keypress: space
+171.0954 	DATA 	Keypress: space
+171.7138 	DATA 	Keypress: space
+172.2653 	DATA 	Keypress: space
+172.7139 	DATA 	Keypress: space
+173.2627 	DATA 	Keypress: space
+173.7793 	DATA 	Keypress: space
+174.2963 	DATA 	Keypress: space
+174.8955 	DATA 	Keypress: space
+175.4974 	DATA 	Keypress: space
+176.0317 	DATA 	Keypress: space
+176.6123 	DATA 	Keypress: space
+177.0809 	DATA 	Keypress: space
+177.5948 	DATA 	Keypress: space
+178.1291 	DATA 	Keypress: space
+178.6141 	DATA 	Keypress: space
+179.2151 	DATA 	Keypress: space
+179.7140 	DATA 	Keypress: space
+180.2300 	DATA 	Keypress: space
+180.7612 	DATA 	Keypress: space
+181.2972 	DATA 	Keypress: space
+181.8284 	DATA 	Keypress: space
+182.3305 	DATA 	Keypress: space
+182.8798 	DATA 	Keypress: space
+183.3815 	DATA 	Keypress: space
+183.9310 	DATA 	Keypress: space
+184.4811 	DATA 	Keypress: space
+185.0300 	DATA 	Keypress: space
+185.5482 	DATA 	Keypress: space
+186.1132 	DATA 	Keypress: space
+186.6489 	DATA 	Keypress: space
+187.2006 	DATA 	Keypress: space
+187.7178 	DATA 	Keypress: space
+188.2802 	DATA 	Keypress: space
+188.7821 	DATA 	Keypress: space
+189.3159 	DATA 	Keypress: space
+189.8803 	DATA 	Keypress: space
+190.3473 	DATA 	Keypress: space
+190.8951 	DATA 	Keypress: space
+191.4669 	DATA 	Keypress: space
+191.9955 	DATA 	Keypress: space
+192.4979 	DATA 	Keypress: space
+193.0487 	DATA 	Keypress: space
+193.5992 	DATA 	Keypress: space
+194.1487 	DATA 	Keypress: space
+194.6667 	DATA 	Keypress: space
+195.2007 	DATA 	Keypress: space
+195.7126 	DATA 	Keypress: space
+196.2475 	DATA 	Keypress: space
+196.7978 	DATA 	Keypress: space
+197.3322 	DATA 	Keypress: space
+197.9306 	DATA 	Keypress: space
+198.4317 	DATA 	Keypress: space
+198.9489 	DATA 	Keypress: space
+199.5173 	DATA 	Keypress: space
+200.0298 	DATA 	Keypress: space
+200.5963 	DATA 	Keypress: space
+201.1147 	DATA 	Keypress: space
+201.6296 	DATA 	Keypress: space
+202.2275 	DATA 	Keypress: space
+202.6805 	DATA 	Keypress: space
+203.2632 	DATA 	Keypress: space
+203.7494 	DATA 	Keypress: space
+204.2955 	DATA 	Keypress: space
+204.7820 	DATA 	Keypress: space
+205.2849 	DATA 	Keypress: space
+205.8295 	DATA 	Keypress: space
+206.3154 	DATA 	Keypress: space
+206.8482 	DATA 	Keypress: space
+207.3860 	DATA 	Keypress: space
+207.9030 	DATA 	Keypress: space
+208.4676 	DATA 	Keypress: space
+208.9990 	DATA 	Keypress: space
+209.5157 	DATA 	Keypress: space
+210.0841 	DATA 	Keypress: space
+210.5980 	DATA 	Keypress: space
+211.1351 	DATA 	Keypress: space
+211.5654 	DATA 	Keypress: space
+212.1186 	DATA 	Keypress: space
+212.6687 	DATA 	Keypress: space
+213.2160 	DATA 	Keypress: space
+213.7324 	DATA 	Keypress: space
+214.2330 	DATA 	Keypress: space
+214.7500 	DATA 	Keypress: space
+215.2496 	DATA 	Keypress: space
+215.7637 	DATA 	Keypress: space
+216.2680 	DATA 	Keypress: space
+216.8321 	DATA 	Keypress: space
+217.3802 	DATA 	Keypress: space
+217.9205 	DATA 	Keypress: space
+218.4662 	DATA 	Keypress: space
+219.0503 	DATA 	Keypress: space
+219.8352 	DATA 	Keypress: space
+220.3535 	DATA 	Keypress: space
+220.9500 	DATA 	Keypress: space
+221.4806 	DATA 	Keypress: space
+221.9646 	DATA 	Keypress: space
+222.5505 	DATA 	Keypress: space
+223.0329 	DATA 	Keypress: space
+223.5344 	DATA 	Keypress: space
+224.0335 	DATA 	Keypress: space
+224.5317 	DATA 	Keypress: space
+225.0815 	DATA 	Keypress: space
+225.5821 	DATA 	Keypress: space
+226.1538 	DATA 	Keypress: space
+226.6499 	DATA 	Keypress: space
+227.1182 	DATA 	Keypress: space
+227.7054 	DATA 	Keypress: space
+228.2016 	DATA 	Keypress: space
+228.7336 	DATA 	Keypress: space
+229.2005 	DATA 	Keypress: space
+229.8168 	DATA 	Keypress: space
+230.3172 	DATA 	Keypress: space
+230.8151 	DATA 	Keypress: space
+231.3358 	DATA 	Keypress: space
+231.8847 	DATA 	Keypress: space
+232.3526 	DATA 	Keypress: space
+232.8699 	DATA 	Keypress: space
+233.3347 	DATA 	Keypress: space
+233.8694 	DATA 	Keypress: space
+234.3184 	DATA 	Keypress: space
+234.8684 	DATA 	Keypress: space
+235.3174 	DATA 	Keypress: space
+235.9660 	DATA 	Keypress: space
+236.5022 	DATA 	Keypress: space
+237.0493 	DATA 	Keypress: space
+237.5677 	DATA 	Keypress: space
+238.0657 	DATA 	Keypress: space
+238.5827 	DATA 	Keypress: space
+239.1660 	DATA 	Keypress: space
+239.6510 	DATA 	Keypress: space
+240.1503 	DATA 	Keypress: space
+240.6998 	DATA 	Keypress: space
+241.2346 	DATA 	Keypress: space
+241.7349 	DATA 	Keypress: space
+242.2008 	DATA 	Keypress: space
+242.7669 	DATA 	Keypress: space
+243.2315 	DATA 	Keypress: space
+243.7318 	DATA 	Keypress: space
+244.2860 	DATA 	Keypress: space
+244.8321 	DATA 	Keypress: space
+245.3911 	DATA 	Keypress: space
+245.9321 	DATA 	Keypress: space
+246.4851 	DATA 	Keypress: space
+246.9824 	DATA 	Keypress: space
+247.5353 	DATA 	Keypress: space
+248.1178 	DATA 	Keypress: space
+248.6883 	DATA 	Keypress: space
+249.1719 	DATA 	Keypress: space
+249.7682 	DATA 	Keypress: space
+250.2519 	DATA 	Keypress: space
+250.7667 	DATA 	Keypress: space
+251.2853 	DATA 	Keypress: space
+251.8186 	DATA 	Keypress: space
+252.3352 	DATA 	Keypress: space
+252.8539 	DATA 	Keypress: space
+253.3943 	DATA 	Keypress: space
+253.8865 	DATA 	Keypress: space
+254.4690 	DATA 	Keypress: space
+254.9384 	DATA 	Keypress: space
+255.4199 	DATA 	Keypress: space
+256.0341 	DATA 	Keypress: space
+256.6544 	DATA 	Keypress: space
+257.1542 	DATA 	Keypress: space
+257.5867 	DATA 	Keypress: space
+258.1219 	DATA 	Keypress: space
+258.8232 	DATA 	Keypress: space
+259.3547 	DATA 	Keypress: space
+259.5510 	EXP 	window1: mouseVisible = True
