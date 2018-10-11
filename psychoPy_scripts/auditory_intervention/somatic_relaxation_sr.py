@@ -21,7 +21,11 @@ from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
+# user prefs
 sendTTL = True
+colFont = 'white' # font colour (rgb space)
+colBkgd = 'black' # background colour (rgb space)
+
 parallelPortAddress = 61368 #49168
 
 if sendTTL:
@@ -63,7 +67,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 win = visual.Window(
     size=(1024, 768), fullscr=True, screen=0,
     allowGUI=False, allowStencil=False,
-    monitor='testMonitor', color=[1.0,1.0,1.0], colorSpace='rgb',
+    monitor='testMonitor', color=colBkgd, colorSpace='rgb',
     blendMode='avg', useFBO=True)
 # store frame rate of monitor if we can measure it
 expInfo['frameRate'] = win.getActualFrameRate()
@@ -78,7 +82,7 @@ Instructions = visual.TextStim(win=win, name='Instructions',
     text=u'You are about to listen to a recording of a guided somatic relaxation. Please try to follow the instructions to the best of your ability while keeping still in your seat. The entire experience should last approximately 20 minutes. \n\nPress SPACE to continue.',
     font=u'Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
-    color=u'black', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
 
 # Initialize components for Routine "intervention"
@@ -92,7 +96,7 @@ text = visual.TextStim(win=win, name='text',
     text=u'This part is done. Please inform the experimenter.',
     font=u'Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
-    color=u'black', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
 
 # Create some handy timers
