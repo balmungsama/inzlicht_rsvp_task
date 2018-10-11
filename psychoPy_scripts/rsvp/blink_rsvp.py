@@ -41,7 +41,11 @@ from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
-sendTTL = False
+# user prefs
+sendTTL    = True
+colFont    = 'white' # font colour (rgb space)
+colBkgd    = 'black' # background colour (rgb space)
+
 parallelPortAddress = 61368 #49168
 
 if sendTTL:
@@ -83,7 +87,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 win = visual.Window(
     size=[3240, 2160], fullscr=True, screen=0,
     allowGUI=True, allowStencil=False,
-    monitor=u'testMonitor', color=u'white', colorSpace='rgb',
+    monitor=u'testMonitor', color=colBkgd, colorSpace='rgb',
     blendMode='avg', useFBO=True)
 # store frame rate of monitor if we can measure it
 expInfo['frameRate'] = win.getActualFrameRate()
@@ -135,7 +139,7 @@ instruct_p1 = visual.TextStim(win=win, name='instruct_p1',
     text='Hello. Thank you for coming in today. \n\n For this task, you will be asked to observe a series of characters flash on the screen and try to identify any number(s) you see in the stream. The characters will appear quickly, so you will have to pay close attention. \n\n Sometimes a stream of characters will contain two numbers, and other times it will only contain one. Each stream will contain 15 to 19 characters and last for about a second.  \n\n When two numbers are presented, please enter the numbers via keyboard in the order they were presented. When only one number is presented, enter in the number you saw along with any random number. \n\n If you at any point are not sure which number(s) were presented, you can just guess. \n\n You will be presented two blocks of this task; each block lasting between 13 to 15 minutes.\n\n\n                                                        Press SPACE to continue.',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0,
-    color='black', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
 
 # Initialize components for Routine "instructions"
@@ -144,7 +148,7 @@ ending_p1 = visual.TextStim(win=win, name='ending_p1',
     text='This part is done. Please inform the experimenter.',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0,
-    color='black', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
 
 # Initialize components for Routine "ready_block"
@@ -154,19 +158,19 @@ ready = visual.TextStim(win=win, name='ready',
     text='default text',
     font='Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0,
-    color='black', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=-1.0);
 go = visual.TextStim(win=win, name='go',
     text='GO',
     font='Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0,
-    color='black', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=-2.0);
 gap = visual.TextStim(win=win, name='gap',
     text=None,
     font='Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0,
-    color='white', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=-3.0);
 
 # Initialize components for Routine "trial_def"
@@ -175,7 +179,7 @@ text = visual.TextStim(win=win, name='text',
     text='default text',
     font='Arial',
     pos=(0, 0), height=2, wrapWidth=None, ori=0,
-    color='grey', colorSpace='rgb', opacity=0,
+    color=colFont, colorSpace='rgb', opacity=0,
     depth=-1.0);
 
 # Initialize components for Routine "disp_stimulus"
@@ -184,13 +188,13 @@ text_2 = visual.TextStim(win=win, name='text_2',
     text='default text',
     font='Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0,
-    color='black', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
 mask = visual.TextStim(win=win, name='mask',
     text=' ',
     font='Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0,
-    color='white', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=-1.0);
 
 # Initialize components for Routine "rec_resp_T1"
@@ -199,7 +203,7 @@ Probe_t1 = visual.TextStim(win=win, name='Probe_t1',
     text='What numbers did you see?',
     font='Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0,
-    color='black', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
 
 # Initialize components for Routine "rec_resp_T2"
@@ -208,7 +212,7 @@ Probe_t2 = visual.TextStim(win=win, name='Probe_t2',
     text='What numbers did you see?',
     font='Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0,
-    color='black', colorSpace='rgb', opacity=1,
+    color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
 
 # Initialize components for Routine "delay"
@@ -217,7 +221,7 @@ blank = visual.TextStim(win=win, name='blank',
     text=None,
     font='Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0,
-    color='white', colorSpace='rgb', opacity=1,
+    color=colBkgd, colorSpace='rgb', opacity=1,
     depth=0.0);
 
 # Create some handy timers
@@ -437,7 +441,7 @@ for thisBlock in block:
 
 
     # set up handler to look after randomisation of conditions etc
-    trials = data.TrialHandler(nReps=ntrials, method='random',
+    trials = data.TrialHandler(nReps=ntrials, method='sequential',
         extraInfo=expInfo, originPath=-1,
         trialList=[None],
         seed=None, name='trials')
@@ -739,7 +743,8 @@ for thisBlock in block:
                 win.callOnFlip(usr_input_t1.clock.reset)  # t=0 on next screen flip
                 event.clearEvents(eventType='keyboard')
             if usr_input_t1.status == STARTED:
-                theseKeys = event.getKeys(keyList=['1', '2', '3', '4', '5', '6', '7', '8', '9'])
+                theseKeys = event.getKeys(keyList=['1', '2', '3', '4', '5', '6', '7', '8', '9', 
+                                                   'num_1', 'num_2', 'num_3', 'num_4', 'num_5', 'num_6', 'num_7', 'num_8', 'num_9'])
 
                 # check for quit:
                 if "escape" in theseKeys:
