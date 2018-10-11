@@ -12,6 +12,8 @@ If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2009) Generating stimuli for neuroscience using PsychoPy.
         Frontiers in Neuroinformatics, 2:10. doi: 10.3389/neuro.11.010.2008
 
+TTL 1: first stimulus has been displayed
+
 TTL 4: a short-seperation trial is beginning
 TTL 8: a long-seperation trial is beginning
 
@@ -42,9 +44,20 @@ import os  # handy system and path functions
 import sys  # to get file system encoding
 
 # user prefs
-sendTTL    = True
-colFont    = 'white' # font colour (rgb space)
-colBkgd    = 'black' # background colour (rgb space)
+sendTTL   = False
+colFont   = 'white' # font colour (rgb space)
+colBkgd   = 'black' # background colour (rgb space)
+stim_dur  = .050 #duration of stimulus presentation in seconds
+mask_dur  = .034 #duration of the mask in seconds
+iti_dur   = .75   # duration of ITI in seconds
+
+sep_short = 4 # SHORT number of stimuli that should seperate T1 from T2
+sep_long  = 8 # LONG  number of stimuli that should seperate T1 from T2
+
+nShortTrials = 72  # number of short-interval trials
+nLongTrials  = 192 # number of long-interval trials
+
+nBlocks = 4 # number of blocks in the task
 
 parallelPortAddress = 61368 #49168
 
@@ -72,7 +85,7 @@ filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expNa
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath=u'C:\\Users\\enter\\Documents\\Software\\gitrepos\\experiment\\test_experiment.psyexp',
+    originPath=None,
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -89,6 +102,8 @@ win = visual.Window(
     allowGUI=True, allowStencil=False,
     monitor=u'testMonitor', color=colBkgd, colorSpace='rgb',
     blendMode='avg', useFBO=True)
+win.mouseVisible = False
+
 # store frame rate of monitor if we can measure it
 expInfo['frameRate'] = win.getActualFrameRate()
 if expInfo['frameRate'] != None:
@@ -103,26 +118,18 @@ import random as rand
 import pandas as pd
 import string
 
+# define trial types
+trialType_stim = ['t1', 't2'] # stimulus condition types
+
 # keeping track
 trial_count = 0
 block_count = 0
 
-# USER_DEFINED OPTIONS
-stim_dur = .050 #duration of stimulus presentation in seconds
-mask_dur = .034 #duration of the mask in seconds
-iti_dur  = .5   # duration of ITI in seconds
-trialType_stim = ['t1', 't2'] #stimulus ondition types
-
-sep_short = 4 # number of stimuli that should seperate T1 from T2
-sep_long  = 8
-
 #create an array of short/long interval conditions
 
-trialType_sep  = np.repeat(a = ['short', 'long'], repeats = [192, 72])
-
+trialType_sep  = np.repeat(a = ['short', 'long'], repeats = [nLongTrials, nShortTrials])
 trialType_sep  = np.repeat(a = trialType_sep, repeats = len(trialType_stim))
-
-trialType_stim = np.repeat(a = trialType_stim, repeats = 192 + 72)
+trialType_stim = np.repeat(a = trialType_stim, repeats = nLongTrials + nShortTrials)
 
 #create an array of short/long interval conditions
 
@@ -142,9 +149,9 @@ instruct_p1 = visual.TextStim(win=win, name='instruct_p1',
     color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
 
-# Initialize components for Routine "instructions"
-exp_endedClock = core.Clock()
-ending_p1 = visual.TextStim(win=win, name='ending_p1',
+# Initialize components for Routine "endTxt"
+endTxtClock = core.Clock()
+endTxt = visual.TextStim(win=win, name='endTxt',
     text='This part is done. Please inform the experimenter.',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0,
@@ -178,7 +185,7 @@ trial_defClock = core.Clock()
 text = visual.TextStim(win=win, name='text',
     text='default text',
     font='Arial',
-    pos=(0, 0), height=2, wrapWidth=None, ori=0,
+    pos=(0, 0), wrapWidth=None, ori=0,
     color=colFont, colorSpace='rgb', opacity=0,
     depth=-1.0);
 
@@ -344,7 +351,7 @@ for thisComponent in instructionsComponents:
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-block = data.TrialHandler(nReps=2, method='random',
+block = data.TrialHandler(nReps=nBlocks, method='random',
     extraInfo=expInfo, originPath=-1,
     trialList=[None],
     seed=None, name='block')
@@ -519,19 +526,11 @@ for thisBlock in block:
             elif type(stim_array[elem]) is str:
                 stim_cond.append('distractor')
 
-        # put this data into a dataframe
-#        print sep_col
-#        print tnum_col
-#        print trial_col
-#        print stimCount_col
-#        print stim_array
-#        print stim_cond
-
         trial_tab = np.vstack((trial_col, sep_col, tnum_col, stimCount_col, stim_array, stim_cond))
         trial_tab = np.transpose(trial_tab)
         trial_tab = pd.DataFrame(trial_tab)
         
-        print trial_tab
+        # print trial_tab
 
         # save dataframe to conditions *.csv file
         trial_tab.to_csv("tmp_stimuli.csv", header = ['block', 'sep_dur', 'Tx', 'trial', 'stimulus', 'cond'], index = False)
@@ -613,7 +612,7 @@ for thisBlock in block:
             if trialOnsCount == 0 and sendTTL:
                 win.callOnFlip(port.setData, 1)
             elif trialOnsCount == 0 and not sendTTL:
-                print "TTL: 1"
+                print "TTL 1"
             currentLoop = stim
             # abbreviate parameter names if possible (e.g. rgb = thisStim.rgb)
             if thisStim != None:
@@ -622,7 +621,7 @@ for thisBlock in block:
                 if thisStim['cond'] == 'target' and frameCount == 0:
                     targetList.append(stimulus)
                     numTTL = int(stimulus) + len(targetList) * 10
-                    print stimulus
+                    # print stimulus
                     if sendTTL:
                         win.callOnFlip(port.setData, numTTL)
                     else:
@@ -952,4 +951,73 @@ for thisBlock in block:
 
     thisExp.nextEntry()
 
-# completed 2 repeats of 'block'
+# completed nBlocks repeats of 'block'
+
+# ------Prepare to start Routine "endTxt"-------
+t = 0
+endTxtClock.reset()  # clock
+frameN = -1
+continueRoutine = True
+# update component parameters for each repeat
+end_p1 = event.BuilderKeyResponse()
+# keep track of which components have finished
+endTxtComponents = [endTxt, adv_p1]
+for thisComponent in instructionsComponents:
+    if hasattr(thisComponent, 'status'):
+        thisComponent.status = NOT_STARTED
+
+# -------Start Routine "endTxt"-------
+while continueRoutine:
+    # get current time
+    t = instructionsClock.getTime()
+    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+    # update/draw components on each frame
+
+    # *instruct_p1* updates
+    if t >= 0.0 and instruct_p1.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        endTxt.tStart = t
+        endTxt.frameNStart = frameN  # exact frame index
+        endTxt.setAutoDraw(True)
+
+    # *adv_p1* updates
+    if t >= 0.0 and adv_p1.status == NOT_STARTED:
+        # keep track of start time/frame for later
+        end_p1.tStart = t
+        end_p1.frameNStart = frameN  # exact frame index
+        end_p1.status = STARTED
+        # keyboard checking is just starting
+        event.clearEvents(eventType='keyboard')
+    if end_p1.status == STARTED:
+        theseKeys = event.getKeys(keyList=['space'])
+
+        # check for quit:
+        if "escape" in theseKeys:
+            endExpNow = True
+        if len(theseKeys) > 0:  # at least one key was pressed
+            # a response ends the routine
+            continueRoutine = False
+
+    # check if all components have finished
+    if not continueRoutine:  # a component has requested a forced-end of Routine
+        break
+    continueRoutine = False  # will revert to True if at least one component still running
+    for thisComponent in endTxtComponents:
+        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+            continueRoutine = True
+            break  # at least one component has not yet finished
+
+    # check for quit (the Esc key)
+    if endExpNow or event.getKeys(keyList=["escape"]):
+        core.quit()
+
+    # refresh the screen
+    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+        win.flip()
+
+# -------Ending Routine "endTxt"-------
+for thisComponent in endTxtComponents:
+    if hasattr(thisComponent, "setAutoDraw"):
+        thisComponent.setAutoDraw(False)
+# the Routine "instructions" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
