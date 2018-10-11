@@ -69,6 +69,8 @@ win = visual.Window(
     allowGUI=False, allowStencil=False,
     monitor='testMonitor', color=colBkgd, colorSpace='rgb',
     blendMode='avg', useFBO=True)
+win.mouseVisible = False
+
 # store frame rate of monitor if we can measure it
 expInfo['frameRate'] = win.getActualFrameRate()
 if expInfo['frameRate'] != None:
