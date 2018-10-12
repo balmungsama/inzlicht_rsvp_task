@@ -52,6 +52,7 @@ mask_dur   = .034    #duration of the mask in seconds
 iti_dur    = .75     # duration of ITI in seconds
 fontSzStim = .5      # font size for the stimuli (starts at .1)
 
+
 sep_short = 4 # SHORT number of stimuli that should seperate T1 from T2
 sep_long  = 8 # LONG  number of stimuli that should seperate T1 from T2
 
@@ -59,6 +60,9 @@ nShortTrials = 72  # number of short-interval trials
 nLongTrials  = 192 # number of long-interval trials
 
 nBlocks = 2 # number of blocks in the task
+
+if not sendTTL:
+    colBkgd = 'red'
 
 parallelPortAddress = 61368 #49168
 

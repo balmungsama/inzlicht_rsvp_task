@@ -26,6 +26,9 @@ sendTTL = True
 colFont = 'white' # font colour (rgb space)
 colBkgd = 'black' # background colour (rgb space)
 
+if not sendTTL:
+    colBkgd = 'red'
+
 parallelPortAddress = 61368 #49168
 
 if sendTTL:

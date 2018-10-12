@@ -30,6 +30,9 @@ duration_s = 240     # how long the task lasts in seconds (not including trainin
 colFont    = 'white' # font colour (rgb space)
 colBkgd    = 'black' # background colour (rgb space)
 
+if not sendTTL:
+    colBkgd = 'red'
+
 parallelPortAddress = 61368 
 
 if sendTTL:

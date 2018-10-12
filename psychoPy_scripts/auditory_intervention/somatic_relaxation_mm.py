@@ -15,6 +15,7 @@ from psychopy import locale_setup, sound, gui, visual, core, data, event, loggin
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 import numpy as np  # whole numpy lib is available, prepend 'np.'
+from pygame import sndarray
 from numpy import (sin, cos, tan, log, log10, pi, average,
                    sqrt, std, deg2rad, rad2deg, linspace, asarray)
 from numpy.random import random, randint, normal, shuffle
@@ -25,6 +26,9 @@ import sys  # to get file system encoding
 sendTTL = True
 colFont = 'white' # font colour (rgb space)
 colBkgd = 'black' # background colour (rgb space)
+
+if not sendTTL:
+    colBkgd = 'red'
 
 parallelPortAddress = 61368 #49168
 
@@ -89,8 +93,15 @@ Instructions = visual.TextStim(win=win, name='Instructions',
 
 # Initialize components for Routine "intervention"
 interventionClock = core.Clock()
-sound_SR = sound.Sound(u'../stimuli/body_scan_long_norm.ogg', secs=-1)
+sound_SR = sound.Sound(u'../stimuli/body_scan_long_norm.ogg', secs=-1, stereo=False)
 sound_SR.setVolume(1)
+
+# my addition below
+# stim_array = sndarray.array(sound_SR._snd)
+# mono_stim = stim_array[:,0]
+# nz = np.zeros(len(mono_stim))
+# na = np.asarray(np.column_stack((mono_stim,nz)),dtype=int) 
+# sound_SR._snd = sndarray.make_sound(na)
 
 # Initialize components for Routine "ending"
 endingClock = core.Clock()
@@ -229,7 +240,7 @@ while continueRoutine and routineTimer.getTime() > 0:
             break  # at least one component has not yet finished
     
     # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]):
+    if endExpNow or event.getKeys(keyList=["escape"]:
         core.quit()
     
     # refresh the screen
