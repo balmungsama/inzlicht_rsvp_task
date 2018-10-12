@@ -42,16 +42,18 @@ from numpy import (sin, cos, tan, log, log10, pi, average,
 from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
+import random as rand
+import pandas as pd
+import string
 
 # user prefs
 sendTTL    = False
 colFont    = 'white' # font colour (rgb space)
 colBkgd    = 'black' # background colour (rgb space)
-stim_dur   = .050    #duration of stimulus presentation in seconds
-mask_dur   = .034    #duration of the mask in seconds
+stim_dur   = .050    # duration of stimulus presentation in seconds (0.05)
+mask_dur   = .034    # duration of the mask in seconds (0.034)
 iti_dur    = .75     # duration of ITI in seconds
 fontSzStim = .5      # font size for the stimuli (starts at .1)
-
 
 sep_short = 4 # SHORT number of stimuli that should seperate T1 from T2
 sep_long  = 8 # LONG  number of stimuli that should seperate T1 from T2
@@ -118,10 +120,6 @@ else:
 
 # Initialize components for Routine "code_Init"
 code_InitClock = core.Clock()
-# IMPORTING MY PACKAGES
-import random as rand
-import pandas as pd
-import string
 
 # define trial types
 trialType_stim = ['t1', 't2'] # stimulus condition types
@@ -547,9 +545,9 @@ for thisBlock in block:
                 thisComponent.status = NOT_STARTED
                 
         if trialType_cur[1] == 'short':
-            sep_ttl = 4
+            sep_ttl = sep_short
         elif trialType_cur[1] == 'long':
-            sep_ttl = 8
+            sep_ttl = sep_long
             
         if sendTTL:
             port.setData(sep_ttl) # mark the end of stimulus presentation
@@ -697,7 +695,7 @@ for thisBlock in block:
                     frameCount = frameCount + 1
                     trialOnsCount += 1
                     win.flip()
-
+            
             # -------Ending Routine "disp_stimulus"-------
             for thisComponent in disp_stimulusComponents:
                 if hasattr(thisComponent, "setAutoDraw"):
@@ -754,13 +752,13 @@ for thisBlock in block:
                 if "escape" in theseKeys:
                     endExpNow = True
                 if len(theseKeys) > 0:  # at least one key was pressed
+                    if "num_" in theseKeys[0]:
+                        theseKeys[0] = theseKeys[0].split("_")[1]
+                    
                     if targetList[0] == theseKeys[0]:
                         acc_t1 = 211
                     else:
                         acc_t1 = 210
-
-                    if "num_" in theseKeys[0]:
-                        theseKeys[0] = theseKeys[0].split("_")[1]
 
                     if sendTTL:
                         print "TTL {}".format(int(theseKeys[0]) + 110)
@@ -850,6 +848,9 @@ for thisBlock in block:
                 if "escape" in theseKeys:
                     endExpNow = True
                 if len(theseKeys) > 0:  # at least one key was pressed
+                    if "num_" in theseKeys[0]:
+                        theseKeys[0] = theseKeys[0].split("_")[1]
+
                     if len(targetList) > 1:
                         if targetList[1] == theseKeys[0]:
                             acc_t2 = 221
@@ -857,9 +858,6 @@ for thisBlock in block:
                             acc_t2 = 220
                     else:
                         acc_t2 = 220
-                    
-                    if "num_" in theseKeys[0]:
-                        theseKeys[0] = theseKeys[0].split("_")[1]
                     
                     if sendTTL:
                         port.setData(int(theseKeys[0]) + 120)
@@ -962,7 +960,7 @@ for thisBlock in block:
         thisExp.nextEntry()
 
     # completed ntrials repeats of 'trials'
-
+    routineTimer.reset()
     thisExp.nextEntry()
 
 # completed nBlocks repeats of 'block'
@@ -975,7 +973,7 @@ continueRoutine = True
 # update component parameters for each repeat
 end_p1 = event.BuilderKeyResponse()
 # keep track of which components have finished
-endTxtComponents = [endTxt, adv_p1]
+endTxtComponents = [endTxt, end_p1]
 for thisComponent in instructionsComponents:
     if hasattr(thisComponent, 'status'):
         thisComponent.status = NOT_STARTED
@@ -994,8 +992,8 @@ while continueRoutine:
         endTxt.frameNStart = frameN  # exact frame index
         endTxt.setAutoDraw(True)
 
-    # *adv_p1* updates
-    if t >= 0.0 and adv_p1.status == NOT_STARTED:
+    # *end_p1* updates
+    if t >= 0.0 and end_p1.status == NOT_STARTED:
         # keep track of start time/frame for later
         end_p1.tStart = t
         end_p1.frameNStart = frameN  # exact frame index
@@ -1003,10 +1001,10 @@ while continueRoutine:
         # keyboard checking is just starting
         event.clearEvents(eventType='keyboard')
     if end_p1.status == STARTED:
-        theseKeys = event.getKeys(keyList=['space'])
+        theseKeys = event.getKeys(keyList=['space', 'escape'])
 
         # check for quit:
-        if "escape" in theseKeys:
+        if "escape" in theseKeys or "space" in theseKeys:
             endExpNow = True
         if len(theseKeys) > 0:  # at least one key was pressed
             # a response ends the routine
@@ -1033,5 +1031,10 @@ while continueRoutine:
 for thisComponent in endTxtComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
-# the Routine "instructions" was not non-slip safe, so reset the non-slip timer
-routineTimer.reset()
+# check for quit (the Esc key)
+if endExpNow or event.getKeys(keyList=["escape"]):
+    core.quit()
+
+thisExp.nextEntry()
+win.close()
+core.quit()
