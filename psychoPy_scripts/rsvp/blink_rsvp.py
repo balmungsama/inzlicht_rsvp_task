@@ -44,12 +44,13 @@ import os  # handy system and path functions
 import sys  # to get file system encoding
 
 # user prefs
-sendTTL   = True
-colFont   = 'white' # font colour (rgb space)
-colBkgd   = 'black' # background colour (rgb space)
-stim_dur  = .050 #duration of stimulus presentation in seconds
-mask_dur  = .034 #duration of the mask in seconds
-iti_dur   = .75   # duration of ITI in seconds
+sendTTL    = False
+colFont    = 'white' # font colour (rgb space)
+colBkgd    = 'black' # background colour (rgb space)
+stim_dur   = .050    #duration of stimulus presentation in seconds
+mask_dur   = .034    #duration of the mask in seconds
+iti_dur    = .75     # duration of ITI in seconds
+fontSzStim = .5      # font size for the stimuli (starts at .1)
 
 sep_short = 4 # SHORT number of stimuli that should seperate T1 from T2
 sep_long  = 8 # LONG  number of stimuli that should seperate T1 from T2
@@ -193,9 +194,10 @@ disp_stimulusClock = core.Clock()
 text_2 = visual.TextStim(win=win, name='text_2',
     text='default text',
     font='Arial',
-    pos=(0, 0), height=0.1, wrapWidth=None, ori=0,
+    pos=(0, 0), height=fontSzStim, wrapWidth=None, ori=0,
     color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
+
 mask = visual.TextStim(win=win, name='mask',
     text=' ',
     font='Arial',
@@ -840,9 +842,6 @@ for thisBlock in block:
                 theseKeys = event.getKeys(keyList=['1', '2', '3', '4', '5', '6', '7', '8', '9', 
                                                    'num_1', 'num_2', 'num_3', 'num_4', 'num_5', 'num_6', 'num_7', 'num_8', 'num_9'])
 
-                if "num_" in theseKeys[0]:
-                        theseKeys[0] = theseKeys[0].split("_")[1]
-
                 # check for quit:
                 if "escape" in theseKeys:
                     endExpNow = True
@@ -854,6 +853,10 @@ for thisBlock in block:
                             acc_t2 = 220
                     else:
                         acc_t2 = 220
+                    
+                    if "num_" in theseKeys[0]:
+                        theseKeys[0] = theseKeys[0].split("_")[1]
+                    
                     if sendTTL:
                         port.setData(int(theseKeys[0]) + 120)
                         port.setData(acc_t2)
