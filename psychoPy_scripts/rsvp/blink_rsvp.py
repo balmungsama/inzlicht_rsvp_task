@@ -837,7 +837,11 @@ for thisBlock in block:
                 win.callOnFlip(usr_input_t2.clock.reset)  # t=0 on next screen flip
                 event.clearEvents(eventType='keyboard')
             if usr_input_t2.status == STARTED:
-                theseKeys = event.getKeys(keyList=['1', '2', '3', '4', '5', '6', '7', '8', '9'])
+                theseKeys = event.getKeys(keyList=['1', '2', '3', '4', '5', '6', '7', '8', '9', 
+                                                   'num_1', 'num_2', 'num_3', 'num_4', 'num_5', 'num_6', 'num_7', 'num_8', 'num_9'])
+
+                if "num_" in theseKeys[0]:
+                        theseKeys[0] = theseKeys[0].split("_")[1]
 
                 # check for quit:
                 if "escape" in theseKeys:
