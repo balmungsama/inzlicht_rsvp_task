@@ -44,7 +44,7 @@ import os  # handy system and path functions
 import sys  # to get file system encoding
 
 # user prefs
-sendTTL   = False
+sendTTL   = True
 colFont   = 'white' # font colour (rgb space)
 colBkgd   = 'black' # background colour (rgb space)
 stim_dur  = .050 #duration of stimulus presentation in seconds
@@ -57,7 +57,7 @@ sep_long  = 8 # LONG  number of stimuli that should seperate T1 from T2
 nShortTrials = 72  # number of short-interval trials
 nLongTrials  = 192 # number of long-interval trials
 
-nBlocks = 4 # number of blocks in the task
+nBlocks = 2 # number of blocks in the task
 
 parallelPortAddress = 61368 #49168
 
@@ -134,7 +134,6 @@ trialType_stim = np.repeat(a = trialType_stim, repeats = nLongTrials + nShortTri
 #create an array of short/long interval conditions
 
 trialType_mat  = np.stack((trialType_stim, trialType_sep))
-
 trialType_mat = np.transpose(trialType_mat)
 
 # number of trials
@@ -143,7 +142,7 @@ ntrials = trialType_mat.shape[0]
 # Initialize components for Routine "instructions"
 instructionsClock = core.Clock()
 instruct_p1 = visual.TextStim(win=win, name='instruct_p1',
-    text='Hello. Thank you for coming in today. \n\n For this task, you will be asked to observe a series of characters flash on the screen and try to identify any number(s) you see in the stream. The characters will appear quickly, so you will have to pay close attention. \n\n Sometimes a stream of characters will contain two numbers, and other times it will only contain one. Each stream will contain 15 to 19 characters and last for about a second.  \n\n When two numbers are presented, please enter the numbers via keyboard in the order they were presented. When only one number is presented, enter in the number you saw along with any random number. \n\n If you at any point are not sure which number(s) were presented, you can just guess. \n\n You will be presented two blocks of this task; each block lasting between 13 to 15 minutes.\n\n\n                                                        Press SPACE to continue.',
+    text='Hello. Thank you for coming in today. \n\nFor this task, you will be asked to observe a series of characters flash on the screen and try to identify any number(s) you see in the stream. Numbers will be from 1 to 9. The characters will appear quickly, so you will have to pay close attention. \n\nSometimes a stream of characters will contain two numbers, and other times it will only contain one. Each stream will contain 15 to 19 characters and last for about a second. \n\nWhen two numbers are presented, please enter the numbers via keyboard in the order they were presented. When only one number is presented, enter in the number you saw along with any random number. \n\nPlease respond as accurately as you can. If you at any point are not sure which number(s) were presented, you can just guess. \n\nYou will be presented two blocks of this task; each block lasting between 13 to 15 minutes.\n\n\nPress SPACE to continue.',
     font='Arial',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0,
     color=colFont, colorSpace='rgb', opacity=1,
@@ -753,6 +752,10 @@ for thisBlock in block:
                         acc_t1 = 211
                     else:
                         acc_t1 = 210
+
+                    if "num_" in theseKeys[0]:
+                        theseKeys[0] = theseKeys[0].split("_")[1]
+
                     if sendTTL:
                         print "TTL {}".format(int(theseKeys[0]) + 110)
                         port.setData(int(theseKeys[0]) + 110) # send participant's t1 response
