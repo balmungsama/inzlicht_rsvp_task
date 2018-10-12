@@ -1,0 +1,332 @@
+9.3845 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, args=UNKNOWN, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color='black', colorSpace='named', fullscr=UNKNOWN, gamma=None, kwargs=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x20A96DD0>, multiSample=False, name='window1', numSamples=2, pos=[0, 0], screen=0, size=array([3240, 2160]), stereo=False, units=u'norm', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType=u'pyglet')
+9.3849 	EXP 	window1: mouseVisible = False
+9.3849 	EXP 	window1: recordFrameIntervals = False
+9.5524 	EXP 	window1: recordFrameIntervals = True
+9.7351 	EXP 	window1: recordFrameIntervals = False
+10.5425 	EXP 	Created instruct_p1 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, name='instruct_p1', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+10.5793 	EXP 	Created endTxt = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, name='endTxt', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+10.6048 	EXP 	Created ready = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='ready', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='default text', units=u'norm', win=Window(...), wrapWidth=1)
+10.6136 	EXP 	Created go = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='go', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='GO', units=u'norm', win=Window(...), wrapWidth=1)
+10.6143 	EXP 	Created gap = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-3.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='gap', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='', units=u'norm', win=Window(...), wrapWidth=1)
+10.6260 	EXP 	Created text = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='text', opacity=0.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='default text', units=u'norm', win=Window(...), wrapWidth=1)
+10.6369 	EXP 	Created text_2 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='text_2', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='default text', units=u'norm', win=Window(...), wrapWidth=1)
+10.6418 	EXP 	Created mask = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='mask', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=' ', units=u'norm', win=Window(...), wrapWidth=1)
+10.6822 	EXP 	Created Probe_t1 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='Probe_t1', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='What numbers did you see?', units=u'norm', win=Window(...), wrapWidth=1)
+10.7205 	EXP 	Created Probe_t2 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='Probe_t2', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='What numbers did you see?', units=u'norm', win=Window(...), wrapWidth=1)
+10.7219 	EXP 	Created blank = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='black', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='blank', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 0.,  0.,  0.]), text='', units=u'norm', win=Window(...), wrapWidth=1)
+10.7457 	EXP 	text_2: size = 2
+10.7457 	EXP 	instruct_p1: autoDraw = True
+11.2973 	DATA 	Keypress: space
+11.2997 	EXP 	Created sequence: random, trialTypes=1, nReps=2, seed=None
+11.3005 	EXP 	New trial (rep=0, index=0): None
+11.3941 	EXP 	instruct_p1: autoDraw = False
+11.3941 	EXP 	ready: text = 'Block 1\n\nReady?'
+11.3941 	EXP 	ready: autoDraw = True
+12.3165 	EXP 	ready: autoDraw = False
+12.3342 	EXP 	go: autoDraw = True
+12.8170 	EXP 	go: autoDraw = False
+12.8170 	EXP 	gap: autoDraw = True
+13.0016 	EXP 	Created sequence: sequential, trialTypes=1, nReps=528, seed=None
+13.0135 	EXP 	New trial (rep=0, index=0): None
+13.0617 	EXP 	ready: autoDraw = False
+13.0617 	EXP 	go: autoDraw = False
+13.0617 	EXP 	gap: autoDraw = False
+13.0617 	EXP 	text: text = 1
+13.0617 	EXP 	text: autoDraw = True
+13.2176 	EXP 	Imported tmp_stimuli.csv as conditions, 18 conditions, 6 params
+13.2193 	EXP 	Created sequence: sequential, trialTypes=18, nReps=1, seed=None
+13.2213 	EXP 	New trial (rep=0, index=0): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 1), ('stimulus', u'U'), ('cond', u'distractor')])
+13.2571 	EXP 	text: autoDraw = False
+13.2571 	EXP 	text_2: text = u'U'
+13.2571 	EXP 	text_2: autoDraw = True
+13.2848 	EXP 	New trial (rep=0, index=1): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 2), ('stimulus', u'M'), ('cond', u'distractor')])
+13.3230 	EXP 	text_2: autoDraw = False
+13.3230 	EXP 	mask: autoDraw = False
+13.3230 	EXP 	text_2: text = u'M'
+13.3230 	EXP 	text_2: autoDraw = True
+13.3479 	EXP 	text_2: autoDraw = False
+13.3676 	EXP 	mask: autoDraw = True
+13.3699 	EXP 	New trial (rep=0, index=2): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 3), ('stimulus', u'O'), ('cond', u'distractor')])
+13.3957 	EXP 	text_2: autoDraw = False
+13.3957 	EXP 	mask: autoDraw = False
+13.3957 	EXP 	text_2: text = u'O'
+13.3957 	EXP 	text_2: autoDraw = True
+13.4339 	EXP 	text_2: autoDraw = False
+13.4517 	EXP 	mask: autoDraw = True
+13.4532 	EXP 	New trial (rep=0, index=3): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 4), ('stimulus', u'J'), ('cond', u'distractor')])
+13.4854 	EXP 	text_2: autoDraw = False
+13.4854 	EXP 	mask: autoDraw = False
+13.4854 	EXP 	text_2: text = u'J'
+13.4854 	EXP 	text_2: autoDraw = True
+13.5345 	EXP 	text_2: autoDraw = False
+13.5345 	EXP 	mask: autoDraw = True
+13.5362 	EXP 	New trial (rep=0, index=4): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 5), ('stimulus', u'E'), ('cond', u'distractor')])
+13.5673 	EXP 	text_2: autoDraw = False
+13.5673 	EXP 	mask: autoDraw = False
+13.5673 	EXP 	text_2: text = u'E'
+13.5673 	EXP 	text_2: autoDraw = True
+13.6009 	EXP 	text_2: autoDraw = False
+13.6179 	EXP 	mask: autoDraw = True
+13.6203 	EXP 	New trial (rep=0, index=5): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 6), ('stimulus', u'S'), ('cond', u'distractor')])
+13.6513 	EXP 	mask: autoDraw = False
+13.6513 	EXP 	text_2: autoDraw = False
+13.6513 	EXP 	mask: autoDraw = False
+13.6513 	EXP 	text_2: text = u'S'
+13.6513 	EXP 	text_2: autoDraw = True
+13.6855 	EXP 	text_2: autoDraw = False
+13.7016 	EXP 	mask: autoDraw = True
+13.7040 	EXP 	New trial (rep=0, index=6): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 7), ('stimulus', u'U'), ('cond', u'distractor')])
+13.7354 	EXP 	mask: autoDraw = False
+13.7354 	EXP 	text_2: autoDraw = False
+13.7354 	EXP 	mask: autoDraw = False
+13.7354 	EXP 	text_2: text = u'U'
+13.7354 	EXP 	text_2: autoDraw = True
+13.7680 	EXP 	text_2: autoDraw = False
+13.7839 	EXP 	mask: autoDraw = True
+13.7854 	EXP 	New trial (rep=0, index=7): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 8), ('stimulus', u'V'), ('cond', u'distractor')])
+13.8161 	EXP 	mask: autoDraw = False
+13.8161 	EXP 	text_2: autoDraw = False
+13.8161 	EXP 	mask: autoDraw = False
+13.8161 	EXP 	text_2: text = u'V'
+13.8161 	EXP 	text_2: autoDraw = True
+13.8516 	EXP 	text_2: autoDraw = False
+13.8669 	EXP 	mask: autoDraw = True
+13.8686 	EXP 	New trial (rep=0, index=8): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 9), ('stimulus', u'2'), ('cond', u'target')])
+13.9036 	EXP 	mask: autoDraw = False
+13.9036 	EXP 	text_2: autoDraw = False
+13.9036 	EXP 	mask: autoDraw = False
+13.9036 	EXP 	text_2: text = u'2'
+13.9036 	EXP 	text_2: autoDraw = True
+13.9501 	EXP 	text_2: autoDraw = False
+13.9501 	EXP 	mask: autoDraw = True
+13.9516 	EXP 	New trial (rep=0, index=9): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 10), ('stimulus', u'G'), ('cond', u'distractor')])
+13.9766 	EXP 	mask: autoDraw = False
+13.9766 	EXP 	text_2: autoDraw = False
+13.9766 	EXP 	mask: autoDraw = False
+13.9766 	EXP 	text_2: text = u'G'
+13.9766 	EXP 	text_2: autoDraw = True
+14.0169 	EXP 	text_2: autoDraw = False
+14.0343 	EXP 	mask: autoDraw = True
+14.0367 	EXP 	New trial (rep=0, index=10): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 11), ('stimulus', u'V'), ('cond', u'distractor')])
+14.0672 	EXP 	mask: autoDraw = False
+14.0672 	EXP 	text_2: autoDraw = False
+14.0672 	EXP 	mask: autoDraw = False
+14.0672 	EXP 	text_2: text = u'V'
+14.0672 	EXP 	text_2: autoDraw = True
+14.1004 	EXP 	text_2: autoDraw = False
+14.1176 	EXP 	mask: autoDraw = True
+14.1195 	EXP 	New trial (rep=0, index=11): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 12), ('stimulus', u'J'), ('cond', u'distractor')])
+14.1470 	EXP 	mask: autoDraw = False
+14.1470 	EXP 	text_2: autoDraw = False
+14.1470 	EXP 	mask: autoDraw = False
+14.1470 	EXP 	text_2: text = u'J'
+14.1470 	EXP 	text_2: autoDraw = True
+14.1836 	EXP 	text_2: autoDraw = False
+14.2010 	EXP 	mask: autoDraw = True
+14.2030 	EXP 	New trial (rep=0, index=12): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 13), ('stimulus', u' '), ('cond', u'mask')])
+14.2308 	EXP 	mask: autoDraw = False
+14.2308 	EXP 	text_2: autoDraw = False
+14.2308 	EXP 	mask: autoDraw = False
+14.2308 	EXP 	text_2: text = u' '
+14.2308 	EXP 	text_2: autoDraw = True
+14.2671 	EXP 	text_2: autoDraw = False
+14.2847 	EXP 	mask: autoDraw = True
+14.2868 	EXP 	New trial (rep=0, index=13): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 14), ('stimulus', u'C'), ('cond', u'distractor')])
+14.3177 	EXP 	mask: autoDraw = False
+14.3177 	EXP 	text_2: autoDraw = False
+14.3177 	EXP 	mask: autoDraw = False
+14.3177 	EXP 	text_2: text = u'C'
+14.3177 	EXP 	text_2: autoDraw = True
+14.3507 	EXP 	text_2: autoDraw = False
+14.3688 	EXP 	mask: autoDraw = True
+14.3707 	EXP 	New trial (rep=0, index=14): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 15), ('stimulus', u'G'), ('cond', u'distractor')])
+14.3978 	EXP 	mask: autoDraw = False
+14.3978 	EXP 	text_2: autoDraw = False
+14.3978 	EXP 	mask: autoDraw = False
+14.3978 	EXP 	text_2: text = u'G'
+14.3978 	EXP 	text_2: autoDraw = True
+14.4356 	EXP 	text_2: autoDraw = False
+14.4524 	EXP 	mask: autoDraw = True
+14.4553 	EXP 	New trial (rep=0, index=15): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 16), ('stimulus', u'S'), ('cond', u'distractor')])
+14.4873 	EXP 	mask: autoDraw = False
+14.4873 	EXP 	text_2: autoDraw = False
+14.4873 	EXP 	mask: autoDraw = False
+14.4873 	EXP 	text_2: text = u'S'
+14.4873 	EXP 	text_2: autoDraw = True
+14.5343 	EXP 	text_2: autoDraw = False
+14.5343 	EXP 	mask: autoDraw = True
+14.5366 	EXP 	New trial (rep=0, index=16): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 17), ('stimulus', u'Y'), ('cond', u'distractor')])
+14.5752 	EXP 	mask: autoDraw = False
+14.5752 	EXP 	text_2: autoDraw = False
+14.5752 	EXP 	mask: autoDraw = False
+14.5752 	EXP 	text_2: text = u'Y'
+14.5752 	EXP 	text_2: autoDraw = True
+14.6016 	EXP 	text_2: autoDraw = False
+14.6181 	EXP 	mask: autoDraw = True
+14.6204 	EXP 	New trial (rep=0, index=17): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 18), ('stimulus', u'R'), ('cond', u'distractor')])
+14.6540 	EXP 	mask: autoDraw = False
+14.6540 	EXP 	text_2: autoDraw = False
+14.6540 	EXP 	mask: autoDraw = False
+14.6540 	EXP 	text_2: text = u'R'
+14.6540 	EXP 	text_2: autoDraw = True
+14.7013 	EXP 	text_2: autoDraw = False
+14.7013 	EXP 	mask: autoDraw = True
+14.7177 	EXP 	mask: autoDraw = False
+14.7177 	EXP 	text_2: autoDraw = False
+14.7177 	EXP 	mask: autoDraw = False
+15.0843 	DATA 	Keypress: escape
+15.1545 	EXP 	window1: mouseVisible = True
+11.0582 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, args=UNKNOWN, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color='black', colorSpace='named', fullscr=UNKNOWN, gamma=None, kwargs=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x2171BDD0>, multiSample=False, name='window1', numSamples=2, pos=[0, 0], screen=0, size=array([3240, 2160]), stereo=False, units=u'norm', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType=u'pyglet')
+11.0585 	EXP 	window1: mouseVisible = False
+11.0586 	EXP 	window1: recordFrameIntervals = False
+11.2253 	EXP 	window1: recordFrameIntervals = True
+11.4077 	EXP 	window1: recordFrameIntervals = False
+12.5318 	EXP 	Created instruct_p1 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, name='instruct_p1', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+12.5690 	EXP 	Created endTxt = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.05, italic=False, name='endTxt', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+12.5950 	EXP 	Created ready = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='ready', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='default text', units=u'norm', win=Window(...), wrapWidth=1)
+12.6040 	EXP 	Created go = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-2.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='go', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='GO', units=u'norm', win=Window(...), wrapWidth=1)
+12.6047 	EXP 	Created gap = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-3.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='gap', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='', units=u'norm', win=Window(...), wrapWidth=1)
+12.6156 	EXP 	Created text = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='text', opacity=0.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='default text', units=u'norm', win=Window(...), wrapWidth=1)
+12.6270 	EXP 	Created text_2 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='text_2', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='default text', units=u'norm', win=Window(...), wrapWidth=1)
+12.6310 	EXP 	Created mask = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=-1.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='mask', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=' ', units=u'norm', win=Window(...), wrapWidth=1)
+12.6720 	EXP 	Created Probe_t1 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='Probe_t1', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='What numbers did you see?', units=u'norm', win=Window(...), wrapWidth=1)
+12.7041 	EXP 	Created Probe_t2 = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='Probe_t2', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='What numbers did you see?', units=u'norm', win=Window(...), wrapWidth=1)
+12.7053 	EXP 	Created blank = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='black', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='blank', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 0.,  0.,  0.]), text='', units=u'norm', win=Window(...), wrapWidth=1)
+12.7271 	EXP 	text_2: size = 20
+12.7271 	EXP 	instruct_p1: autoDraw = True
+13.0252 	DATA 	Keypress: space
+13.0269 	EXP 	Created sequence: random, trialTypes=1, nReps=2, seed=None
+13.0282 	EXP 	New trial (rep=0, index=0): None
+13.1428 	EXP 	instruct_p1: autoDraw = False
+13.1428 	EXP 	ready: text = 'Block 1\n\nReady?'
+13.1428 	EXP 	ready: autoDraw = True
+14.0408 	EXP 	ready: autoDraw = False
+14.0589 	EXP 	go: autoDraw = True
+14.5410 	EXP 	go: autoDraw = False
+14.5585 	EXP 	gap: autoDraw = True
+14.7254 	EXP 	Created sequence: sequential, trialTypes=1, nReps=528, seed=None
+14.7366 	EXP 	New trial (rep=0, index=0): None
+14.7803 	EXP 	gap: autoDraw = False
+14.7803 	EXP 	ready: autoDraw = False
+14.7803 	EXP 	go: autoDraw = False
+14.7803 	EXP 	gap: autoDraw = False
+14.7803 	EXP 	text: text = 1
+14.7803 	EXP 	text: autoDraw = True
+14.9386 	EXP 	Imported tmp_stimuli.csv as conditions, 16 conditions, 6 params
+14.9400 	EXP 	Created sequence: sequential, trialTypes=16, nReps=1, seed=None
+14.9419 	EXP 	New trial (rep=0, index=0): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 1), ('stimulus', u'T'), ('cond', u'distractor')])
+14.9709 	EXP 	text: autoDraw = False
+14.9709 	EXP 	text: autoDraw = False
+14.9709 	EXP 	text_2: text = u'T'
+14.9709 	EXP 	text_2: autoDraw = True
+15.0077 	EXP 	text_2: autoDraw = False
+15.0247 	EXP 	mask: autoDraw = True
+15.0268 	EXP 	New trial (rep=0, index=1): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 2), ('stimulus', u'M'), ('cond', u'distractor')])
+15.0650 	EXP 	text_2: autoDraw = False
+15.0650 	EXP 	mask: autoDraw = False
+15.0650 	EXP 	text_2: text = u'M'
+15.0650 	EXP 	text_2: autoDraw = True
+15.0891 	EXP 	text_2: autoDraw = False
+15.1079 	EXP 	mask: autoDraw = True
+15.1094 	EXP 	New trial (rep=0, index=2): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 3), ('stimulus', u'L'), ('cond', u'distractor')])
+15.1408 	EXP 	text_2: autoDraw = False
+15.1408 	EXP 	mask: autoDraw = False
+15.1408 	EXP 	text_2: text = u'L'
+15.1408 	EXP 	text_2: autoDraw = True
+15.1746 	EXP 	text_2: autoDraw = False
+15.1913 	EXP 	mask: autoDraw = True
+15.1934 	EXP 	New trial (rep=0, index=3): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 4), ('stimulus', u'H'), ('cond', u'distractor')])
+15.2236 	EXP 	text_2: autoDraw = False
+15.2236 	EXP 	mask: autoDraw = False
+15.2236 	EXP 	text_2: text = u'H'
+15.2236 	EXP 	text_2: autoDraw = True
+15.2579 	EXP 	text_2: autoDraw = False
+15.2745 	EXP 	mask: autoDraw = True
+15.2763 	EXP 	New trial (rep=0, index=4): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 5), ('stimulus', u'E'), ('cond', u'distractor')])
+15.3057 	EXP 	text_2: autoDraw = False
+15.3057 	EXP 	mask: autoDraw = False
+15.3057 	EXP 	text_2: text = u'E'
+15.3057 	EXP 	text_2: autoDraw = True
+15.3413 	EXP 	text_2: autoDraw = False
+15.3583 	EXP 	mask: autoDraw = True
+15.3602 	EXP 	New trial (rep=0, index=5): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 6), ('stimulus', u'L'), ('cond', u'distractor')])
+15.3888 	EXP 	text_2: autoDraw = False
+15.3888 	EXP 	mask: autoDraw = False
+15.3888 	EXP 	text_2: text = u'L'
+15.3888 	EXP 	text_2: autoDraw = True
+15.4252 	EXP 	text_2: autoDraw = False
+15.4418 	EXP 	mask: autoDraw = True
+15.4437 	EXP 	New trial (rep=0, index=6): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 7), ('stimulus', u'M'), ('cond', u'distractor')])
+15.4702 	EXP 	text_2: autoDraw = False
+15.4702 	EXP 	mask: autoDraw = False
+15.4702 	EXP 	text_2: text = u'M'
+15.4702 	EXP 	text_2: autoDraw = True
+15.5083 	EXP 	text_2: autoDraw = False
+15.5245 	EXP 	mask: autoDraw = True
+15.5262 	EXP 	New trial (rep=0, index=7): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 8), ('stimulus', u'S'), ('cond', u'distractor')])
+15.5588 	EXP 	text_2: autoDraw = False
+15.5588 	EXP 	mask: autoDraw = False
+15.5588 	EXP 	text_2: text = u'S'
+15.5588 	EXP 	text_2: autoDraw = True
+15.5918 	EXP 	text_2: autoDraw = False
+15.6084 	EXP 	mask: autoDraw = True
+15.6101 	EXP 	New trial (rep=0, index=8): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 9), ('stimulus', u'Q'), ('cond', u'distractor')])
+15.6475 	EXP 	text_2: autoDraw = False
+15.6475 	EXP 	mask: autoDraw = False
+15.6475 	EXP 	text_2: text = u'Q'
+15.6475 	EXP 	text_2: autoDraw = True
+15.6910 	EXP 	text_2: autoDraw = False
+15.6910 	EXP 	mask: autoDraw = True
+15.6930 	EXP 	New trial (rep=0, index=9): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 10), ('stimulus', u'A'), ('cond', u'distractor')])
+15.7274 	EXP 	text_2: autoDraw = False
+15.7274 	EXP 	mask: autoDraw = False
+15.7274 	EXP 	text_2: text = u'A'
+15.7274 	EXP 	text_2: autoDraw = True
+15.7748 	EXP 	text_2: autoDraw = False
+15.7748 	EXP 	mask: autoDraw = True
+15.7762 	EXP 	New trial (rep=0, index=10): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 11), ('stimulus', u'7'), ('cond', u'target')])
+15.8098 	EXP 	text_2: autoDraw = False
+15.8098 	EXP 	mask: autoDraw = False
+15.8098 	EXP 	text_2: text = u'7'
+15.8098 	EXP 	text_2: autoDraw = True
+15.8582 	EXP 	text_2: autoDraw = False
+15.8582 	EXP 	mask: autoDraw = True
+15.8598 	EXP 	New trial (rep=0, index=11): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 12), ('stimulus', u'O'), ('cond', u'distractor')])
+15.8884 	EXP 	text_2: autoDraw = False
+15.8884 	EXP 	mask: autoDraw = False
+15.8884 	EXP 	text_2: text = u'O'
+15.8884 	EXP 	text_2: autoDraw = True
+15.9245 	EXP 	text_2: autoDraw = False
+15.9420 	EXP 	mask: autoDraw = True
+15.9443 	EXP 	New trial (rep=0, index=12): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 13), ('stimulus', u'I'), ('cond', u'distractor')])
+15.9817 	EXP 	text_2: autoDraw = False
+15.9817 	EXP 	mask: autoDraw = False
+15.9817 	EXP 	text_2: text = u'I'
+15.9817 	EXP 	text_2: autoDraw = True
+16.0249 	EXP 	text_2: autoDraw = False
+16.0249 	EXP 	mask: autoDraw = True
+16.0271 	EXP 	New trial (rep=0, index=13): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 14), ('stimulus', u'H'), ('cond', u'distractor')])
+16.0558 	EXP 	text_2: autoDraw = False
+16.0558 	EXP 	mask: autoDraw = False
+16.0558 	EXP 	text_2: text = u'H'
+16.0558 	EXP 	text_2: autoDraw = True
+16.0916 	EXP 	text_2: autoDraw = False
+16.1098 	EXP 	mask: autoDraw = True
+16.1116 	EXP 	New trial (rep=0, index=14): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 15), ('stimulus', u' '), ('cond', u'mask')])
+16.1389 	EXP 	text_2: autoDraw = False
+16.1389 	EXP 	mask: autoDraw = False
+16.1389 	EXP 	text_2: text = u' '
+16.1389 	EXP 	text_2: autoDraw = True
+16.1747 	EXP 	text_2: autoDraw = False
+16.1920 	EXP 	mask: autoDraw = True
+16.1936 	EXP 	New trial (rep=0, index=15): OrderedDict([('block', 1), ('sep_dur', u'short'), ('Tx', u't1'), ('trial', 16), ('stimulus', u'Y'), ('cond', u'distractor')])
+16.2240 	EXP 	text_2: autoDraw = False
+16.2240 	EXP 	mask: autoDraw = False
+16.2240 	EXP 	text_2: text = u'Y'
+16.2240 	EXP 	text_2: autoDraw = True
+16.2592 	EXP 	text_2: autoDraw = False
+16.2759 	EXP 	mask: autoDraw = True
+16.2917 	EXP 	text_2: autoDraw = False
+16.2917 	EXP 	mask: autoDraw = False
+16.2926 	DATA 	Keypress: escape
+16.4849 	EXP 	window1: mouseVisible = True

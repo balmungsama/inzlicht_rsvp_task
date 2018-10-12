@@ -1,0 +1,18 @@
+4.9065 	WARNING 	User requested fullscreen with size [1024  768], but screen is actually [3240, 2160]. Using actual size
+5.7675 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, args=UNKNOWN, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color='red', colorSpace='named', fullscr=UNKNOWN, gamma=None, kwargs=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x1DE28E10>, multiSample=False, name='window1', numSamples=2, pos=[0, 0], screen=0, size=array([3240, 2160]), stereo=False, units=u'norm', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType=u'pyglet')
+5.7676 	EXP 	window1: mouseVisible = False
+5.7677 	EXP 	window1: recordFrameIntervals = False
+5.9327 	EXP 	window1: recordFrameIntervals = True
+6.1164 	EXP 	window1: recordFrameIntervals = False
+6.4040 	EXP 	Created Instructions = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='Instructions', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+6.4554 	EXP 	Created stayStill = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='stayStill', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+8.0201 	EXP 	Sound  set volume 1.000
+8.0585 	EXP 	Created text = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='text', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+8.0755 	EXP 	Instructions: autoDraw = True
+8.9393 	DATA 	Keypress: space
+8.9562 	EXP 	Instructions: autoDraw = False
+8.9562 	EXP 	stayStill: autoDraw = True
+18.9504 	EXP 	stayStill: autoDraw = False
+18.9504 	EXP 	text: autoDraw = True
+21.7185 	DATA 	Keypress: escape
+21.7777 	EXP 	window1: mouseVisible = True

@@ -1,0 +1,7 @@
+train_loop.thisRepN,train_loop.thisTrialN,train_loop.thisN,train_loop.thisIndex,date,frameRate,expName,session,participant,
+0,0,0,0,2018_Oct_12_1237,60.0615903436,finger_tap,001,test_instruct,
+1,0,1,0,2018_Oct_12_1237,60.0615903436,finger_tap,001,test_instruct,
+2,0,2,0,2018_Oct_12_1237,60.0615903436,finger_tap,001,test_instruct,
+3,0,3,0,2018_Oct_12_1237,60.0615903436,finger_tap,001,test_instruct,
+4,0,4,0,2018_Oct_12_1237,60.0615903436,finger_tap,001,test_instruct,
+5,0,5,0,2018_Oct_12_1237,60.0615903436,finger_tap,001,test_instruct,
