@@ -90,7 +90,7 @@ Instructions = visual.TextStim(win=win, name='Instructions',
 # Initialize components for Routine "intervention"
 interventionClock = core.Clock()
 sound_SR = sound.Sound(u'../stimuli/Newcastle Hospitals - unknown album - 00 - Progressive Muscle Relaxation - Male Voice.ogg', secs=-1)
-sound_SR.setVolume(1)
+sound_SR.setVolume(.35)
 
 # Initialize components for Routine "ending"
 endingClock = core.Clock()
