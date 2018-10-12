@@ -25,7 +25,7 @@ import os  # handy system and path functions
 import sys  # to get file system encoding
 
 # user prefs
-sendTTL    = True
+sendTTL    = False
 duration_s = 240     # how long the task lasts in seconds (not including training)
 colFont    = 'white' # font colour (rgb space)
 colBkgd    = 'black' # background colour (rgb space)
@@ -88,7 +88,7 @@ else:
 # Initialize components for Routine "instructions_2"
 instructions_2Clock = core.Clock()
 instructions_text = visual.TextStim(win=win, name='instructions_text',
-    text=u'For this next task, you will be asked to press the space bar once every 600 ms (0.6 seconds). A metronome sound will be played during the first 10 seconds to help you establish a rythm. Afterwards, you are to continue this rythm to the best of your ability for 4 minutes.\n\nPress Space to continue.',
+    text=u'For this next task, you will be asked to press the space bar once every 600 ms (0.6 seconds). A metronome sound will be played during the first 10 seconds to help you establish a rythm. Afterwards, you are to continue this rythm to the best of your ability for 4 minutes.\n\nPlease keep your eyes open and fixed on the crosshairs.\n\nPress Space to continue.',
     font=u'Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
     color=colFont, colorSpace='rgb', opacity=1,
