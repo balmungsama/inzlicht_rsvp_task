@@ -15,6 +15,7 @@ from psychopy import locale_setup, sound, gui, visual, core, data, event, loggin
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
 import numpy as np  # whole numpy lib is available, prepend 'np.'
+from pygame import sndarray
 from numpy import (sin, cos, tan, log, log10, pi, average,
                    sqrt, std, deg2rad, rad2deg, linspace, asarray)
 from numpy.random import random, randint, normal, shuffle
@@ -22,7 +23,7 @@ import os  # handy system and path functions
 import sys  # to get file system encoding
 
 # user prefs
-sendTTL = True
+sendTTL = False
 colFont = 'white' # font colour (rgb space)
 colBkgd = 'black' # background colour (rgb space)
 
@@ -85,6 +86,14 @@ else:
 instructionsClock = core.Clock()
 Instructions = visual.TextStim(win=win, name='Instructions',
     text=u'You are about to listen to a recording of a guided somatic relaxation. Please try to follow the instructions to the best of your ability while keeping still in your seat. The entire experience should last approximately 20 minutes. \n\nPress SPACE to continue.',
+    font=u'Arial',
+    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    color=colFont, colorSpace='rgb', opacity=1,
+    depth=0.0);
+
+# Initialize components for Routine "stayStill"
+stayStill = visual.TextStim(win=win, name='stayStill',
+    text=u'Please keep relatively still while still following the directions.',
     font=u'Arial',
     pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
     color=colFont, colorSpace='rgb', opacity=1,
@@ -192,7 +201,7 @@ t = 0
 interventionClock.reset()  # clock
 frameN = -1
 continueRoutine = True
-routineTimer.add(1216.000000)
+routineTimer.add(sound_SR.getDuration())
 # update component parameters for each repeat
 # keep track of which components have finished
 interventionComponents = [sound_SR]
@@ -218,7 +227,11 @@ while continueRoutine and routineTimer.getTime() > 0:
         sound_SR.tStart = t
         sound_SR.frameNStart = frameN  # exact frame index
         sound_SR.play()  # start the sound (it finishes automatically)
-    frameRemains = 0.0 + 1216- win.monitorFramePeriod * 0.75  # most of one frame period left
+
+        stayStill.tStart = t
+        stayStill.frameNStart = frameN  # exact frame index
+        stayStill.setAutoDraw(True)
+    frameRemains = 0.0 + sound_SR.getDuration() - win.monitorFramePeriod * 0.75  # most of one frame period left
     if sound_SR.status == STARTED and t >= frameRemains:
         sound_SR.stop()  # stop the sound (if longer than duration)
     
@@ -244,6 +257,7 @@ for thisComponent in interventionComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
 sound_SR.stop()  # ensure sound has stopped at end of routine
+stayStill.setAutoDraw(False) # clear the text at the end of the routine
 
 if sendTTL:
     port.setData(int(255))

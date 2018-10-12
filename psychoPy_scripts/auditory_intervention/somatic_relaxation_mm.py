@@ -23,7 +23,7 @@ import os  # handy system and path functions
 import sys  # to get file system encoding
 
 # user prefs
-sendTTL = True
+sendTTL = False
 colFont = 'white' # font colour (rgb space)
 colBkgd = 'black' # background colour (rgb space)
 
@@ -91,17 +91,18 @@ Instructions = visual.TextStim(win=win, name='Instructions',
     color=colFont, colorSpace='rgb', opacity=1,
     depth=0.0);
 
+# Initialize components for Routine "stayStill"
+stayStill = visual.TextStim(win=win, name='stayStill',
+    text=u'Please keep relatively still while still following the directions.',
+    font=u'Arial',
+    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    color=colFont, colorSpace='rgb', opacity=1,
+    depth=0.0);
+
 # Initialize components for Routine "intervention"
 interventionClock = core.Clock()
-sound_SR = sound.Sound(u'../stimuli/body_scan_long_norm.ogg', secs=-1, stereo=False)
+sound_SR = sound.Sound(u'../stimuli/body_scan_long_norm.ogg', secs=-1)
 sound_SR.setVolume(1)
-
-# my addition below
-# stim_array = sndarray.array(sound_SR._snd)
-# mono_stim = stim_array[:,0]
-# nz = np.zeros(len(mono_stim))
-# na = np.asarray(np.column_stack((mono_stim,nz)),dtype=int) 
-# sound_SR._snd = sndarray.make_sound(na)
 
 # Initialize components for Routine "ending"
 endingClock = core.Clock()
@@ -200,7 +201,7 @@ t = 0
 interventionClock.reset()  # clock
 frameN = -1
 continueRoutine = True
-routineTimer.add(1308.000000)
+routineTimer.add(sound_SR.getDuration()) 
 # update component parameters for each repeat
 # keep track of which components have finished
 interventionComponents = [sound_SR]
@@ -219,14 +220,18 @@ while continueRoutine and routineTimer.getTime() > 0:
     if sendTTL:
         port.setData(int(1))
     else:
-        print "TTL {}".format(int(1))
+       print "TTL {}".format(int(1))
 
     if t >= 0.0 and sound_SR.status == NOT_STARTED:
         # keep track of start time/frame for later
         sound_SR.tStart = t
         sound_SR.frameNStart = frameN  # exact frame index
         sound_SR.play()  # start the sound (it finishes automatically)
-    frameRemains = 0.0 + 1308- win.monitorFramePeriod * 0.75  # most of one frame period left
+        
+        stayStill.tStart = t
+        stayStill.frameNStart = frameN  # exact frame index
+        stayStill.setAutoDraw(True)
+    frameRemains = 0.0 + sound_SR.getDuration() - win.monitorFramePeriod * 0.75  # most of one frame period left
     if sound_SR.status == STARTED and t >= frameRemains:
         sound_SR.stop()  # stop the sound (if longer than duration)
     
@@ -240,7 +245,7 @@ while continueRoutine and routineTimer.getTime() > 0:
             break  # at least one component has not yet finished
     
     # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]:
+    if endExpNow or event.getKeys(keyList=["escape"]):
         core.quit()
     
     # refresh the screen
@@ -252,6 +257,7 @@ for thisComponent in interventionComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
 sound_SR.stop()  # ensure sound has stopped at end of routine
+stayStill.setAutoDraw(False) # clear the text at the end of the routine
 
 if sendTTL:
         port.setData(int(255))
