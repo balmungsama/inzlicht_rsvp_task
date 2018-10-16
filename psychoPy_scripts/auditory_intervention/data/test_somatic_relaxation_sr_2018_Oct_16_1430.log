@@ -1,0 +1,24 @@
+2.8274 	EXP 	Added new global key event: red rect
+5.9902 	WARNING 	User requested fullscreen with size [1024  768], but screen is actually [3240, 2160]. Using actual size
+7.0244 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, args=UNKNOWN, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color='red', colorSpace='named', fullscr=UNKNOWN, gamma=None, kwargs=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x1F4B8E50>, multiSample=False, name='window1', numSamples=2, pos=[0, 0], screen=0, size=array([3240, 2160]), stereo=False, units=u'norm', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType=u'pyglet')
+7.0245 	EXP 	window1: mouseVisible = False
+7.0246 	EXP 	window1: recordFrameIntervals = False
+7.1899 	EXP 	window1: recordFrameIntervals = True
+7.3739 	EXP 	window1: recordFrameIntervals = False
+7.6721 	EXP 	Created Instructions = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='Instructions', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+7.7213 	EXP 	Created stayStill = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='stayStill', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+9.3877 	EXP 	Sound  set volume 1.000
+9.4281 	EXP 	Created text = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='text', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text=newstr(...), units=u'norm', win=Window(...), wrapWidth=1)
+9.4466 	EXP 	Instructions: autoDraw = True
+9.8296 	DATA 	Keypress: escape
+10.2601 	DATA 	Keypress: escape
+10.5148 	DATA 	Keypress: escape
+10.9300 	DATA 	Keypress: space
+10.9479 	EXP 	Instructions: autoDraw = False
+10.9479 	EXP 	stayStill: autoDraw = True
+12.8239 	DATA 	Keypress: escape
+13.1085 	DATA 	Keypress: escape
+13.6596 	DATA 	Keypress: lshift
+14.0433 	DATA 	Keypress: escape
+14.0434 	EXP 	Global key event: red rect. Calling <function quitExp at 0x10BD3430>.
+14.1107 	EXP 	window1: mouseVisible = True
