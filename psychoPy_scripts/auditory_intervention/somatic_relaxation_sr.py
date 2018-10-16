@@ -27,10 +27,15 @@ sendTTL = False
 colFont = 'white' # font colour (rgb space)
 colBkgd = 'black' # background colour (rgb space)
 
+parallelPortAddress = 61368 #49168
+
 if not sendTTL:
     colBkgd = 'red'
 
-parallelPortAddress = 61368 #49168
+def quitExp():
+    core.quit()
+
+event.globalKeys.add(key='escape', modifiers=['shift'], func=quitExp, name='red rect')
 
 if sendTTL:
     from psychopy import parallel
@@ -175,7 +180,7 @@ while continueRoutine:
             break  # at least one component has not yet finished
     
     # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]):
+    if endExpNow: # or event.getKeys(keyList=["escape"])
         core.quit()
     
     # refresh the screen
@@ -245,7 +250,7 @@ while continueRoutine and routineTimer.getTime() > 0:
             break  # at least one component has not yet finished
     
     # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]):
+    if endExpNow: # or event.getKeys(keyList=["escape"])
         core.quit()
     
     # refresh the screen
@@ -306,8 +311,8 @@ while continueRoutine:
         theseKeys = event.getKeys(keyList=['space'])
         
         # check for quit:
-        if "escape" in theseKeys:
-            endExpNow = True
+        # if "escape" in theseKeys:
+        #     endExpNow = True
         if len(theseKeys) > 0:  # at least one key was pressed
             end_exp.keys = theseKeys[-1]  # just the last key pressed
             end_exp.rt = end_exp.clock.getTime()
@@ -324,7 +329,7 @@ while continueRoutine:
             break  # at least one component has not yet finished
     
     # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]):
+    if endExpNow: # or event.getKeys(keyList=["escape"])
         core.quit()
     
     # refresh the screen

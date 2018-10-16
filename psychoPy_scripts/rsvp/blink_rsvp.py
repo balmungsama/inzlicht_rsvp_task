@@ -63,10 +63,15 @@ nLongTrials  = 192 # number of long-interval trials
 
 nBlocks = 2 # number of blocks in the task
 
+parallelPortAddress = 61368 #49168
+
 if not sendTTL:
     colBkgd = 'red'
 
-parallelPortAddress = 61368 #49168
+def quitExp():
+    core.quit()
+
+event.globalKeys.add(key='escape', modifiers=['shift'], func=quitExp, name='red rect')
 
 if sendTTL:
     from psychopy import parallel
@@ -269,8 +274,9 @@ while continueRoutine:
             break  # at least one component has not yet finished
 
     # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]):
+    if endExpNow: #or event.getKeys(keyList=["escape"])
         core.quit()
+
 
     # refresh the screen
     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
@@ -323,8 +329,8 @@ while continueRoutine:
         theseKeys = event.getKeys(keyList=['space'])
 
         # check for quit:
-        if "escape" in theseKeys:
-            endExpNow = True
+        # if "escape" in theseKeys:
+        #     endExpNow = True
         if len(theseKeys) > 0:  # at least one key was pressed
             # a response ends the routine
             continueRoutine = False
@@ -339,7 +345,7 @@ while continueRoutine:
             break  # at least one component has not yet finished
 
     # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]):
+    if endExpNow: # or event.getKeys(keyList=["escape"])
         core.quit()
 
     # refresh the screen
@@ -437,7 +443,7 @@ for thisBlock in block:
                 break  # at least one component has not yet finished
 
         # check for quit (the Esc key)
-        if endExpNow or event.getKeys(keyList=["escape"]):
+        if endExpNow: # or event.getKeys(keyList=["escape"])
             core.quit()
 
         # refresh the screen
@@ -582,7 +588,7 @@ for thisBlock in block:
                     break  # at least one component has not yet finished
 
             # check for quit (the Esc key)
-            if endExpNow or event.getKeys(keyList=["escape"]):
+            if endExpNow: # or event.getKeys(keyList=["escape"])
                 core.quit()
 
             # refresh the screen
@@ -684,7 +690,7 @@ for thisBlock in block:
                         break  # at least one component has not yet finished
 
                 # check for quit (the Esc key)
-                if endExpNow or event.getKeys(keyList=["escape"]):
+                if endExpNow: # or event.getKeys(keyList=["escape"])
                     core.quit()
 
                 # refresh the screen
@@ -749,8 +755,8 @@ for thisBlock in block:
                                                    'num_1', 'num_2', 'num_3', 'num_4', 'num_5', 'num_6', 'num_7', 'num_8', 'num_9'])
 
                 # check for quit:
-                if "escape" in theseKeys:
-                    endExpNow = True
+                # if "escape" in theseKeys:
+                #     endExpNow = True
                 if len(theseKeys) > 0:  # at least one key was pressed
                     if "num_" in theseKeys[0]:
                         theseKeys[0] = theseKeys[0].split("_")[1]
@@ -784,7 +790,7 @@ for thisBlock in block:
                     break  # at least one component has not yet finished
 
             # check for quit (the Esc key)
-            if endExpNow or event.getKeys(keyList=["escape"]):
+            if endExpNow: # or event.getKeys(keyList=["escape"])
                 core.quit()
 
             # refresh the screen
@@ -845,8 +851,8 @@ for thisBlock in block:
                                                    'num_1', 'num_2', 'num_3', 'num_4', 'num_5', 'num_6', 'num_7', 'num_8', 'num_9'])
 
                 # check for quit:
-                if "escape" in theseKeys:
-                    endExpNow = True
+                # if "escape" in theseKeys:
+                #     endExpNow = True
                 if len(theseKeys) > 0:  # at least one key was pressed
                     if "num_" in theseKeys[0]:
                         theseKeys[0] = theseKeys[0].split("_")[1]
@@ -881,7 +887,7 @@ for thisBlock in block:
                     break  # at least one component has not yet finished
 
             # check for quit (the Esc key)
-            if endExpNow or event.getKeys(keyList=["escape"]):
+            if endExpNow: # or event.getKeys(keyList=["escape"])
                 core.quit()
 
             # refresh the screen
@@ -946,7 +952,7 @@ for thisBlock in block:
                     break  # at least one component has not yet finished
 
             # check for quit (the Esc key)
-            if endExpNow or event.getKeys(keyList=["escape"]):
+            if endExpNow: # or event.getKeys(keyList=["escape"])
                 core.quit()
 
             # refresh the screen
@@ -1004,7 +1010,7 @@ while continueRoutine:
         theseKeys = event.getKeys(keyList=['space', 'escape'])
 
         # check for quit:
-        if "escape" in theseKeys or "space" in theseKeys:
+        if "space" in theseKeys: #"escape" in theseKeys or 
             endExpNow = True
         if len(theseKeys) > 0:  # at least one key was pressed
             # a response ends the routine
@@ -1020,7 +1026,7 @@ while continueRoutine:
             break  # at least one component has not yet finished
 
     # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]):
+    if endExpNow: # or event.getKeys(keyList=["escape"])
         core.quit()
 
     # refresh the screen
@@ -1032,7 +1038,7 @@ for thisComponent in endTxtComponents:
     if hasattr(thisComponent, "setAutoDraw"):
         thisComponent.setAutoDraw(False)
 # check for quit (the Esc key)
-if endExpNow or event.getKeys(keyList=["escape"]):
+if endExpNow: # or event.getKeys(keyList=["escape"])
     core.quit()
 
 thisExp.nextEntry()

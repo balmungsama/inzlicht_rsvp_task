@@ -30,10 +30,15 @@ duration_s = 240     # how long the task lasts in seconds (not including trainin
 colFont    = 'white' # font colour (rgb space)
 colBkgd    = 'black' # background colour (rgb space)
 
+parallelPortAddress = 61368 
+
 if not sendTTL:
     colBkgd = 'red'
 
-parallelPortAddress = 61368 
+def quitExp():
+    core.quit()
+
+event.globalKeys.add(key='escape', modifiers=['shift'], func=quitExp, name='red rect')
 
 if sendTTL:
     from psychopy import parallel
@@ -162,8 +167,8 @@ while continueRoutine:
         theseKeys = event.getKeys(keyList=['space'])
         
         # check for quit:
-        if "escape" in theseKeys:
-            endExpNow = True
+        # if "escape" in theseKeys:
+        #     endExpNow = True
         if len(theseKeys) > 0:  # at least one key was pressed
             # a response ends the routine
             continueRoutine = False
@@ -178,7 +183,7 @@ while continueRoutine:
             break  # at least one component has not yet finished
     
     # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]):
+    if endExpNow: # or event.getKeys(keyList=["escape"])
         core.quit()
     
     # refresh the screen
@@ -232,7 +237,7 @@ while continueRoutine and routineTimer.getTime() > 0:
             break  # at least one component has not yet finished
     
     # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]):
+    if endExpNow: # or event.getKeys(keyList=["escape"])
         core.quit()
     
     # refresh the screen
@@ -315,8 +320,8 @@ for thisTrain_loop in train_loop:
             theseKeys = event.getKeys(keyList=['space'])
 
             # check for quit:
-            if "escape" in theseKeys:
-                endExpNow = True
+            # if "escape" in theseKeys:
+            #     endExpNow = True
             # send practice TTL
             if "space" in theseKeys:
                 if sendTTL:
@@ -341,7 +346,7 @@ for thisTrain_loop in train_loop:
                 break  # at least one component has not yet finished
         
         # check for quit (the Esc key)
-        if endExpNow or event.getKeys(keyList=["escape"]):
+        if endExpNow: # or event.getKeys(keyList=["escape"])
             core.quit()
         
         # refresh the screen
@@ -397,8 +402,8 @@ while continueRoutine and routineTimer.getTime() > 0:
         theseKeys = event.getKeys(keyList=['space'])
         
         # check for quit:
-        if "escape" in theseKeys:
-            endExpNow = True
+        # if "escape" in theseKeys:
+        #     endExpNow = True
         if len(theseKeys) > 0:  # at least one key was pressed
             button_press.keys.extend(theseKeys)  # storing all keys
             button_press.rt.append(button_press.clock.getTime())
@@ -418,7 +423,7 @@ while continueRoutine and routineTimer.getTime() > 0:
             break  # at least one component has not yet finished
     
     # check for quit (the Esc key)
-    if endExpNow or event.getKeys(keyList=["escape"]):
+    if endExpNow: # or event.getKeys(keyList=["escape"])
         core.quit()
     
     # refresh the screen
