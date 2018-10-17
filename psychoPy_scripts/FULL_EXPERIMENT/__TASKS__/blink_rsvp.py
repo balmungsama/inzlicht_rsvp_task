@@ -54,7 +54,7 @@ import string
 # USER PREFERENCES
 # ==============================================================================
 
-sendTTL    = False
+sendTTL    = True
 colFont    = 'white' # font colour (rgb space)
 colBkgd    = 'black' # background colour (rgb space)
 colTest    = 'red'   # background colour for when sendTTL = False (rgb space)
@@ -66,8 +66,8 @@ fontSzStim = .5      # font size for the stimuli (starts at .1)
 sep_short = 4 # SHORT number of stimuli that should seperate T1 from T2
 sep_long  = 8 # LONG  number of stimuli that should seperate T1 from T2
 
-nShortTrials = 1#72  # number of short-interval trials
-nLongTrials  = 1#192 # number of long-interval trials
+nShortTrials = 72  # number of short-interval trials
+nLongTrials  = 192 # number of long-interval trials
 
 nBlocks = 2 # number of blocks in the task
 
