@@ -66,8 +66,8 @@ fontSzStim = .5      # font size for the stimuli (starts at .1)
 sep_short = 4 # SHORT number of stimuli that should seperate T1 from T2
 sep_long  = 8 # LONG  number of stimuli that should seperate T1 from T2
 
-nShortTrials = 72  # number of short-interval trials
-nLongTrials  = 192 # number of long-interval trials
+nShortTrials = 1#72  # number of short-interval trials
+nLongTrials  = 1#192 # number of long-interval trials
 
 nBlocks = 2 # number of blocks in the task
 
@@ -986,6 +986,9 @@ for thisBlock in block:
     thisExp.nextEntry()
 
 # completed nBlocks repeats of 'block'
+
+# remove the tmp_stimuli.csv file
+os.remove("tmp_stimuli.csv")
 
 # ------Prepare to start Routine "endTxt"-------
 t = 0

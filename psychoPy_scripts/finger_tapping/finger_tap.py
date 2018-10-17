@@ -130,7 +130,7 @@ crosshair_Clock = core.Clock()
 
 # Initialize components for Routine "training"
 trainingClock = core.Clock()
-tick = sound.Sound(u'clock-tick1.wav', secs=0.1)
+tick = sound.Sound(u'../stimuli/clock-tick1.wav', secs=0.1)
 tick.setVolume(1)
 
 # Initialize components for Routine "pressing"
