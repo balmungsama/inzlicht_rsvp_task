@@ -32,6 +32,10 @@ TTL 220: Participant's T2 response was incorrect
 TTL 221: Participant's T2 response was correct
 '''
 
+# ==============================================================================
+# IMPORT PACKAGES
+# ==============================================================================
+
 from __future__ import absolute_import, division
 from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
@@ -46,10 +50,14 @@ import random as rand
 import pandas as pd
 import string
 
-# user prefs
+# ==============================================================================
+# USER PREFERENCES
+# ==============================================================================
+
 sendTTL    = False
 colFont    = 'white' # font colour (rgb space)
 colBkgd    = 'black' # background colour (rgb space)
+colTest    = 'red'   # background colour for when sendTTL = False (rgb space)
 stim_dur   = .050    # duration of stimulus presentation in seconds (0.05)
 mask_dur   = .034    # duration of the mask in seconds (0.034)
 iti_dur    = .75     # duration of ITI in seconds
@@ -63,15 +71,19 @@ nLongTrials  = 192 # number of long-interval trials
 
 nBlocks = 2 # number of blocks in the task
 
-parallelPortAddress = 61368 #49168
+parallelPortAddress = 61368 
+
+# ==============================================================================
+# SETUP EXPERIMENT
+# ==============================================================================
 
 if not sendTTL:
-    colBkgd = 'red'
+    colBkgd = colTest
 
 def quitExp():
     core.quit()
 
-event.globalKeys.add(key='escape', modifiers=['shift'], func=quitExp, name='red rect')
+event.globalKeys.add(key='escape', modifiers=['shift'], func=quitExp, name='forcequit')
 
 if sendTTL:
     from psychopy import parallel
@@ -83,8 +95,8 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = u'test_experiment'  # from the Builder filename that created this script
-expInfo = {u'session': u'001', u'participant': u''}
+expName = u'rsvp'  # from the Builder filename that created this script
+expInfo = {u'run': u'r', u'participant': u'10'}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -92,7 +104,7 @@ expInfo['date'] = data.getDateStr()  # add a simple timestamp
 expInfo['expName'] = expName
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
+filename = _thisDir + os.sep + u'data/John_%s_%s_%s' % (expName, expInfo['participant'], expInfo['run'])
 
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
@@ -242,6 +254,10 @@ blank = visual.TextStim(win=win, name='blank',
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine
+
+# ==============================================================================
+# BEGIN EXPERIMENT
+# ==============================================================================
 
 # ------Prepare to start Routine "code_Init"-------
 t = 0
@@ -419,7 +435,7 @@ for thisBlock in block:
             go.tStart = t
             go.frameNStart = frameN  # exact frame index
             go.setAutoDraw(True)
-        frameRemains = 1 + 0.5- win.monitorFramePeriod * 0.75  # most of one frame period left
+        frameRemains = 1 + 0.5 - win.monitorFramePeriod * 0.75  # most of one frame period left
         if go.status == STARTED and t >= frameRemains:
             go.setAutoDraw(False)
 
@@ -429,7 +445,7 @@ for thisBlock in block:
             gap.tStart = t
             gap.frameNStart = frameN  # exact frame index
             gap.setAutoDraw(True)
-        frameRemains = 1.5 + .2- win.monitorFramePeriod * 0.75  # most of one frame period left
+        frameRemains = 1.5 + .2 - win.monitorFramePeriod * 0.75  # most of one frame period left
         if gap.status == STARTED and t >= frameRemains:
             gap.setAutoDraw(False)
 
@@ -503,9 +519,9 @@ for thisBlock in block:
 
         # put T2 in the stimulus vector
         if trialType_cur[0] == 't2':
-            stim_array[t2_pos - 1] = np.random.choice(range(1,9))
+            stim_array[t2_pos] = np.random.choice(range(1,9))
         elif trialType_cur[0] == 't1':
-            stim_array[t2_pos - 1] = ' '
+            stim_array[t2_pos] = ' '
 
         # the 20% chance of the trial including a blank stimulus
         if trialType_cur[0] == 't2':

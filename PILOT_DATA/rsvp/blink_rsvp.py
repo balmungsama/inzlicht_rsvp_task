@@ -64,7 +64,7 @@ nBlocks = 2 # number of blocks in the task
 if not sendTTL:
     colBkgd = 'red'
 
-parallelPortAddress = 61368 #49168
+parallelPortAddress = 61368 
 
 if sendTTL:
     from psychopy import parallel

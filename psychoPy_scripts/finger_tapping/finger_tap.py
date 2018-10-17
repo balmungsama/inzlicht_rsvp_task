@@ -13,6 +13,10 @@ TTL 10  = practice press
 TTL 100 = space bar press
 """
 
+# ==============================================================================
+# IMPORT PACKAGES
+# ==============================================================================
+
 from __future__ import absolute_import, division
 from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
@@ -24,21 +28,29 @@ from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
-# user prefs
+# ==============================================================================
+# USER PREFERENCES
+# ==============================================================================
+
 sendTTL    = False
 duration_s = 240     # how long the task lasts in seconds (not including training)
 colFont    = 'white' # font colour (rgb space)
 colBkgd    = 'black' # background colour (rgb space)
+colTest    = 'red'   # background colour for when sendTTL = False (rgb space)
 
 parallelPortAddress = 61368 
 
+# ==============================================================================
+# SETUP EXPERIMENT
+# ==============================================================================
+
 if not sendTTL:
-    colBkgd = 'red'
+    colBkgd = colTest
 
 def quitExp():
     core.quit()
 
-event.globalKeys.add(key='escape', modifiers=['shift'], func=quitExp, name='red rect')
+event.globalKeys.add(key='escape', modifiers=['shift'], func=quitExp, name='forcequit')
 
 if sendTTL:
     from psychopy import parallel
@@ -50,8 +62,8 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = u'finger_tap'  # from the Builder filename that created this script
-expInfo = {u'session': u'001', u'participant': u''}
+expName = u'tap'  # from the Builder filename that created this script
+expInfo = {u'run': u'r', u'participant': u'10'}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -59,7 +71,7 @@ expInfo['date'] = data.getDateStr()  # add a simple timestamp
 expInfo['expName'] = expName
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
+filename = _thisDir + os.sep + u'data/John_%s_%s_%s' % (expName, expInfo['participant'], expInfo['run'])
 
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
@@ -127,6 +139,10 @@ pressingClock = core.Clock()
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
+
+# ==============================================================================
+# BEGIN EXPERIMENT
+# ==============================================================================
 
 # ------Prepare to start Routine "instructions_2"-------
 t = 0
@@ -250,7 +266,7 @@ for thisComponent in inter_stimulusComponents:
         thisComponent.setAutoDraw(False)
 
 # set up handler to look after randomisation of conditions etc
-train_loop = data.TrialHandler(nReps=17, method='random', 
+train_loop = data.TrialHandler(nReps=17, method='sequential', 
     extraInfo=expInfo, originPath=-1,
     trialList=[None],
     seed=None, name='train_loop')

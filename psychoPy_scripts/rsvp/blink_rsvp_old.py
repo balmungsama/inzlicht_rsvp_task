@@ -25,7 +25,7 @@ import os  # handy system and path functions
 import sys  # to get file system encoding
 
 sendTTL = True
-parallelPortAddress = 61368 #49168
+parallelPortAddress = 61368 
 
 if sendTTL:
     port = parallel.ParallelPort(address = parallelPortAddress)

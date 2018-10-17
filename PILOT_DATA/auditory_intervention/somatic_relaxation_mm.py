@@ -30,7 +30,7 @@ colBkgd = 'black' # background colour (rgb space)
 if not sendTTL:
     colBkgd = 'red'
 
-parallelPortAddress = 61368 #49168
+parallelPortAddress = 61368 
 
 if sendTTL:
     from psychopy import parallel

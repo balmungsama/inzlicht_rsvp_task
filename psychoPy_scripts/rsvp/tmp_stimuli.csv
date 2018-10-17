@@ -1,17 +1,18 @@
 block,sep_dur,Tx,trial,stimulus,cond
-2,short,t1,1,Q,distractor
-2,short,t1,2,H,distractor
-2,short,t1,3,3,target
-2,short,t1,4,O,distractor
-2,short,t1,5,A,distractor
-2,short,t1,6,E,distractor
-2,short,t1,7, ,mask
-2,short,t1,8,W,distractor
-2,short,t1,9,P,distractor
-2,short,t1,10,R,distractor
-2,short,t1,11,V,distractor
-2,short,t1,12,M,distractor
-2,short,t1,13,H,distractor
-2,short,t1,14,M,distractor
-2,short,t1,15,V,distractor
-2,short,t1,16,M,distractor
+1,short,t1,1,R,distractor
+1,short,t1,2,F,distractor
+1,short,t1,3,R,distractor
+1,short,t1,4,5,target
+1,short,t1,5,T,distractor
+1,short,t1,6,B,distractor
+1,short,t1,7,D,distractor
+1,short,t1,8,I,distractor
+1,short,t1,9, ,mask
+1,short,t1,10,T,distractor
+1,short,t1,11,X,distractor
+1,short,t1,12,P,distractor
+1,short,t1,13,X,distractor
+1,short,t1,14,J,distractor
+1,short,t1,15,Z,distractor
+1,short,t1,16,Y,distractor
+1,short,t1,17,E,distractor

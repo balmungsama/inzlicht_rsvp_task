@@ -10,6 +10,10 @@ If you publish work using this script please cite the PsychoPy publications:
         Frontiers in Neuroinformatics, 2:10. doi: 10.3389/neuro.11.010.2008
 """
 
+# ==============================================================================
+# IMPORT PACKAGES
+# ==============================================================================
+
 from __future__ import absolute_import, division
 from psychopy import locale_setup, sound, gui, visual, core, data, event, logging
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
@@ -22,20 +26,28 @@ from numpy.random import random, randint, normal, shuffle
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
-# user prefs
+# ==============================================================================
+# USER PREFERENCES
+# ==============================================================================
+
 sendTTL = False
 colFont = 'white' # font colour (rgb space)
 colBkgd = 'black' # background colour (rgb space)
+colTest = 'red'   # background colour for when sendTTL = False (rgb space)
 
-parallelPortAddress = 61368 #49168
+parallelPortAddress = 61368 
+
+# ==============================================================================
+# SETUP EXPERIMENT
+# ==============================================================================
 
 if not sendTTL:
-    colBkgd = 'red'
+    colBkgd = colTest
 
 def quitExp():
     core.quit()
 
-event.globalKeys.add(key='escape', modifiers=['shift'], func=quitExp, name='red rect')
+event.globalKeys.add(key='escape', modifiers=['shift'], func=quitExp, name='forcequit')
 
 if sendTTL:
     from psychopy import parallel
@@ -47,8 +59,8 @@ _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemen
 os.chdir(_thisDir)
 
 # Store info about the experiment session
-expName = 'somatic_relaxation_sr'  # from the Builder filename that created this script
-expInfo = {u'session': u'001', u'participant': u''}
+expName = u'audio'  # from the Builder filename that created this script
+expInfo = {u'participant': u'10'}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -56,7 +68,7 @@ expInfo['date'] = data.getDateStr()  # add a simple timestamp
 expInfo['expName'] = expName
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = _thisDir + os.sep + u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
+filename = _thisDir + os.sep + u'data/John_%s_%s_%s' % (expName, expInfo['participant'], 'mm')
 
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
@@ -121,6 +133,10 @@ text = visual.TextStim(win=win, name='text',
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
+
+# ==============================================================================
+# BEGIN EXPERIMENT
+# ==============================================================================
 
 # ------Prepare to start Routine "instructions"-------
 t = 0
