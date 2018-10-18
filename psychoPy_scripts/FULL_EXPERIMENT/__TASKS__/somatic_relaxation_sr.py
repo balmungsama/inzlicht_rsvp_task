@@ -37,17 +37,20 @@ colTest = 'red'   # background colour for when sendTTL = False (rgb space)
 
 parallelPortAddress = 61368 
 
-if not sendTTL:
-    colBkgd = colTest
-
 # ==============================================================================
 # SETUP EXPERIMENT
 # ==============================================================================
 
-def quitExp():
+if not sendTTL:
+    colBkgd = colTest
+
+def forceQuit():
+    if sendTTL:
+        port.setData(int(255))
     core.quit()
 
-event.globalKeys.add(key='escape', modifiers=['shift'], func=quitExp, name='forcequit')
+event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, name='forcequit')
+event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, name='forcequit')
 
 if sendTTL:
     from psychopy import parallel

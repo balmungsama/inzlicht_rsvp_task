@@ -44,10 +44,13 @@ parallelPortAddress = 61368
 if not sendTTL:
     colBkgd = colTest
 
-def quitExp():
+def forceQuit():
+    if sendTTL:
+        port.setData(int(255))
     core.quit()
 
-event.globalKeys.add(key='escape', modifiers=['shift'], func=quitExp, name='forcequit')
+event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, name='forcequit')
+event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, name='forcequit')
 
 if sendTTL:
     from psychopy import parallel
