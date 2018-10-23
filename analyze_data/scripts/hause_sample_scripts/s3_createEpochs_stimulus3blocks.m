@@ -9,6 +9,10 @@ function s3_createEpochs_stimulus3blocks(subject)
 
 % subject = '015'; % subject id
 
+% ==============================================================================
+% User Preferences
+% ==============================================================================
+
 binlister = 'Stimulus_3blocks.txt';
 epochRange = [-2500 3500]; % ms
 epochBaselineCorrect = [-200 0]; % ms
@@ -18,10 +22,24 @@ tfrSave = true; % save time-frequency data?
 % binSeparateSets = false; % save each bin as separate sets
 dataDirectory = 'EEGData'; % directory containing subject/participant data
 
+% ==============================================================================
+% User-specific paths to add
+% ==============================================================================
+
+addpath('/psyhome/u4/linhause/matlabtoolboxes/eeglab14_1_2b'); % addpath on UTSC cluster
+addpath('/users/hause/dropbox/Apps/MATLAB Toolboxes and Packages/eeglab14_1_2b') % add path on local machine
+addpath('/Users/Hause/Dropbox/Apps/MATLAB Toolboxes and Packages/fieldtrip-20180723/')
+ft_defaults
+
+% ==============================================================================
+% Import event list csv
+% ==============================================================================
+
 currentDir = pwd; % current directory
 parentDir = currentDir(1:end-8); % remove 'Scripts' from path
 
 % try reading eventlist csv
+% TODO: Find out what the eventlist csv looks like
 try 
     readtable(fullfile(parentDir, 'Trial event info', [num2str(str2num(subject)) '_trialEventInfo.csv']),'TreatAsEmpty','NA');
 catch
@@ -30,13 +48,10 @@ catch
     return
 end
 
-% add paths
-addpath('/psyhome/u4/linhause/matlabtoolboxes/eeglab14_1_2b'); % addpath on UTSC cluster
-addpath('/users/hause/dropbox/Apps/MATLAB Toolboxes and Packages/eeglab14_1_2b') % add path on local machine
-addpath('/Users/Hause/Dropbox/Apps/MATLAB Toolboxes and Packages/fieldtrip-20180723/')
-ft_defaults
 
-%% start analysing data
+% ==============================================================================
+% Start Analyzing Data
+% ==============================================================================
 
 try 
     dataDirectoryAbsPath = fullfile(parentDir, dataDirectory); 
