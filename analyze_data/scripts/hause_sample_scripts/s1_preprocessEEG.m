@@ -365,6 +365,7 @@ try
                 if isempty(eyeChanIdx) % if no index found, skip to next iteration
                     % do nothing
                 else
+                    % pop_chanedit() - Edit the channel locations structure of an EEGLAB dataset
                     EEG = pop_chanedit(EEG,'changefield',{eyeChanIdx 'labels' eyeChanBESA{chanI}}); % rename channels to BESA channel names
                 end
             end
@@ -430,7 +431,9 @@ try
     %% Apply ICA weights from 1-40Hz filtered data to 0.1 Hz filtered data
 
     if useICA
-
+        %  eeg_store() - store specified EEG dataset(s) in the ALLEG variable 
+        %                containing all current datasets, after first checking 
+        %                dataset consistency using eeg_checkset().
         [ALLEEG EEG CURRENTSET] = eeg_store(ALLEEG, EEG, CURRENTSET);
         EEG.icawinv = tempICAweights.icawinv;
         EEG.icasphere = tempICAweights.icasphere;
@@ -456,12 +459,12 @@ try
 
         % use iclabel to label components
         try
-            EEG = iclabel(EEG); % label ICA components
+            EEG = iclabel(EEG); % label ICA components (identifies signal, noise, noise sources, etc. NOT PERFECT)
         catch
             disp('Failed to label ICA components with iclabel');
         end
 
-        % use icablinkmetrics to identify blink components
+        % use icablinkmetrics to identify blink components (finds blinks)
         try
             EEG.icaquant = icablinkmetrics(EEG,'ArtifactChannel',EEG.data(find(strcmp({EEG.chanlocs.labels},'SO2')),:),'Alpha',0.001, 'VisualizeData','False');
         catch
@@ -475,7 +478,7 @@ try
     EEG = eeg_checkset(EEG);
     %% Clear evenlist and remove events with codelabel '5sec' (created by adjust plugin)
 
-    pop_squeezevents(EEG); % summarize events (ERPLAB)
+    pop_squeezevents(EEG); % summarize events (ERPLAB); Summarizes current EEG event codes into MATLAB command window
     % eeg_eventtypes(EEG) % summarize events (EEGLAB)
     EEG.EVENTLIST = [];
     try 
