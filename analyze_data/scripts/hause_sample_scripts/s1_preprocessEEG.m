@@ -78,14 +78,17 @@ emgChan = {'CorsOut','CorsIns','CORRins','CORRout','ZYGup','ZYGlow','COORins','C
 eyeChan = {'veog1','veog2','heogL','heogR'}; % name of eye channels
 eyeChanBESA = {'SO2','IO2','LO1','LO2'}; % name of eye channels (BESA names)
 
+% TODO: Replace this with my own eeglab path
 % addpath to eeglab (in case)
 addpath('/psyhome/u4/linhause/matlabtoolboxes/eeglab14_1_2b'); % addpath on UTSC cluster
 addpath('/users/hause/dropbox/Apps/MATLAB Toolboxes and Packages/eeglab14_1_2b') % add path on local machine
 
-%% Check if subject needs to be pre-processed
+% ==============================================================================
+% Check if subject needs to be pre-processed
+% ==============================================================================
 
 % Do not modify from here onwards unless you know what you're doing
-dataDirectoryAbsPath = fullfile(pwd, dataDirectory);
+dataDirectoryAbsPath = fullfile(pwd, dataDirectory); % turn relative path to absolute
 
 clc;
 if ~exist(fullfile(dataDirectoryAbsPath, subject),'dir') % if directory folder doesn't exist, skip this subject
@@ -94,7 +97,8 @@ if ~exist(fullfile(dataDirectoryAbsPath, subject),'dir') % if directory folder d
 end
 disp(['Subject ' subject, '']);
 
-if keepPreprocessed % if keeping existing files (don't overwrite)
+% Well terminate function if this dara was already preprocessed
+if keepPreprocessed % if keeping existing files (don't overwrite). 
 
     filesInContinuousDirectory = dir(fullfile(dataDirectoryAbsPath, subject, 'continuous'));
     match1_ica = sum(~cellfun(@isempty, strfind({filesInContinuousDirectory.name}, '_continuous_ICAweights.set'))) > 0;
@@ -130,9 +134,9 @@ try
 
     % find files to load/read
     currentSubjectDirectory = fullfile(dataDirectoryAbsPath, subject);
-    rawDataDirectory = fullfile(currentSubjectDirectory,'raw'); % directory with raw data
-    filesInRawDirectory = dir(rawDataDirectory); % files in raw data directory
-    fileIdx = find(~cellfun(@isempty, strfind({filesInRawDirectory.name}, eegdataformat))); % index of file to read
+    rawDataDirectory = fullfile(currentSubjectDirectory,'raw'); % 'raw' data directory
+    filesInRawDirectory = dir(rawDataDirectory); % list files in raw data directory
+    fileIdx = find(~cellfun(@isempty, strfind({filesInRawDirectory.name}, eegdataformat))); % index of files to read (by matching extension)
 
     if length(fileIdx) ~= 1 % if more than one raw data found, skip to next person!
         % save error message to directory
@@ -143,12 +147,13 @@ try
         return % quit function
     end
 
-    rawFileAbsDirectory = fullfile(rawDataDirectory, filesInRawDirectory(fileIdx).name); % absolute directory path to raw data
+    % filesInRawDirectory(fileIdx).name contains the names of the raw data files
+    rawFileAbsDirectory = fullfile(rawDataDirectory, filesInRawDirectory(fileIdx).name); % absolute directory path to raw data files
 
-    [ALLEEG EEG CURRENTSET ALLCOM] = eeglab; % run eeglab
+    [ALLEEG, EEG, CURRENTSET, ALLCOM] = eeglab; % run eeglab
     % EEG = pop_loadeep(rawFileAbsDirectory,'triggerfile','on'); % read data into MATLAB/eeglab
-    EEG = pop_loadeep_v4(rawFileAbsDirectory); % read data into MATLAB/eeglab
-    EEG.subject = subject;
+    EEG = pop_loadeep_v4(rawFileAbsDirectory); % read data into MATLAB/eeglab. Function loads an EEProbe continuous file (*.cnt).
+    EEG.subject = subject; % assign subject name
 
     % pop_squeezevents(EEG); % summarize events (ERPLAB)
     % eeg_eventtypes(EEG) % summarize events (EEGLAB)
@@ -169,6 +174,8 @@ try
         end
     end
     
+    %TODO: Understand pop_ functions in EEGlab
+
     % remove emg channels
     if ~isempty(emgChan)
         toRemove = [];
@@ -180,12 +187,16 @@ try
             EEG_emg = pop_select(EEG,'channel',toRemove); % save EMG channels
         end
         EEG = pop_select(EEG,'nochannel',toRemove); % remove EMG channels
+            % pop_select() - given an input EEG dataset structure, output a new EEG data structure 
+            %                retaining and/or excluding specified time/latency, data point, channel, 
+            %                and/or epoch range(s).
         [ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG,EEG,1,'overwrite','on'); % modify ALLEEG structure, check consistency
+                                % pop_newset() - Edit/save EEG dataset structure information.
     end
-    EEG.comments = pop_comments(EEG.comments,'','Removed EMG channels.',1);
+    EEG.comments = pop_comments(EEG.comments,'','Removed EMG channels.',1); % edit comments after removing emg channels
 
     % add channel locations
-    EEG = pop_chanedit(EEG,'lookup','standard-10-5-cap385.elp');
+    EEG = pop_chanedit(EEG,'lookup','standard-10-5-cap385.elp'); % look-up channel numbers for standard locations in the channel location file given as input.
     EEG.comments = pop_comments(EEG.comments,'','Added channel locations.',1);
 
     %% if doing ICA, run the following
@@ -194,13 +205,16 @@ try
 
         %% Band pass filter for ICA (ERPLAB filter)
 
+        % feed in the EEG data (for each channel). Specifying the event Boundary code 'boundary', apply the bandpass filter with specified high/low-cutoffs, 
+        % using a 'butter' type bandpass filter of length/order of 2. Removing mean value/DC offset is set to 'on'
         EEG = pop_basicfilter(EEG,1:length(EEG.chanlocs),'Boundary','boundary','Cutoff',[highPassForICA lowPass],'Design','butter','Filter','bandpass','Order', 2,'RemoveDC', 'on');
-        [ALLEEG EEG CURRENTSET] = eeg_store(ALLEEG,EEG,1); % modify ALLEEG structure; check consistency; store in dataset1
+        [ALLEEG EEG CURRENTSET] = eeg_store(ALLEEG,EEG,1); % modify ALLEEG structure; check consistency; store in dataset1/ALLEEG variable
 
         %% Trim data (ERPLAB function)
 
+        % This function deletes segments of continuous EEG data between event codes if the length of the segment is greater than a user-specified length of time
         EEG = pop_erplabDeleteTimeSegments(EEG,'displayEEG',0,'endEventcodeBufferMS',bufferTime,'ignoreUseType','ignore','startEventcodeBufferMS',bufferTime,'timeThresholdMS',minTimeThreshold);
-        [ALLEEG EEG CURRENTSET] = eeg_store(ALLEEG,EEG,1); % modify ALLEEG structure; check consistency; store in dataset1
+        [ALLEEG EEG CURRENTSET] = eeg_store(ALLEEG,EEG,1); % modify ALLEEG structure; check consistency; store in dataset1/ALLEEG variable
         
         %% Checking events
 
@@ -226,15 +240,18 @@ try
 
         % identify which channels to look for artifacts in
         allChannels = {EEG.chanlocs.labels}; % all channel labels
-        channelsForArtifactDetection = find(~ismember(allChannels, {'SO1' 'SO2' 'IO1' 'IO2' 'LO1' 'LO2' 'Fp1' 'Fpz' 'Fp2'})); % exclude these channels
+        channelsForArtifactDetection = find(~ismember(allChannels, {'SO1' 'SO2' 'IO1' 'IO2' 'LO1' 'LO2' 'Fp1' 'Fpz' 'Fp2'})); % exclude these channels from artifact detection
 
-        % identify which epochs contain artifact
+        % identify which epochs contain artifact for later rejection
         try
+            % Rejection of artifact in a dataset using joint probability (i.e. probability of activity)
             EEG = pop_jointprob(EEG,1,channelsForArtifactDetection,artifactThresholdZValue,artifactThresholdZValue,0,0);
         end
         try
+            % Rejection of artifact in a dataset using kurtosis of activity (i.e. to detect peaky distribution of activity).
             EEG = pop_rejkurt(EEG,1,channelsForArtifactDetection,artifactThresholdZValue,artifactThresholdZValue,0,0);
         end
+        % Superpose rejections of a EEG dataset.
         EEG = eeg_rejsuperpose(EEG,1,1,1,1,1,1,1,1); % update EEG.reject.rejglobal and EEG.reject.rejglobalE fields with all rejected epochs
 
         % find(EEG.reject.rejglobal) % epochs rejected
@@ -259,7 +276,7 @@ try
 
         % add trial number to table
         eventTable{:, 'trialAll'} = NaN;
-        stimulusOnsetIdx = find(ismember(eventTable.code, stimulusEvents));
+        stimulusOnsetIdx = find(ismember(eventTable.code, stimulusEvents)); %TODO: update my stimulus events to identify the proper events of interest
         nTrials = length(stimulusOnsetIdx);
         eventTable{stimulusOnsetIdx, 'trialAll'} = [1:nTrials]';
 
@@ -301,6 +318,7 @@ try
 
         indelec = 0; % index of bad electrode
         thresholdSD = 5; % SD cutoff for bad electrode detection
+        % pop_rejchan(): reject artifacts channels in an EEG dataset using joint probability of the recorded electrode.
         [EEG,indelec,measure] = pop_rejchan(EEG,'threshold',thresholdSD,'measure','prob','norm','on','elec',channelsForArtifactDetection); % reject bad channels based on probability
         if indelec ~= 0 % if bad channel detected, save information
             badChannelIdx = channelsForArtifactDetection(indelec); % bad channel index
@@ -309,6 +327,7 @@ try
             EEG.badchannel = badChannelName;
             EEG.comments = pop_comments(EEG.comments,'','Removed bad channels.',1);
         end
+        % pop_newset(): Edit/save EEG dataset structure information.
         [ALLEEG EEG CURRENTSET] = pop_newset(ALLEEG,EEG,CURRENTSET,'overwrite','on'); % modify ALLEEG structure, check consistency
     catch
         indelec = 0; % index of bad electrode
@@ -318,8 +337,8 @@ try
 
         %% Run ICA to get weights
 
-        EEG = pop_runica(EEG,'extended',1,'icatype','runica');
-        EEG = eeg_checkset(EEG);
+        EEG = pop_runica(EEG,'extended',1,'icatype','runica'); % run ICA
+        EEG = eeg_checkset(EEG); % check the consistency of the fields of an EEG dataset
 
         % save ICA weights
         tempICAweights.icawinv = EEG.icawinv;

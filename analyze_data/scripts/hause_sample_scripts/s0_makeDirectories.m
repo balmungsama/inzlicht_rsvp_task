@@ -1,4 +1,4 @@
-function s0_makeDirectories(subjectIDs,eegdataExtension,rawDataDirectory)
+function s0_makeDirectories(subjectIDs,rawDataDirectory)
 % Creates EEGData directory in current directory. 
 % Within EEGData, creates a directory for each subject.
 % Each subject's directory contains many subdirectories.
@@ -24,7 +24,6 @@ subjects = subjectIDs; % subjects in numeric
 % subjects = strsplit(num2str(subjects, '%04d '), ' '); % convert numeric to string in cell to match file names and move files accordingly
 
 % eeg raw data filetype
-eegdataformat = eegdataExtension; 
 
 % subdirectories to be created within each participant's folder
 newDirectoriesToMake = {'continuous','epoched','erp','raw','timefreq','parameters'}; 
@@ -43,7 +42,7 @@ disp(subjects);
 disp(['Moving data to this folder: ' fullfile(pwd, 'EEGData')]); % where to move raw data from
 input(['If correct, press enter. If wrong, press Ctrl-C to stop...']);
 
-if nargin == 3
+if nargin == 2
     directoryToReadFrom = rawDataDirectory; 
     disp(['Reading raw data from' rawDataDirectory]); 
 else
@@ -108,8 +107,8 @@ for subjI = 1:length(subjects)
             % disp(['No files found for subject ' currentSubject ' in ' directoryToReadFrom]);
             disp('Data directory and subdirectories already exist.');
             disp('------------------------------------');
-        else
-            if ~exist(subjDirectory, 'dir')
+        else % if subject files exist
+            if ~exist(subjDirectory, 'dir') % if the subject diretory doesn't exist, make it
                 mkdir(subjDirectory);
             end
             % create subdirectories in subject directory
