@@ -86,6 +86,10 @@ try
 
     % create eventlist with ERPLAB and save it in results folder
     outPath = fullfile(parentDir,'Results','Eventlist_erplab'); mkdir(outPath);
+    % pop_creabasiceventlist() - Creates the EVENTLIST structure with the event information
+    %                            extracted and reorganized from EEG.event (default) or from
+    %                            an external list (text file). The EVENTLIST structure is
+    %                            attached to the EEG structure.
     EEG = pop_creabasiceventlist(EEG,'AlphanumericCleaning','on','BoundaryNumeric',{-99},'BoundaryString',{'boundary'},'Eventlist',fullfile(outPath,[EEG.subject '_eventlist_raw.txt']));
     
     % assign bins with ERPLAB binlister
@@ -139,10 +143,11 @@ try
         allChannels = {EEG.chanlocs.labels}; % all channel labels
         channelsToDetectArtifact = find(~ismember(allChannels, eyeEmgChans)); % exclude channels above
 
-        % reject by linear trend/variance (max slope, uV/epoch: 100; R-squred limit: 0.5)
+        % reject by linear trend/variance (max slope, uV/epoch: 100; R-squared limit: 0.5)
         EEG = pop_rejtrend(EEG,1,channelsToDetectArtifact,EEG.pnts,100,0.5,0,0,0);
         disp(['Trials rejected via linear trend/variance: ' num2str(find(EEG.reject.rejconst))]);
 
+        % TODO: make this user-configurable
         % reject by probability (5 SD)
         EEG = pop_jointprob(EEG,1,channelsToDetectArtifact,5,5,0,0,0,[],0);
         disp(['Trials rejected via probability (5 SD): ' num2str(find(EEG.reject.rejjp))]);
@@ -195,7 +200,7 @@ try
     %% Save single-trial event information
 
     el = EEG.EVENTLIST.eventinfo; % save ERPLAB eventlist structure
-    timeLockedEventsIdx = [el.bepoch] ~= 0; % find indices with time-locked events (bepoch is not 0)
+    timeLockedEventsIdx = [el.bepoch] ~= 0; % find indices with time-locked events (bepoch is not 0) % TODO: ask what "bepoch" is. Could just be a typo, but best to be safe.
     allEvents = {el.binlabel}; % all event labels (B1, B2 etc.)
     epochEvent = allEvents(timeLockedEventsIdx); % event/code for every epoch (including epochs with artifacts)
     % find artifact and no-artifact epochs
@@ -216,12 +221,14 @@ try
     elT.Properties.VariableNames = {'subject','eventN','eventCode','binlabel','timeS','samplingPoint','artifactFlag','binIndicator','epochN'}; % rename variable names
     
     % add extra trial info
+    % TODO: figure out what kind of trial event info this file is supposed to contain.
     trialInfo = readtable(fullfile(parentDir, 'Trial event info', [num2str(str2num(subject)) '_trialEventInfo.csv']),'TreatAsEmpty','NA');
     trialInfo.subject = C; % make sure subject id matches
     trialInfo.timeS = []; % remove timeS column (can cause errors joining later)
 
     elT = outerjoin(elT,trialInfo,'Type','left','Mergekeys',true); % join
     
+    % TODO: find out what "bindescr" is.
     elT.bindescr = elT.binlabel; % assign bindescr to each epoch
     for i=1:size(elT,1) %  for each event...
         bindescrTemp = elT{i,'bindescr'}{1}; % get binlabel
@@ -232,6 +239,7 @@ try
         end
     end
 
+    % TODO: change this, since I'm not interested in RT during my RSVP and Auditory Intervention tasks.
     % elT.rt = [NaN; diff(elT.timeS)]; % compute RT (change this line accordingly for different designs/experiments)
     % elT.rt(elT.artifactFlag == 1) = NaN; % convert artifact epochs to NaN
     el_timelockevent = elT((elT.epochN ~= 0),:); % eventlist with just time-locked event info
@@ -242,7 +250,8 @@ try
     disp('Saved event list as txt and csv files');
     
     %% Create design matrix or array of events
-   
+%    TODO: change these labels to fit better with my task(s)
+
     % variable names to save together with matfile later on
     % specify which variables to store in design matrix (only numbers, no text!!)
     epochs_allVars = {'epochN','artifactFlag','binIndicator','food','block','familiar','health','like','taste','choice4','choice2','rt','controlSuccess'};
@@ -276,7 +285,11 @@ try
     save(fullfile(outPath,[EEG.subject '_epochsClean_designMat.mat']),'epochs_clean','epochs_allVars');
     disp('Saved design matrix as txt and mat files');
 
-    %% Select only clean epochs
+    % ==========================================================================
+    % Select only clean epochs
+    % ==========================================================================
+
+    % TODO: ask why he's changing channel names
     
     % change SO2 to Corr
     chanIdx = find(ismember({EEG.chanlocs.labels},'Corr'));
@@ -314,6 +327,7 @@ try
     
     %% Create and save ERPset using ERPLAB
 
+    % pop_averager(): Averages bin-epoched EEG dataset(s)
     ERP = pop_averager(ALLEEG(2),'Criterion','good','SEM','on');
     outPath = fullfile(parentDir,'Results','ERP_stimulus_3blocks'); mkdir(outPath);
     ERP = pop_savemyerp(ERP,'erpname',[EEG.subject '_bin_' strrep(binlister,'.txt','')],'filename',[EEG.subject '.erp'],'filepath',outPath,'Warning','off');
@@ -322,7 +336,8 @@ try
     % erplab redraw
     
     %% Convert all epochs to fieldtrip format for further processing
-    
+    % TODO: FInd out what fieldtrip format is and why it's needed for further processing.
+
     EEGft = eeglab2fieldtrip(ALLEEG(2),'preprocessing');
       
     %% Compute and plot ERPs in fieldtrip
@@ -332,19 +347,21 @@ try
     erp_alltrials = ft_timelockanalysis(cfg,EEGft);
 
     if true 
-        binsUnique = sort(unique(epochs_clean(:,3))); % erp for each bin (congruent, incongruent)
+        binsUnique = sort(unique(epochs_clean(:,3))); % erp for each unique bin (congruent, incongruent) % TODO: change this to match my conditions of interest
         erp_bins = cell(1,length(binsUnique));
         for binI = 1:length(erp_bins) 
             cfg = [];
             cfg.trials = find(epochs_clean(:,3) == binsUnique(binI)); % select trials
-            erp_bins{binI} = ft_timelockanalysis(cfg,EEGft); % compute mean
+            
+            % ft_timelockanalysis() - computes the timelocked average ERP/ERF and computes the covariance matrix
+            erp_bins{binI} = ft_timelockanalysis(cfg,EEGft); % compute mean; performed on the fieldtrip converted EEG dataset
         end
 
         if plotSave
             cfg = [];
             cfg.xlim = [-0.5 1.0];
             cfg.showlabels = 'yes';
-            cfg.comment = 'stimulus-locked (natural, health, taste)';
+            cfg.comment = 'stimulus-locked (natural, health, taste)'; % change this to fit my experiment(s)
             cfg.showcomment = 'yes';
             cfg.rotate = 90; % rotate plot
             cfg.fontsize = 16;
@@ -360,6 +377,7 @@ try
     end
     
     %% Time-frequency decomposition in fieldtrip (keep single trials)
+    % It looks like this section is to convert the EEG data into fourier spectrum
     
     cfg = [];
     cfg.channel = {'Fpz' 'F7' 'F8' 'FCz' 'C3' 'C4' 'Pz' 'Oz'}; % all or channels in cell array
@@ -369,7 +387,7 @@ try
     cfg.output = 'fourier';	% fourier, pow, or powandcsd
     cfg.ds = 0.02; % downsampling spacing in seconds
     cfg.ds2 = (1/EEGft.fsample)*(round(0.02/(1/EEGft.fsample))); % actual downsampling spacing based on sampling rate
-    cfg.toistartidx = dsearchn(EEGft.time{1}',-0.6); % specify output time begin in seconds
+    cfg.toistartidx = dsearchn(EEGft.time{1}',-0.6); % specify output time beginning in seconds
     cfg.toiendidx = dsearchn(EEGft.time{1}',1.5); % specify output time end in seconds
     cfg.toi = EEGft.time{1}(cfg.toistartidx):cfg.ds2:EEGft.time{1}(cfg.toiendidx); % downsampled timepoints to return 
     cfg.keeptrials = 'yes'; % return single trials (yes) or average (no)
@@ -393,6 +411,7 @@ try
     tf_pow.powspctrm = abs(tf_fourierSpec.fourierspctrm).^2;
     
     %% Single-trial regression: y ~ b0 + familiar + health + like + taste (block = 1 natural)
+    % TODO: Change this to match my experiments
 
     % create design matrix
     colIdx = ismember(epochs_allVars,{'familiar','health','like','taste'}); % regressors
@@ -411,6 +430,7 @@ try
     tf_betaCoefs{1} = betaTemp;
 
     %% Single-trial regression: y ~ b0 + familiar + health + like + taste (block = 2 health)
+    % TODO: change this to fit my experiment(s)
 
     % create design matrix
     colIdx = ismember(epochs_allVars,{'familiar','health','like','taste'}); % regressors
@@ -418,6 +438,7 @@ try
     designMat = epochs_clean(trialIdx,colIdx);
 
     % fit model
+    % TODO: change this to fit my experiment(s)
     cfg = [];
     cfg.designmatrix = epochs_clean(:,colIdx);
     cfg.designmatrix = designMat;
@@ -431,11 +452,13 @@ try
     %% Single-trial regression: y ~ b0 + familiar + health + like + taste (block = 3 taste)
 
     % create design matrix
+    % TODO: change this to fit my experiment(s)
     colIdx = ismember(epochs_allVars,{'familiar','health','like','taste'}); % regressors
     trialIdx = find(epochs_clean(:,3) == 3); % taste blocks
     designMat = epochs_clean(trialIdx,colIdx);
 
     % fit model
+    % TODO: change this to fit my experiment(s)
     cfg = [];
     cfg.designmatrix = epochs_clean(:,colIdx);
     cfg.designmatrix = designMat;
@@ -447,6 +470,7 @@ try
     tf_betaCoefs{3} = betaTemp;
 
     %% MultiplotTFR
+    % TODO: change this to fit my experiment(s)
 
     if plotSave 
         fignames = {'natural_block','health_block','taste_block'};
@@ -493,6 +517,7 @@ try
 
 
     %% plot FCz
+    % TODO: change this to fit my experiment(s)
 
     if plotSave
         figure(101); clf
@@ -528,6 +553,7 @@ try
     end
     
     %% Plot and save stuff 
+    % TODO: change this to fit my experiment(s)
     
     if plotSave 
         
@@ -557,6 +583,7 @@ try
     end 
     
     %% Save beta coefficients
+    % TODO: change this to fit my experiment(s)
     
     tf_betaCoefs;
     outPath = fullfile(parentDir,'Results','TFR_pow_stimulus_beta_familiarHealthLikeTaste'); mkdir(outPath);
