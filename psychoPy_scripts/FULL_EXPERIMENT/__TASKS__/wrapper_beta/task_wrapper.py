@@ -1,9 +1,7 @@
 # ==============================================================================
 # TODO: Section
 # ==============================================================================
-# [ ] add lines to accept input of subjID
-# [ ] fix call function to properly call the psychoPy scripts
-# [ ] make function version of psychoPy scripts to better accept arguments
+# [ ] need to make the globalKeys work properly 
 
 # ==============================================================================
 # Import packages
