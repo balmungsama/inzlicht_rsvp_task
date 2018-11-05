@@ -49,12 +49,14 @@ import sys  # to get file system encoding
 import random as rand
 import pandas as pd
 import string
+# import SendKeys
+# import win32api,win32con
 
 # ==============================================================================
 # USER PREFERENCES
 # ==============================================================================
 
-sendTTL    = True
+sendTTL    = False
 colFont    = 'white' # font colour (rgb space)
 colBkgd    = 'black' # background colour (rgb space)
 colTest    = 'red'   # background colour for when sendTTL = False (rgb space)
@@ -85,6 +87,13 @@ def forceQuit():
         port.setData(int(255))
     os.remove("tmp_stimuli.csv")
     core.quit()
+
+# def isNumLockOn():
+#     "return 1 if NumLock is ON"
+#     return win32api.GetKeyState(win32con.VK_NUMLOCK)
+
+# if isNumLockOn() != 1:
+#     SendKeys.SendKeys("{NUMLOCK}")
 
 event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, name='forcequit')
 event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, name='forcequit')
@@ -255,6 +264,15 @@ blank = visual.TextStim(win=win, name='blank',
     color=colBkgd, colorSpace='rgb', opacity=1,
     depth=0.0);
 
+# Initialize components for Routine "break"
+BreakClock = core.Clock()
+Break = visual.TextStim(win=win, name='Break',
+    text="This block is done.\nPress SPACE when you're ready to continue",
+    font='Arial',
+    pos=(0, 0), height=0.1, wrapWidth=None, ori=0,
+    color=colBkgd, colorSpace='rgb', opacity=1,
+    depth=0.0);
+
 # Create some handy timers
 globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine
@@ -392,6 +410,7 @@ if thisBlock != None:
         exec('{} = thisBlock[paramName]'.format(paramName))
 
 for thisBlock in block:
+
     currentLoop = block
     # abbreviate parameter names if possible (e.g. rgb = thisBlock.rgb)
     if thisBlock != None:
@@ -988,6 +1007,67 @@ for thisBlock in block:
     # completed ntrials repeats of 'trials'
     routineTimer.reset()
     thisExp.nextEntry()
+
+    # ==========================================================================
+    # Prepare to start Routine "Break"
+    # ==========================================================================
+
+    t = 0
+    BreakClock.reset()  # clock
+    frameN = -1
+    continueRoutine = True
+    adv_Break = event.BuilderKeyResponse()
+    # update component parameters for each repeat
+    # keep track of which components have finished
+    BreakComponents = [Break, adv_Break]
+    for thisComponent in BreakComponents:
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+    
+    # -------Start Routine "Break"-------
+    while continueRoutine:
+        # get current time
+        t = BreakClock.getTime()
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+
+        # *Break* updates
+        if t >= 0.0 and instruct_p1.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            Break.tStart = t
+            Break.frameNStart = frameN  # exact frame index
+            Break.setAutoDraw(True)
+
+        # *adv_Break* updates
+        if t >= 0.0 and adv_Break.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            adv_Break.tStart = t
+            adv_Break.frameNStart = frameN  # exact frame index
+            adv_Break.status = STARTED
+            # keyboard checking is just starting
+            event.clearEvents(eventType='keyboard')
+        if adv_Break.status == STARTED:
+            theseKeys = event.getKeys(keyList=['space'])
+            if len(theseKeys) > 0:  # at least one key was pressed
+                # a response ends the routine
+                continueRoutine = False
+
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in BreakComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+
+        # check for quit (the Esc key)
+        if endExpNow: # or event.getKeys(keyList=["escape"])
+            core.quit()
+
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
 
 # completed nBlocks repeats of 'block'
 
