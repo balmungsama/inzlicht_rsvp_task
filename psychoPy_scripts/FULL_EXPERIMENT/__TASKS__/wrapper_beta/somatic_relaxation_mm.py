@@ -121,7 +121,7 @@ stayStill = visual.TextStim(win=win, name='stayStill',
 
 # Initialize components for Routine "intervention"
 interventionClock = core.Clock()
-sound_SR = sound.Sound(u'../stimuli/body_scan_long_norm.ogg', secs=-1)
+sound_SR = sound.Sound(u'stimuli/body_scan_long_norm.ogg', secs=-1)
 sound_SR.setVolume(1)
 
 # Initialize components for Routine "ending"

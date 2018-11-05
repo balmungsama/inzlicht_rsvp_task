@@ -9,10 +9,12 @@
 # Import packages
 # ==============================================================================
 
-from psychopy import gui
+from psychopy import gui, event, core
 from subprocess import call
 import numpy as np
 import os
+
+import blink_rsvp, finger_tap #, somatic_relaxation_mm, somatic_relaxation_sr
 
 # ==============================================================================
 # Pyhton Environment to run tasks
@@ -20,11 +22,24 @@ import os
 
 pyEnv = 'C:\\Program Files (x86)\\PsychoPy2\\python.exe'
 
-import blink_rsvp #, finger_tap, somatic_relaxation_mm, somatic_relaxation_sr
+# ==============================================================================
+# INTERVENTION FILES
+# ==============================================================================
+
+audioFiles = [
+  'stimuli/body_scan_long_norm.ogg',
+  'stimuli/Newcastle Hospitals - unknown album - 00 - Progressive Muscle Relaxation - Male Voice.ogg'
+]
 
 # ==============================================================================
 # Define Functions
 # ==============================================================================
+
+def forceQuit(sendTTL):
+    if sendTTL:
+        port.setData(int(255))
+    os.remove("tmp_stimuli.csv")
+    core.quit()
 
 def checkSubjID(subjID):
   try:
@@ -55,6 +70,10 @@ def getOrder(subjID):
   return subjOrder
 
 def runExperiment(sendTTL):
+  event.globalKeys.clear()
+  event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, func_args = [sendTTL], name='forcequit')
+  event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, func_args = [sendTTL], name='forcequit')
+
   nTasks  = 2
   nRuns   = 2
   expName = u'John Task Battery' 
@@ -67,17 +86,28 @@ def runExperiment(sendTTL):
   subjOrder = getOrder(subjID)
   runCount  = 0
   taskCount = 0
+
+  expStatus = False
   for run in range(1,nRuns+1):
     for task in range(nTasks):
       currentTask = subjOrder[:,taskCount]
       currentTask = currentTask.item(0)
-      if task == 0:
-        blink_rsvp.blink_rsvp_TASK(expInfo, run + 1, sendTTL)
-      if task == 1:
-        print('this is where the tapping goes')
+      print "the current task is " + str(currentTask)
+      if currentTask == 0:
+        blink_rsvp.blink_rsvp(expInfo, run, expStatus, sendTTL)
+      if currentTask == 1:
+        finger_tap.finger_tap(expInfo, run, expStatus, sendTTL)
+      expStatus = True
       taskCount += 1
     runCount += 1
     if run != nRuns:
-      print "break time!"
+      print "INTERVENTION!"
+  
+  win.close()
+  core.quit() # quit the experiment
+
+# ==============================================================================
+# RUN EXPERIMENT
+# ==============================================================================
 
 runExperiment(False)

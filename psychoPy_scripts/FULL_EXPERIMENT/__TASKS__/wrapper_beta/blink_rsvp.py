@@ -16,13 +16,17 @@ import random as rand
 import pandas as pd
 import string
 
-def forceQuit(sendTTL):
-    if sendTTL:
-        port.setData(int(255))
-    os.remove("tmp_stimuli.csv")
-    core.quit()
+# ==============================================================================
+# Define functions
+# ==============================================================================
 
-def blink_rsvp_TASK(expInfo, run_num, sendTTL = True):
+# def forceQuit(sendTTL):
+#     if sendTTL:
+#         port.setData(int(255))
+#     os.remove("tmp_stimuli.csv")
+#     core.quit()
+
+def blink_rsvp(expInfo, run_num, expStatus, sendTTL = True):
 
     #!/usr/bin/env python
     # -*- coding: utf-8 -*-
@@ -59,10 +63,6 @@ def blink_rsvp_TASK(expInfo, run_num, sendTTL = True):
     '''
 
     # ==============================================================================
-    # Check values
-    # ==============================================================================
-
-    # ==============================================================================
     # USER PREFERENCES
     # ==============================================================================
 
@@ -91,14 +91,15 @@ def blink_rsvp_TASK(expInfo, run_num, sendTTL = True):
 
     if not sendTTL:
         colBkgd = colTest
-
-    event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, func_args = [sendTTL], name='forcequit')
-    event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, func_args = [sendTTL], name='forcequit')
-
+    
     if sendTTL:
         from psychopy import parallel
         port = parallel.ParallelPort(address = parallelPortAddress)
         port.setData(0) #make sure all pins are low
+
+    # event.globalKeys.clear()
+    # event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, func_args = [sendTTL], name='forcequit')
+    # event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, func_args = [sendTTL], name='forcequit')
 
     # Ensure that relative paths start from the same directory as this script
     _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemencoding())
@@ -269,9 +270,9 @@ def blink_rsvp_TASK(expInfo, run_num, sendTTL = True):
     # Initialize components for Routine "break"
     BreakClock = core.Clock()
     Break = visual.TextStim(win=win, name='Break',
-        text="This block is done.\nPress SPACE when you're ready to continue",
+        text="You can take a break.\n\nPress SPACE when you are ready to begin the next block",
         font='Arial',
-        pos=(0, 0), height=fontSzStim, wrapWidth=None, ori=0,
+        pos=(0, 0), height=0.05, wrapWidth=None, ori=0,
         color=colFont, colorSpace='rgb', opacity=1,
         depth=0.0);
 
@@ -426,7 +427,7 @@ def blink_rsvp_TASK(expInfo, run_num, sendTTL = True):
         continueRoutine = True
         routineTimer.add(1.700000)
         # update component parameters for each repeat
-        block_count = block_count + 1
+        block_count += 1
 
         ready_txt = "Block " +  str(block_count)
         ready.setText(ready_txt + '\n\n' + "Ready?")
@@ -1004,6 +1005,76 @@ def blink_rsvp_TASK(expInfo, run_num, sendTTL = True):
                     thisComponent.setAutoDraw(False)
             thisExp.nextEntry()
 
+        # ------Prepare to start Routine "Break"-------
+        if block_count != nBlocks:
+            t = 0
+            BreakClock.reset()  # clock
+            frameN = -1
+            continueRoutine = True
+            # update component parameters for each repeat
+            brk_p1 = event.BuilderKeyResponse()
+            # keep track of which components have finished
+            BreakComponents = [Break, brk_p1]
+            for thisComponent in BreakComponents:
+                if hasattr(thisComponent, 'status'):
+                    thisComponent.status = NOT_STARTED
+
+            # -------Start Routine "Break"-------
+            while continueRoutine:
+                # get current time
+                t = instructionsClock.getTime()
+                frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+                # update/draw components on each frame
+
+                # *Break* updates
+                if t >= 0.0 and Break.status == NOT_STARTED:
+                    # keep track of start time/frame for later
+                    Break.tStart = t
+                    Break.frameNStart = frameN  # exact frame index
+                    Break.setAutoDraw(True)
+
+                # *brk_p1* updates
+                if t >= 0.0 and brk_p1.status == NOT_STARTED:
+                    # keep track of start time/frame for later
+                    brk_p1.tStart = t
+                    brk_p1.frameNStart = frameN  # exact frame index
+                    brk_p1.status = STARTED
+                    # keyboard checking is just starting
+                    event.clearEvents(eventType='keyboard')
+                if brk_p1.status == STARTED:
+                    theseKeys = event.getKeys(keyList=['space'])
+
+                    # check for quit:
+                    # if "escape" in theseKeys:
+                    #     endExpNow = True
+                    if len(theseKeys) > 0:  # at least one key was pressed
+                        # a response ends the routine
+                        continueRoutine = False
+
+                # check if all components have finished
+                if not continueRoutine:  # a component has requested a forced-end of Routine
+                    break
+                continueRoutine = False  # will revert to True if at least one component still running
+                for thisComponent in BreakComponents:
+                    if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                        continueRoutine = True
+                        break  # at least one component has not yet finished
+
+                # check for quit (the Esc key)
+                if endExpNow: # or event.getKeys(keyList=["escape"])
+                    core.quit()
+
+                # refresh the screen
+                if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+                    win.flip()
+
+            # -------Ending Routine "Break"-------
+            for thisComponent in BreakComponents:
+                if hasattr(thisComponent, "setAutoDraw"):
+                    thisComponent.setAutoDraw(False)
+            # the Routine "Break" was not non-slip safe, so reset the non-slip timer
+            routineTimer.reset()
+
         # completed ntrials repeats of 'trials'
         routineTimer.reset()
         thisExp.nextEntry()
@@ -1079,10 +1150,6 @@ def blink_rsvp_TASK(expInfo, run_num, sendTTL = True):
     for thisComponent in endTxtComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # check for quit (the Esc key)
-    if endExpNow: # or event.getKeys(keyList=["escape"])
-        core.quit()
 
     thisExp.nextEntry()
-    win.close()
-    # core.quit()
+    # win.close()
