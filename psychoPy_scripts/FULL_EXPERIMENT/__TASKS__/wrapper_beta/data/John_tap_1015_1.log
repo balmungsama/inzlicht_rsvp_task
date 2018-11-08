@@ -1,0 +1,80 @@
+144.7642 	EXP 	Added new global key event: forcequit
+144.7643 	EXP 	Added new global key event: forcequit
+144.8742 	WARNING 	User requested fullscreen with size [800 600], but screen is actually [3240, 2160]. Using actual size
+154.9316 	WARNING 	Couldn't measure a consistent frame rate.
+  - Is your graphics card set to sync to vertical blank?
+  - Are you running other processes on your computer?
+
+154.9328 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, args=UNKNOWN, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color='black', colorSpace='named', fullscr=UNKNOWN, gamma=None, kwargs=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x1DF79A10>, multiSample=False, name='window1', numSamples=2, pos=[0, 0], screen=0, size=array([3240, 2160]), stereo=False, units=u'norm', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType=u'pyglet')
+154.9330 	EXP 	window1: mouseVisible = False
+154.9332 	EXP 	window1: recordFrameIntervals = False
+155.2106 	EXP 	window1: recordFrameIntervals = True
+155.2609 	WARNING 	t of last frame was 24.06ms (=1/41)
+155.2921 	WARNING 	t of last frame was 31.10ms (=1/32)
+155.3170 	WARNING 	t of last frame was 24.97ms (=1/40)
+155.3425 	WARNING 	t of last frame was 25.50ms (=1/39)
+155.3713 	WARNING 	Multiple dropped frames have occurred - I'll stop bothering you about them!
+158.0832 	WARNING 	Couldn't measure a consistent frame rate.
+  - Is your graphics card set to sync to vertical blank?
+  - Are you running other processes on your computer?
+
+159.0248 	EXP 	Created template = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='template', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='Lorem Ipsum', units=u'norm', win=Window(...), wrapWidth=1)
+160.7827 	EXP 	Created crosshair = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='crosshair', opacity=1.0, ori=0.0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='+', units=u'norm', win=Window(...), wrapWidth=1)
+160.9061 	EXP 	Sound  set volume 1.000
+160.9451 	EXP 	instructions_text: name = 'instructions_text'
+160.9451 	EXP 	instructions_text: text = 'For this next task, you will be asked to press the space bar once every 600 ms (0.6 seconds). A metronome sound will be played during the first 10 seconds to help you establish a rythm. Afterwards, you are to continue this rythm to the best of your ability for 4 minutes.\n\nPlease keep your eyes open and fixed on the crosshairs.\n\nPress Space to continue.'
+160.9451 	EXP 	blank_iti: name = 'blank_iti'
+160.9451 	EXP 	blank_iti: text = 'For this next task, you will be asked to press the space bar once every 600 ms (0.6 seconds). A metronome sound will be played during the first 10 seconds to help you establish a rythm. Afterwards, you are to continue this rythm to the best of your ability for 4 minutes.\n\nPlease keep your eyes open and fixed on the crosshairs.\n\nPress Space to continue.'
+160.9451 	EXP 	blank_iti: autoDraw = True
+172.9946 	DATA 	Keypress: lshift
+173.2271 	DATA 	Keypress: escape
+173.2272 	EXP 	Global key event: forcequit. Calling <function forceQuit at 0x1DF5D170>.
+174.5411 	DATA 	Keypress: lshift
+174.9574 	DATA 	Keypress: escape
+174.9575 	EXP 	Global key event: forcequit. Calling <function forceQuit at 0x1DF5D170>.
+175.7060 	DATA 	Keypress: space
+175.7604 	EXP 	blank_iti: autoDraw = False
+175.7604 	EXP 	blank_iti: autoDraw = True
+176.7424 	EXP 	Created sequence: sequential, trialTypes=1, nReps=17, seed=None
+176.7435 	EXP 	New trial (rep=0, index=0): None
+176.7883 	EXP 	blank_iti: autoDraw = False
+176.7883 	EXP 	crosshair: autoDraw = True
+176.7883 	EXP 	crosshair: autoDraw = True
+176.8776 	DATA 	Mouse: Left button down, pos=(1960,628)
+177.0435 	DATA 	Mouse:  Left button up, pos=(1960,628)
+177.3632 	EXP 	New trial (rep=1, index=0): None
+177.3928 	EXP 	crosshair: autoDraw = True
+177.9341 	EXP 	New trial (rep=2, index=0): None
+177.9669 	EXP 	crosshair: autoDraw = True
+178.5463 	EXP 	New trial (rep=3, index=0): None
+178.5754 	EXP 	crosshair: autoDraw = True
+179.1812 	EXP 	New trial (rep=4, index=0): None
+179.2083 	EXP 	crosshair: autoDraw = True
+179.7520 	EXP 	New trial (rep=5, index=0): None
+179.7836 	EXP 	crosshair: autoDraw = True
+179.9897 	DATA 	Keypress: lshift
+180.2060 	DATA 	Keypress: escape
+180.2063 	EXP 	Global key event: forcequit. Calling <function forceQuit at 0x1DF5D170>.
+180.3390 	EXP 	New trial (rep=6, index=0): None
+180.3678 	EXP 	crosshair: autoDraw = True
+180.9634 	EXP 	New trial (rep=7, index=0): None
+180.9939 	EXP 	crosshair: autoDraw = True
+181.5456 	EXP 	New trial (rep=8, index=0): None
+181.5740 	EXP 	crosshair: autoDraw = True
+182.0358 	DATA 	Keypress: escape
+182.1462 	EXP 	New trial (rep=9, index=0): None
+182.1750 	EXP 	crosshair: autoDraw = True
+182.7438 	EXP 	New trial (rep=10, index=0): None
+182.7746 	EXP 	crosshair: autoDraw = True
+183.3587 	EXP 	New trial (rep=11, index=0): None
+183.3879 	EXP 	crosshair: autoDraw = True
+183.9365 	EXP 	New trial (rep=12, index=0): None
+183.9661 	EXP 	crosshair: autoDraw = True
+184.5475 	EXP 	New trial (rep=13, index=0): None
+184.5754 	EXP 	crosshair: autoDraw = True
+185.1469 	EXP 	New trial (rep=14, index=0): None
+185.1805 	EXP 	crosshair: autoDraw = True
+185.7576 	EXP 	New trial (rep=15, index=0): None
+185.7841 	EXP 	crosshair: autoDraw = True
+186.3565 	EXP 	New trial (rep=16, index=0): None
+186.3844 	EXP 	crosshair: autoDraw = True

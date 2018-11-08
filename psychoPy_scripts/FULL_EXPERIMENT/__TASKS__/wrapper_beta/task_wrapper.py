@@ -34,10 +34,10 @@ audioFiles = [
 # ==============================================================================
 
 def forceQuit(sendTTL):
-    if sendTTL:
-        port.setData(int(255))
-    os.remove("tmp_stimuli.csv")
-    core.quit()
+  if sendTTL:
+    port.setData(int(255))
+  os.remove("tmp_stimuli.csv")
+  core.quit()
 
 def checkSubjID(subjID):
   try:
@@ -68,10 +68,6 @@ def getOrder(subjID):
   return subjOrder
 
 def runExperiment(sendTTL):
-  event.globalKeys.clear()
-  event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, func_args = [sendTTL], name='forcequit')
-  event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, func_args = [sendTTL], name='forcequit')
-
   nTasks  = 2
   nRuns   = 2
   expName = u'John Task Battery' 
@@ -101,7 +97,6 @@ def runExperiment(sendTTL):
     if run != nRuns:
       print "INTERVENTION!"
   
-  win.close()
   core.quit() # quit the experiment
 
 # ==============================================================================

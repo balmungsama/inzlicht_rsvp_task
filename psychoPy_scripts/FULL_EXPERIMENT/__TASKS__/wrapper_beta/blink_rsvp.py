@@ -97,9 +97,9 @@ def blink_rsvp(expInfo, run_num, expStatus, sendTTL = True):
         port = parallel.ParallelPort(address = parallelPortAddress)
         port.setData(0) #make sure all pins are low
 
-    # event.globalKeys.clear()
-    # event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, func_args = [sendTTL], name='forcequit')
-    # event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, func_args = [sendTTL], name='forcequit')
+    event.globalKeys.clear()
+    event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, func_args = [sendTTL], name='forcequit')
+    event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, func_args = [sendTTL], name='forcequit')
 
     # Ensure that relative paths start from the same directory as this script
     _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemencoding())

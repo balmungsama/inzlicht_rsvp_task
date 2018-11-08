@@ -1,0 +1,38 @@
+59.0683 	EXP 	Added new global key event: forcequit
+59.0684 	EXP 	Added new global key event: forcequit
+59.0885 	WARNING 	User requested fullscreen with size [800 600], but screen is actually [2160, 1440]. Using actual size
+61.8366 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, args=UNKNOWN, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color='black', colorSpace='named', fullscr=UNKNOWN, gamma=None, kwargs=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x1D478DF0>, multiSample=False, name='window1', numSamples=2, pos=[0, 0], screen=0, size=array([2160, 1440]), stereo=False, units=u'norm', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType=u'pyglet')
+61.8367 	EXP 	window1: mouseVisible = False
+61.8367 	EXP 	window1: recordFrameIntervals = False
+62.0033 	EXP 	window1: recordFrameIntervals = True
+62.1860 	EXP 	window1: recordFrameIntervals = False
+62.5149 	EXP 	Created template = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='template', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='Lorem Ipsum', units=u'norm', win=Window(...), wrapWidth=1)
+63.3781 	EXP 	Created crosshair = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='Arial', fontFiles=[], height=0.1, italic=False, name='crosshair', opacity=1.0, ori=0.0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='+', units=u'norm', win=Window(...), wrapWidth=1)
+63.4690 	EXP 	Sound  set volume 1.000
+63.4980 	EXP 	instructions_text: name = 'instructions_text'
+63.4980 	EXP 	instructions_text: text = 'For this next task, you will be asked to press the space bar once every 600 ms (0.6 seconds). A metronome sound will be played during the first 10 seconds to help you establish a rythm. Afterwards, you are to continue this rythm to the best of your ability for 4 minutes.\n\nPlease keep your eyes open and fixed on the crosshairs.\n\nPress Space to continue.'
+63.4980 	EXP 	blank_iti: name = 'blank_iti'
+63.4980 	EXP 	blank_iti: text = 'For this next task, you will be asked to press the space bar once every 600 ms (0.6 seconds). A metronome sound will be played during the first 10 seconds to help you establish a rythm. Afterwards, you are to continue this rythm to the best of your ability for 4 minutes.\n\nPlease keep your eyes open and fixed on the crosshairs.\n\nPress Space to continue.'
+63.4980 	EXP 	blank_iti: autoDraw = True
+69.3332 	DATA 	Mouse: Left button down, pos=(1404,285)
+69.5214 	DATA 	Mouse:  Left button up, pos=(1404,285)
+70.1362 	DATA 	Keypress: space
+70.1522 	EXP 	blank_iti: autoDraw = False
+70.1522 	EXP 	blank_iti: autoDraw = True
+71.1089 	DATA 	Keypress: space
+71.1433 	EXP 	Created sequence: sequential, trialTypes=1, nReps=17, seed=None
+71.1445 	EXP 	New trial (rep=0, index=0): None
+71.1692 	EXP 	blank_iti: autoDraw = False
+71.1692 	EXP 	crosshair: autoDraw = True
+71.1692 	EXP 	crosshair: autoDraw = True
+71.3568 	DATA 	Keypress: space
+71.7347 	EXP 	New trial (rep=1, index=0): None
+71.7517 	EXP 	crosshair: autoDraw = True
+72.3384 	EXP 	New trial (rep=2, index=0): None
+72.3555 	EXP 	crosshair: autoDraw = True
+72.9163 	DATA 	Keypress: lshift
+72.9317 	EXP 	New trial (rep=3, index=0): None
+72.9473 	EXP 	crosshair: autoDraw = True
+73.1490 	DATA 	Keypress: escape
+73.1491 	EXP 	Global key event: forcequit. Calling <function forceQuit at 0x1D3821B0>.
+73.2906 	EXP 	window1: mouseVisible = True

@@ -17,11 +17,81 @@ import sys  # to get file system encoding
 # Define functions
 # ==============================================================================
 
-# def forceQuit(sendTTL):
-#     if sendTTL:
-#         port.setData(int(255))
-#     os.remove("tmp_stimuli.csv")
-#     core.quit()
+def forceQuit(sendTTL, win):
+    if sendTTL:
+        port.setData(int(255))
+    win.close()
+    # core.quit()
+
+def disp_instr(instructions_text, nextKeys='space'):
+    # ------Prepare to start Routine "instructions"-------
+    t = 0
+    instructions_Clock.reset()  # clock
+    frameN = -1
+    continueRoutine = True
+    # update component parameters for each repeat
+    space_start = event.BuilderKeyResponse()
+    # keep track of which components have finished
+    instructions_Components = [instructions_text, space_start]
+    for thisComponent in instructions_Components:
+        if hasattr(thisComponent, 'status'):
+            thisComponent.status = NOT_STARTED
+
+    # -------Start Routine "instructions"-------
+    while continueRoutine:
+        # get current time
+        t = instructions_Clock.getTime()
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *instructions_text* updates
+        if t >= 0.0 and instructions_text.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            instructions_text.tStart = t
+            instructions_text.frameNStart = frameN  # exact frame index
+            instructions_text.setAutoDraw(True)
+        
+        # *space_start* updates
+        if t >= 0.0 and space_start.status == NOT_STARTED:
+            # keep track of start time/frame for later
+            space_start.tStart = t
+            space_start.frameNStart = frameN  # exact frame index
+            space_start.status = STARTED
+            # keyboard checking is just starting
+            event.clearEvents(eventType='keyboard')
+        if space_start.status == STARTED:
+            theseKeys = event.getKeys(keyList=['space'])
+            
+            # check for quit:
+            # if "escape" in theseKeys:
+            #     endExpNow = True
+            if len(theseKeys) > 0:  # at least one key was pressed
+                # a response ends the routine
+                continueRoutine = False
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in instructions_Components:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # check for quit (the Esc key)
+        if endExpNow: # or event.getKeys(keyList=["escape"])
+            core.quit()
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+
+    # -------Ending Routine "instructions"-------
+    for thisComponent in instructions_Components:
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # the Routine "instructions" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
 
 def finger_tap(expInfo, run_num, expStatus, sendTTL = True):
     #!/usr/bin/env python
@@ -58,10 +128,6 @@ def finger_tap(expInfo, run_num, expStatus, sendTTL = True):
         port = parallel.ParallelPort(address = parallelPortAddress)
         port.setData(0) #make sure all pins are low
 
-    # event.globalKeys.clear()
-    # event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, func_args = [sendTTL], name='forcequit')
-    # event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, func_args = [sendTTL], name='forcequit')
-
     # Ensure that relative paths start from the same directory as this script
     _thisDir = os.path.dirname(os.path.abspath(__file__)).decode(sys.getfilesystemencoding())
     os.chdir(_thisDir)
@@ -85,18 +151,26 @@ def finger_tap(expInfo, run_num, expStatus, sendTTL = True):
     logFile = logging.LogFile(filename+'.log', level=logging.EXP)
     logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
 
+    global endExpNow
+    global routineTimer
+    global instructions_text
     endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
     # Start Code - component code to be run before the window creation
 
     # Setup the Window
-    # if not expStatus:
+    global win
     win = visual.Window(
         size=[2160, 1440], fullscr=True, screen=0,
         allowGUI=False, allowStencil=False,
         monitor=u'testMonitor', color=colBkgd, colorSpace='rgb',
         blendMode='avg', useFBO=True)
     win.mouseVisible = False
+
+    # define the forcequit controls
+    event.globalKeys.clear()
+    event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, func_args = [sendTTL, win], name='forcequit')
+    event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, func_args = [sendTTL, win], name='forcequit')
 
     # store frame rate of monitor if we can measure it
     expInfo['frameRate'] = win.getActualFrameRate()
@@ -105,31 +179,36 @@ def finger_tap(expInfo, run_num, expStatus, sendTTL = True):
     else:
         frameDur = 1.0 / 60.0  # could not measure, so guess
 
-    # Initialize components for Routine "instructions_2"
-    instructions_2Clock = core.Clock()
-    instructions_text = visual.TextStim(win=win, name='instructions_text',
-        text=u'For this next task, you will be asked to press the space bar once every 600 ms (0.6 seconds). A metronome sound will be played during the first 10 seconds to help you establish a rythm. Afterwards, you are to continue this rythm to the best of your ability for 4 minutes.\n\nPlease keep your eyes open and fixed on the crosshairs.\n\nPress Space to continue.',
-        font=u'Arial',
-        pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
-        color=colFont, colorSpace='rgb', opacity=1,
-        depth=0.0);
+    # visual.TextStim template
+    textTemplate = visual.TextStim(
+        win        = win,
+        name       = 'template',
+        text       = u'Lorem Ipsum',
+        font       = u'Arial',
+        height     = 0.1,
+        color      = colFont, 
+        opacity    = 1
+        )
+
+    # Initialize components for Routine "instructions"
+    global instructions_Clock
+    instructions_Clock    = core.Clock()
+    instructions_text     = textTemplate
+    instructions_text.name='instructions_text'
+    instructions_text.text='For this next task, you will be asked to press the space bar once every 600 ms (0.6 seconds). A metronome sound will be played during the first 10 seconds to help you establish a rythm. Afterwards, you are to continue this rythm to the best of your ability for 4 minutes.\n\nPlease keep your eyes open and fixed on the crosshairs.\n\nPress Space to continue.'
 
     # Initialize components for Routine "inter_stimulus"
     inter_stimulusClock = core.Clock()
-    blank_iti = visual.TextStim(win=win, name='blank_iti',
-        text=None,
-        font=u'Arial',
-        pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
-        color=colFont, colorSpace='rgb', opacity=1,
-        depth=0.0);
+    blank_iti           = textTemplate
+    blank_iti.name      = 'blank_iti'
+    blank_iti.text      = None
+
 
     # define crosshair
-    crosshair = visual.TextStim(win, 
-        text='+', 
-        font='', 
-        color=colFont, 
-        name='crosshair');
     crosshair_Clock = core.Clock()
+    crosshair       = textTemplate
+    crosshair.name  = 'crosshair'
+    crosshair.text  = '+'
 
     # Initialize components for Routine "training"
     trainingClock = core.Clock()
@@ -147,74 +226,75 @@ def finger_tap(expInfo, run_num, expStatus, sendTTL = True):
     # BEGIN EXPERIMENT
     # ==============================================================================
 
-    # ------Prepare to start Routine "instructions_2"-------
-    t = 0
-    instructions_2Clock.reset()  # clock
-    frameN = -1
-    continueRoutine = True
-    # update component parameters for each repeat
-    space_start = event.BuilderKeyResponse()
-    # keep track of which components have finished
-    instructions_2Components = [instructions_text, space_start]
-    for thisComponent in instructions_2Components:
-        if hasattr(thisComponent, 'status'):
-            thisComponent.status = NOT_STARTED
+    disp_instr(instructions_text)
+    # # ------Prepare to start Routine "instructions"-------
+    # t = 0
+    # instructions_Clock.reset()  # clock
+    # frameN = -1
+    # continueRoutine = True
+    # # update component parameters for each repeat
+    # space_start = event.BuilderKeyResponse()
+    # # keep track of which components have finished
+    # instructions_Components = [instructions_text, space_start]
+    # for thisComponent in instructions_Components:
+    #     if hasattr(thisComponent, 'status'):
+    #         thisComponent.status = NOT_STARTED
 
-    # -------Start Routine "instructions_2"-------
-    while continueRoutine:
-        # get current time
-        t = instructions_2Clock.getTime()
-        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-        # update/draw components on each frame
+    # # -------Start Routine "instructions"-------
+    # while continueRoutine:
+    #     # get current time
+    #     t = instructions_Clock.getTime()
+    #     frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+    #     # update/draw components on each frame
         
-        # *instructions_text* updates
-        if t >= 0.0 and instructions_text.status == NOT_STARTED:
-            # keep track of start time/frame for later
-            instructions_text.tStart = t
-            instructions_text.frameNStart = frameN  # exact frame index
-            instructions_text.setAutoDraw(True)
+    #     # *instructions_text* updates
+    #     if t >= 0.0 and instructions_text.status == NOT_STARTED:
+    #         # keep track of start time/frame for later
+    #         instructions_text.tStart = t
+    #         instructions_text.frameNStart = frameN  # exact frame index
+    #         instructions_text.setAutoDraw(True)
         
-        # *space_start* updates
-        if t >= 0.0 and space_start.status == NOT_STARTED:
-            # keep track of start time/frame for later
-            space_start.tStart = t
-            space_start.frameNStart = frameN  # exact frame index
-            space_start.status = STARTED
-            # keyboard checking is just starting
-            event.clearEvents(eventType='keyboard')
-        if space_start.status == STARTED:
-            theseKeys = event.getKeys(keyList=['space'])
+    #     # *space_start* updates
+    #     if t >= 0.0 and space_start.status == NOT_STARTED:
+    #         # keep track of start time/frame for later
+    #         space_start.tStart = t
+    #         space_start.frameNStart = frameN  # exact frame index
+    #         space_start.status = STARTED
+    #         # keyboard checking is just starting
+    #         event.clearEvents(eventType='keyboard')
+    #     if space_start.status == STARTED:
+    #         theseKeys = event.getKeys(keyList=['space'])
             
-            # check for quit:
-            # if "escape" in theseKeys:
-            #     endExpNow = True
-            if len(theseKeys) > 0:  # at least one key was pressed
-                # a response ends the routine
-                continueRoutine = False
+    #         # check for quit:
+    #         # if "escape" in theseKeys:
+    #         #     endExpNow = True
+    #         if len(theseKeys) > 0:  # at least one key was pressed
+    #             # a response ends the routine
+    #             continueRoutine = False
         
-        # check if all components have finished
-        if not continueRoutine:  # a component has requested a forced-end of Routine
-            break
-        continueRoutine = False  # will revert to True if at least one component still running
-        for thisComponent in instructions_2Components:
-            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-                continueRoutine = True
-                break  # at least one component has not yet finished
+    #     # check if all components have finished
+    #     if not continueRoutine:  # a component has requested a forced-end of Routine
+    #         break
+    #     continueRoutine = False  # will revert to True if at least one component still running
+    #     for thisComponent in instructions_Components:
+    #         if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+    #             continueRoutine = True
+    #             break  # at least one component has not yet finished
         
-        # check for quit (the Esc key)
-        if endExpNow: # or event.getKeys(keyList=["escape"])
-            core.quit()
+    #     # check for quit (the Esc key)
+    #     if endExpNow: # or event.getKeys(keyList=["escape"])
+    #         core.quit()
         
-        # refresh the screen
-        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-            win.flip()
+    #     # refresh the screen
+    #     if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+    #         win.flip()
 
-    # -------Ending Routine "instructions_2"-------
-    for thisComponent in instructions_2Components:
-        if hasattr(thisComponent, "setAutoDraw"):
-            thisComponent.setAutoDraw(False)
-    # the Routine "instructions_2" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset()
+    # # -------Ending Routine "instructions"-------
+    # for thisComponent in instructions_Components:
+    #     if hasattr(thisComponent, "setAutoDraw"):
+    #         thisComponent.setAutoDraw(False)
+    # # the Routine "instructions" was not non-slip safe, so reset the non-slip timer
+    # routineTimer.reset()
 
     # ------Prepare to start Routine "inter_stimulus"-------
     t = 0

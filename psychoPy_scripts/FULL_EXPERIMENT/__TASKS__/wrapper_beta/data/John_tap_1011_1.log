@@ -1,0 +1,85 @@
+226.7850 	WARNING 	Couldn't measure a consistent frame rate.
+  - Is your graphics card set to sync to vertical blank?
+  - Are you running other processes on your computer?
+
+226.7856 	EXP 	Created window1 = Window(allowGUI=False, allowStencil=False, args=UNKNOWN, autoLog=True, bitsMode=UNKNOWN, blendMode='avg', color='black', colorSpace='named', fullscr=UNKNOWN, gamma=None, kwargs=UNKNOWN, lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x1DEFC510>, multiSample=False, name='window1', numSamples=2, pos=[1220, 780], screen=0, size=array([800, 600]), stereo=False, units=u'norm', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType=u'pyglet')
+226.7883 	EXP 	window1: mouseVisible = False
+226.7884 	EXP 	window1: recordFrameIntervals = False
+226.9944 	EXP 	window1: recordFrameIntervals = True
+227.0568 	WARNING 	t of last frame was 27.89ms (=1/35)
+227.1792 	WARNING 	t of last frame was 32.61ms (=1/30)
+227.2280 	WARNING 	t of last frame was 29.28ms (=1/34)
+227.2629 	WARNING 	t of last frame was 23.72ms (=1/42)
+227.3004 	WARNING 	Multiple dropped frames have occurred - I'll stop bothering you about them!
+228.8265 	WARNING 	Couldn't measure a consistent frame rate.
+  - Is your graphics card set to sync to vertical blank?
+  - Are you running other processes on your computer?
+
+229.0968 	EXP 	Created template = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='template', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='Lorem Ipsum', units=u'norm', win=Window(...), wrapWidth=1)
+229.6693 	EXP 	Created blank_iti = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0.0, flipHoriz=False, flipVert=False, font=u'Arial', fontFiles=[], height=0.1, italic=False, name='blank_iti', opacity=1.0, ori=0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='', units=u'norm', win=Window(...), wrapWidth=1)
+229.6821 	EXP 	Created crosshair = TextStim(alignHoriz='center', alignVert='center', antialias=True, autoLog=True, bold=False, color='white', colorSpace='named', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, font='', fontFiles=[], height=0.1, italic=False, name='crosshair', opacity=1.0, ori=0.0, pos=array([ 0.,  0.]), rgb=array([ 255.,  255.,  255.]), text='+', units=u'norm', win=Window(...), wrapWidth=1)
+229.8840 	EXP 	Sound  set volume 1.000
+229.9094 	EXP 	instructions_text: name = 'instructions_text'
+229.9094 	EXP 	instructions_text: text = 'For this next task, you will be asked to press the space bar once every 600 ms (0.6 seconds). A metronome sound will be played during the first 10 seconds to help you establish a rythm. Afterwards, you are to continue this rythm to the best of your ability for 4 minutes.\n\nPlease keep your eyes open and fixed on the crosshairs.\n\nPress Space to continue.'
+229.9094 	EXP 	instructions_text: autoDraw = True
+238.9934 	DATA 	Mouse: Left button down, pos=(441,225)
+239.1287 	DATA 	Mouse:  Left button up, pos=(441,225)
+239.4992 	DATA 	Keypress: space
+239.5057 	EXP 	instructions_text: autoDraw = False
+239.5057 	EXP 	blank_iti: autoDraw = True
+240.5064 	EXP 	Created sequence: sequential, trialTypes=1, nReps=17, seed=None
+240.5071 	EXP 	New trial (rep=0, index=0): None
+240.5281 	EXP 	blank_iti: autoDraw = False
+240.5281 	EXP 	crosshair: autoDraw = True
+240.5281 	EXP 	crosshair: autoDraw = True
+241.1106 	EXP 	New trial (rep=1, index=0): None
+241.1358 	EXP 	crosshair: autoDraw = True
+241.1729 	DATA 	Keypress: space
+241.6604 	DATA 	Keypress: space
+241.7157 	EXP 	New trial (rep=2, index=0): None
+241.7252 	EXP 	crosshair: autoDraw = True
+242.3188 	EXP 	New trial (rep=3, index=0): None
+242.3234 	DATA 	Keypress: space
+242.3415 	EXP 	crosshair: autoDraw = True
+242.9092 	EXP 	New trial (rep=4, index=0): None
+242.9328 	EXP 	crosshair: autoDraw = True
+242.9787 	DATA 	Keypress: space
+243.5132 	EXP 	New trial (rep=5, index=0): None
+243.5227 	EXP 	crosshair: autoDraw = True
+243.5473 	DATA 	Keypress: space
+244.1165 	EXP 	New trial (rep=6, index=0): None
+244.1242 	EXP 	crosshair: autoDraw = True
+244.6796 	DATA 	Keypress: space
+244.7130 	EXP 	New trial (rep=7, index=0): None
+244.7234 	EXP 	crosshair: autoDraw = True
+245.2782 	DATA 	Keypress: space
+245.3073 	EXP 	New trial (rep=8, index=0): None
+245.3283 	EXP 	crosshair: autoDraw = True
+245.9171 	EXP 	New trial (rep=9, index=0): None
+245.9318 	EXP 	crosshair: autoDraw = True
+245.9349 	DATA 	Keypress: space
+246.5166 	EXP 	New trial (rep=10, index=0): None
+246.5276 	EXP 	crosshair: autoDraw = True
+246.5590 	DATA 	Keypress: space
+247.1153 	EXP 	New trial (rep=11, index=0): None
+247.1259 	EXP 	crosshair: autoDraw = True
+247.1956 	DATA 	Keypress: space
+247.7155 	EXP 	New trial (rep=12, index=0): None
+247.7251 	EXP 	crosshair: autoDraw = True
+247.7827 	DATA 	Keypress: space
+248.3105 	EXP 	New trial (rep=13, index=0): None
+248.3217 	EXP 	crosshair: autoDraw = True
+248.4243 	DATA 	Keypress: space
+248.9082 	EXP 	New trial (rep=14, index=0): None
+248.9303 	EXP 	crosshair: autoDraw = True
+249.0132 	DATA 	Keypress: space
+249.5133 	EXP 	New trial (rep=15, index=0): None
+249.5243 	EXP 	crosshair: autoDraw = True
+249.5902 	DATA 	Keypress: space
+250.1072 	EXP 	New trial (rep=16, index=0): None
+250.1290 	EXP 	crosshair: autoDraw = True
+250.2094 	DATA 	Keypress: space
+250.8194 	DATA 	Keypress: space
+251.5335 	DATA 	Keypress: space
+252.1033 	DATA 	Keypress: space
+252.6672 	DATA 	Keypress: space
