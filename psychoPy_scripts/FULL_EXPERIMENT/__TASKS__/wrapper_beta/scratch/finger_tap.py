@@ -53,7 +53,7 @@ tickSound    = 'stimuli/clock-tick1.wav'  # file path to the ticking sound file
 expInfo         = {u'participant': u'10'}
 
 # ==============================================================================
-# Support Functions
+# Finger-Tapping Functions
 # ==============================================================================
 
 def forceQuit():
@@ -201,6 +201,34 @@ def detectPress(durTask=240, durPractice = 10, gap=0.6, key='space', practice_tt
   return [rt_list, tap_cond_list]
 
 # ==============================================================================
+# RSVP Functions
+# ==============================================================================
+
+def rsvpTrial(cond_prefs, nBlocks=2, stim_dur=0.05, iti_dur=0.75, fontSzStim=0.5):
+  """
+  The 'cond_prefs' input should contain the following fields:
+    
+    nTargets: an integer or list of integers indicating how many targets should 
+        appear in each trial.
+    
+    sepLen: An integer or list of integers indicating how many targets 
+        seperate T1 from T2 stimuli. Will be random if left out.
+    
+    nSepTrials: Number of trials for each listed seperation.
+
+    nTrials: Number of trials. Will be ignored if nSepTrials is given. 
+        If nSepTrials is left out but more than one seperation length if 
+        specified, trials will be assigned to each seperation length randomly.
+
+    The total number of trials in each block (assuming nSepTrials is specified) 
+    will be equal to:
+                        
+                        sum(nSepTrials) * nTargets
+  """
+
+
+
+# ==============================================================================
 # Get participant information
 # ==============================================================================
 
@@ -261,7 +289,7 @@ templateTxt = visual.TextStim(
   )
 
 # ==============================================================================
-# Start the experiment
+# Finger-Tapping Task
 # ==============================================================================
 
 # show the instructions
@@ -273,5 +301,14 @@ rt_list = detectPress(durTask=durTask, durPractice = durPractice, gap=tickGap, k
 # write the data to a csv file
 writeData(rt_list, ['RT', 'condition'])
 
-# close the window
+# ==============================================================================
+# RSVP Task
+# ==============================================================================
+
+# ==============================================================================
+# Close the Window
+# ==============================================================================
+
+# close the window and quit PsychoPy
 win.close()
+# core.quit()
