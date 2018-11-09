@@ -171,26 +171,26 @@ def detectPress(durTask=240, durPractice = 10, gap=0.6, key='space', practice_tt
       if tick_timer.getTime() < 1e-5 or not tick_status:
         tick_status = True
         tick.play()
-        tick_timer.add(gap)
+        win.callOnFlip(tick_timer.add, gap)
       # detect keypress
       theseKeys = event.getKeys(keyList=[key])
       if key in theseKeys:
-        rt_list.append(rt_Clock.getTime())
-        tap_cond_list.append('practice')
-        rt_Clock.reset()
+        win.callOnFlip(rt_list.append, rt_Clock.getTime())
+        win.callOnFlip(tap_cond_list.append, 'practice')
+        win.callOnFlip(rt_Clock.reset)
         if sendTTL:
-          port.setData(int(practice_ttl))
+          win.callOnFlip(port.setData, int(practice_ttl))
         else:
           print "TTL {}".format(int(practice_ttl))
     elif tick_Clock.getTime() <= durTask:
       # detect keypress
       theseKeys = event.getKeys(keyList=[key])
       if key in theseKeys:
-        rt_list.append(rt_Clock.getTime())
-        tap_cond_list.append('PRESS')
-        rt_Clock.reset()
+        win.callOnFlip(rt_list.append, rt_Clock.getTime())
+        win.callOnFlip(tap_cond_list.append, 'PRESS')
+        win.callOnFlip(rt_Clock.reset)
         if sendTTL:
-          port.setData(int(task_ttl))
+          win.callOnFlip(port.setData, int(task_ttl))
         else:
           print "TTL {}".format(int(task_ttl))
     else:
