@@ -17,11 +17,12 @@ from numpy import (sin, cos, tan, log, log10, pi, average,
                    sqrt, std, deg2rad, rad2deg, linspace, asarray)
 from numpy.random import random, randint, normal, shuffle
 from time import sleep
-import os     # handy system and path functions
-import sys    # to get file system encoding
-import csv    # to do the file saving
-import arrow  # to get the date
-import string # get the alphabet
+import random       # allow the random selection of items from a list
+import os           # handy system and path functions
+import sys          # to get file system encoding
+import csv          # to do the file saving
+import arrow        # to get the date
+import string       # get the alphabet
 import pandas as pd
 
 # ==============================================================================
@@ -120,10 +121,9 @@ def dispText(inText, template, advKeys = ['space'], nmText = 'templateTxt'):
 
   continueRoutine = True
 
+  # start instructions routine
+  instructText.setAutoDraw(True)
   while continueRoutine:
-    # start instructions routine
-    instructText.setAutoDraw(True)
-
     # check for the 'next' keyboard shortcut
     if len(advKeys) > 1:
       if event.getKeys(keyList=advKeys[0], modifiers=advKeys[1:]):
@@ -214,7 +214,7 @@ def rsvp_trial_setup(task_params, nTargets, sepLen):
 
   # get number of stimuli in this trial
   nStim     = np.random.choice(task_params['stimuli']['nStim'])
-  trialStim = np.random.choice(list(task_params['stimuli']['tarPool']), size=nStim)
+  trialStim = np.random.choice(list(task_params['stimuli']['charPool']), size=nStim)
 
   if nTargets == 2:
     # position of the t1 stimulus
@@ -225,8 +225,8 @@ def rsvp_trial_setup(task_params, nTargets, sepLen):
     t2_position = t1_position + sepLen + 1
 
     # put the numbers in place
-    trialStim[t1_position] = str(np.random.choice(task_params['stimuli']['tarPool']))
-    trialStim[t2_position] = str(np.random.choice(task_params['stimuli']['tarPool']))
+    trialStim[t1_position] = np.random.choice(task_params['stimuli']['tarPool'])
+    trialStim[t2_position] = np.random.choice(task_params['stimuli']['tarPool'])
     
     # determine if the mask should be put in, and put it in if yes
     trialMask = np.random.random() < task_params['targetSpecs']['maskProb'][nTargets]
@@ -241,7 +241,7 @@ def rsvp_trial_setup(task_params, nTargets, sepLen):
     t1_position   = np.random.choice(t1_position)
     mask_position = t1_position + sepLen + 1
 
-    trialStim[t1_position]   = str(np.random.choice(task_params['stimuli']['tarPool']))
+    trialStim[t1_position]   = np.random.choice(task_params['stimuli']['tarPool'])
     trialStim[mask_position] = ' '
     
   else:
@@ -251,18 +251,20 @@ def rsvp_trial_setup(task_params, nTargets, sepLen):
   return trialStim
 
 def rsvp_task(nBlocks    = 2, 
-              stimDur    = 0.05,                          # duration of stimulus presentation in seconds (0.05)
-              maskDur    = 0.034,                         # duration of the mask in seconds (0.034)
-              respWait   = 1,                             # duration (s) between stimulus presentation & response query
-              itiDur     = 0.75,                          # duration of the ITI in seconds (0.75)
-              fontSz     = 0.5,                           # font size for the stimuli (starts at .1)
-              nTargets   = [1,2],                         # number of targets present in each trial
-              sepLen     = {1:[4,8] , 2:[4,8]},           # number of trials seperating targets 
-              nTrials    = {4:72, 8:192},                 # number of trials of each sepLen entry, in respective order
-              nStim      = range(15,19),                  # number of stimuli present in each trial 
-              maskProb   = {1:0, 2:0.2},                  # probability of a mask occuring spontaneously in each trial
-              charPool   = string.ascii_uppercase,        # pool from which to draw the distractor stimuli
-              tarPool    = range(1,10)
+              stimDur    = 0.05,                                          # duration of stimulus presentation in seconds (0.05)
+              maskDur    = 0.034,                                         # duration of the mask in seconds (0.034)
+              respWait   = 1,                                             # duration (s) between stimulus presentation & response query
+              itiDur     = 0.75,                                          # duration of the ITI in seconds (0.75)
+              fontSz     = 0.5,                                           # font size for the stimuli (starts at .1)
+              nTargets   = [1,2],                                         # number of targets present in each trial
+              sepLen     = {1:[4,8] , 2:[4,8]},                           # number of trials seperating targets 
+              nTrials    = {4:72, 8:192},                                 # number of trials of each sepLen entry, in respective order
+              nStim      = range(15,19),                                  # number of stimuli present in each trial 
+              maskProb   = {1:0, 2:0.2},                                  # probability of a mask occuring spontaneously in each trial
+              charPool   = string.ascii_uppercase,                        # pool from which to draw the distractor stimuli
+              tarPool    = ["1", "2", "3", "4", "5", "6", "7", "8", "9"], # pool from which to draw targets
+              keyPool    = ["1", "2", "3", "4", "5", "6", "7", "8", "9",  # pool of keys to choose from
+                            "num_1", "num_2", "num_3", "num_4", "num_5", "num_6", "num_7", "num_8", "num_9"]
               ):
   """
   The total number of trials in each block (assuming nSepTrials is specified) 
@@ -278,6 +280,7 @@ def rsvp_task(nBlocks    = 2,
   task_params['stimuli'] = {
     'charPool' : charPool,
     'tarPool'  : tarPool,
+    'keyPool'  : keyPool,
     'nStim'    : nStim
     }
   task_params['timing']  = {
@@ -294,14 +297,13 @@ def rsvp_task(nBlocks    = 2,
     }
 
   # text to display when participants respond
-  numberQuery_text      = templateTxt
-  numberQuery_text.text = 'Which numbers did you see?'
-  numberQuery_text.name = 'Number Query'
+  askNumber_txt      = templateTxt
+  askNumber_txt.name = 'askNumber'
 
   # set up the countdown timers
-  stim_timer = core.CountdownTimer(task_params['stimDur' ])
-  mask_timer = core.CountdownTimer(task_params['maskDur' ])
-  wait_timer = core.CountdownTimer(task_params['respWait'])
+  stim_timer = core.CountdownTimer(task_params['timing']['stimDur' ])
+  mask_timer = core.CountdownTimer(task_params['timing']['maskDur' ])
+  wait_timer = core.CountdownTimer(task_params['timing']['respWait'])
 
   # looping through blocks
   for block in range(nBlocks):
@@ -329,59 +331,68 @@ def rsvp_task(nBlocks    = 2,
       tmp_nTargets = trialList['targets'].pop(tmp_select)
       tmp_sepLen   = trialList['sep'    ].pop(tmp_select)
 
-      # get the mask ready
-      mask_text = templateTxt
-      mask_text.text = ' '
-
       # define the stimuli to show in this trial
       trialStim = rsvp_trial_setup(task_params=task_params, nTargets=tmp_nTargets, sepLen=tmp_sepLen)
 
+      # create template for stimulus
+      stimulus_text      = templateTxt
+      stimulus_text.name = 'stimulus'
+
       # loop through each stimulus in trialStim
+      print trialStim
       for stim in trialStim:
+        print "STIM IS: " + stim
         # prepare the stimulus to be displayed
-        stimulus_text      = templateTxt
-        stimulus_text.text = stimulus_text
-        stimulus_text.name = 'stimulus'
-        win.flip()
+        stimulus_text.text = stim
 
         # Shown the stimulus
         stim_timer.reset()
+        win.callOnFlip(stimulus_text.setAutoDraw, True)
         while stim_timer.getTime() > 0:
-          stimulus_text.autoDraw(True)
           win.flip()
-        stimulus_text.autoDraw(False)
+        win.callOnFlip(stimulus_text.setAutoDraw, False)
+
+        # get the mask ready
+        mask_text = templateTxt
+        mask_text.text = ' '
 
         # show the mask
         mask_timer.reset()
+        win.callOnFlip(mask_text.setAutoDraw, True)
         while mask_timer.getTime() > 0:
-          mask_text.autoDraw(True)
           win.flip()
-        mask_text.autoDraw(False)
+        win.callOnFlip(mask_text.setAutoDraw, False)
       
+      win.flip()
+
       # wait to present the participant with the number query
       waitContinue = True
       wait_timer.reset()
       while waitContinue:
-        if wait_timer.getTime < 0:
+        win.flip()
+        if wait_timer.getTime() < 0:
           waitContinue = False
 
       # ask participant what numbers they saw
       respLog = []
       respContinue = True
-      while respContinue:
-        numberQuery_text.autoDraw(True)
 
+      # set text to ask people which numbers they saw
+      askNumber_txt.text = 'Which numbers did you see?'
+      askNumber_txt.setAutoDraw(True)
+      
+      while respContinue:
         # prepare to record responses
-        theseKeys = event.getKeys(keyList=task_params['stimuli']['tarPool'])
+        theseKeys = event.getKeys(keyList=task_params['stimuli']['keyPool'])
         if len(theseKeys) > 0:
           respLog.append(theseKeys[0])
 
-        if len(theseKeys) == 2:
+        if len(respLog) == 2:
           respContinue=False
         
         win.flip()
-      numberQuery_text.autoDraw(False) # stop drawing the query once they've responded
-
+      print respLog
+      askNumber_txt.setAutoDraw(False) # stop drawing the query once they've responded
 
 
 # ==============================================================================
@@ -414,7 +425,7 @@ if sendTTL:
     port.setData(0) #make sure all pins are low
 
 win = visual.Window(
-  fullscr      = True, 
+  fullscr      = False, 
   allowGUI     = True, 
   allowStencil = False,
   monitor      = monitor,
@@ -449,13 +460,19 @@ templateTxt = visual.TextStim(
 # ==============================================================================
 
 # show the instructions
-dispText('SURPRISE, MUTHAFUCKA!', template = templateTxt, nmText = 'instructions')
+# dispText('SURPRISE, MUTHAFUCKA!', template = templateTxt, nmText = 'instructions')
 
 # start the ticking
-rt_list = detectPress(durTask=durTask, durPractice = durPractice, gap=tickGap, key=tickKey, audioFile = tickSound)
+# rt_list = detectPress(durTask=durTask, durPractice = durPractice, gap=tickGap, key=tickKey, audioFile = tickSound)
 
 # write the data to a csv file
-writeData(rt_list, ['RT', 'condition'])
+# writeData(rt_list, ['RT', 'condition'])
+
+# rsvp instructions
+dispText('RSVP, bitch.', template = templateTxt, nmText = 'instructions')
+
+# run teh rsvp
+rsvp_task(nBlocks=1)
 
 # ==============================================================================
 # RSVP Task
