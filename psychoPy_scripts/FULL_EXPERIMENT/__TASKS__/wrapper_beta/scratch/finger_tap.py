@@ -60,7 +60,77 @@ tickSound    = 'stimuli/clock-tick1.wav'  # file path to the ticking sound file
 expInfo         = {u'participant': u'10'}
 
 # ==============================================================================
-# Finger-Tapping Functions
+# TTL Classes & Functions
+# ==============================================================================
+
+class ttl_tap():
+  def __init__(self, key, condition):
+    super(ttl_tap, self).__init__(key, condition)
+
+    if self.condition == 'practice':
+      self.ttl = 10
+
+    # send the TTL
+    # super(ttl_tap, self).send_ttl(self.ttl)
+
+class ttl_rsvp():
+  
+  task    = 'rsvp'
+  respNum = 0
+
+  present_base       = 10
+  
+  response_base      = 100
+  responseXrespNum   = 10
+
+  accuracy_indicator = 1
+  accuracy_base      = 200
+  accuracyXrespNum   = 10
+  
+  def __init__(self, nTargets, sepLen, sendTTL):
+    self.nTargets = nTargets
+    self.sepLen   = sepLen
+    self.sendTTL  = sendTTL
+  
+  def cond_ttl(self):
+    return int(self.sepLen)
+
+  def resp_ttl(self, stimulus, key):
+    self.respNum += 1
+    self.stimulus = stimulus
+    
+    if 'num_' in key:
+      key = key.split("_")[1]
+    self.key = key
+    
+    if self.stimulus == 'mask':
+      self.accuracy = 0
+    elif self.stimulus == self.key:
+      self.accuracy = 1
+    else:
+      self.accuracy = 0
+
+    # TTL indicating participant response
+    self.respTTL = self.responseXrespNum + (self.respNum * self.responseXrespNum) + int(self.key)
+    self.respTTL = int(self.respTTL)
+
+    # TTL indicating participant accuracy
+    if stimulus == 'mask':
+      self.accTTL = self.accuracy_base + (self.respNum * self.accuracyXrespNum) + 0
+    else:
+      self.accTTL = self.accuracy_base + (self.respNum * self.accuracyXrespNum) + int(self.accuracy)
+
+    # send the TTL
+    # super(ttl_rsvp, self).send_ttl(sendTTL)
+
+def send_ttl(ttl, sendTTL):
+  if sendTTL:
+    port.setData(int(ttl))
+  else:
+    print "TTL: {}".format(str(ttl))
+
+# ==============================================================================
+# Functions
 # ==============================================================================
 
 def forceQuit():
@@ -91,7 +161,6 @@ def prepData(inData, colnames):
   outData = {}
   for colNm in range(len(colnames)):
     outData[colnames[colNm]] = inData[colNm]
-  print outData
   outData = pd.DataFrame(outData)
   return outData
 
@@ -215,6 +284,7 @@ def rsvp_trial_setup(task_params, nTargets, sepLen):
   # get number of stimuli in this trial
   nStim     = np.random.choice(task_params['stimuli']['nStim'])
   trialStim = np.random.choice(list(task_params['stimuli']['charPool']), size=nStim)
+  trialCond = ["distractor" for __ in range(nStim)]
 
   if nTargets == 2:
     # position of the t1 stimulus
@@ -227,6 +297,10 @@ def rsvp_trial_setup(task_params, nTargets, sepLen):
     # put the numbers in place
     trialStim[t1_position] = np.random.choice(task_params['stimuli']['tarPool'])
     trialStim[t2_position] = np.random.choice(task_params['stimuli']['tarPool'])
+
+    # add the condition labels
+    trialCond[t1_position] = 'target'
+    trialCond[t2_position] = 'target'
     
     # determine if the mask should be put in, and put it in if yes
     trialMask = np.random.random() < task_params['targetSpecs']['maskProb'][nTargets]
@@ -235,20 +309,35 @@ def rsvp_trial_setup(task_params, nTargets, sepLen):
       while mask_position == t1_position or mask_position == t2_position:
         mask_position  = np.random.choice(range(nStim))
       trialStim[mask_position] = ' '
+      trialCond[mask_position] = 'mask'
     
   elif nTargets == 1:
     t1_position   = range(nStim - sepLen - 1)
     t1_position   = np.random.choice(t1_position)
     mask_position = t1_position + sepLen + 1
 
+    # add to the stimuli list
     trialStim[t1_position]   = np.random.choice(task_params['stimuli']['tarPool'])
     trialStim[mask_position] = ' '
+
+    # add to the condition list
+    trialCond[t1_position]   = 'target'
+    trialCond[mask_position] = 'mask'
     
   else:
     raise ValueError('nTargets must be either 1 or 2.')
 
+  # organize the stimuli into a dictionary
+  trialInfo              = {}
+  trialInfo['stimuli']   = trialStim
+  trialInfo['condition'] = trialCond
+  trialInfo['nTargets']  = nTargets
+  trialInfo['sepLen']    = sepLen
+
   # return the stimuli
-  return trialStim
+  return trialInfo
+
+
 
 def rsvp_task(nBlocks    = 2, 
               stimDur    = 0.05,                                          # duration of stimulus presentation in seconds (0.05)
@@ -296,6 +385,10 @@ def rsvp_task(nBlocks    = 2,
     'nTrials'  : nTrials
     }
 
+  # set up the dictionary containing TTL definitions
+  ttl_library={}
+  ttl_library['end_present'] = 254
+
   # text to display when participants respond
   askNumber_txt      = templateTxt
   askNumber_txt.name = 'askNumber'
@@ -324,7 +417,7 @@ def rsvp_task(nBlocks    = 2,
   
     # looping through trials
     numTrials_block=len(trialList['sep'])
-    for __ in range(numTrials_block):
+    for trialNum in range(numTrials_block):
       tmp_select = random.choice(range(len(trialList['sep'])))
 
       # get the parameters for this trial
@@ -332,22 +425,52 @@ def rsvp_task(nBlocks    = 2,
       tmp_sepLen   = trialList['sep'    ].pop(tmp_select)
 
       # define the stimuli to show in this trial
-      trialStim = rsvp_trial_setup(task_params=task_params, nTargets=tmp_nTargets, sepLen=tmp_sepLen)
+      trialInfo = rsvp_trial_setup(task_params=task_params, nTargets=tmp_nTargets, sepLen=tmp_sepLen)
 
       # create template for stimulus
       stimulus_text      = templateTxt
       stimulus_text.name = 'stimulus'
 
       # loop through each stimulus in trialStim
-      print trialStim
-      for stim in trialStim:
-        print "STIM IS: " + stim
+      targetLog = []
+      rsvp_signal = ttl_rsvp(tmp_nTargets, tmp_sepLen, sendTTL)
+
+      # call on flip tp indicate number of seperating trials
+      win.callOnFlip(send_ttl, tmp_sepLen, sendTTL)
+      for stim in range(len(trialInfo['stimuli'])):
+
         # prepare the stimulus to be displayed
-        stimulus_text.text = stim
+        stimulus_text.text = trialInfo['stimuli'][stim]
+
+        if stimulus_text.text in task_params['stimuli']['charPool']:
+          tmp_condition = 'distractor'
+        elif stimulus_text.text in task_params['stimuli']['tarPool']:
+          tmp_condition = 'target'
+          targetLog.append(stimulus_text.text)
+        elif stimulus_text.text == ' ':
+          tmp_condition = 'mask'
+
+        tmp_row = pd.DataFrame({'Block'    : [block + 1]          , 
+                                'Trial'    : [trialNum + 1]       , 
+                                'nTargets' : [tmp_nTargets]       ,
+                                'Sep'      : [tmp_sepLen]         ,
+                                'Iter'     : [stim + 1]           , 
+                                'Cond'     : [tmp_condition]      , 
+                                'Stim'     : [stimulus_text.text] ,
+                                'Resp'     : [' ']                ,
+                                'Acc'      : [' ']               },
+                              columns=['Block','Trial','nTargets','Sep','Iter','Cond','Stim','Resp','Acc'])
+        
+        try:
+          rsvp_dataFrame = rsvp_dataFrame.append(tmp_row, ignore_index=True)
+        except:
+          rsvp_dataFrame = tmp_row
 
         # Shown the stimulus
         stim_timer.reset()
         win.callOnFlip(stimulus_text.setAutoDraw, True)
+        if tmp_condition == 'target':
+          win.callOnFlip(send_ttl, (len(targetLog) * 10) + int(stimulus_text.text), sendTTL)
         while stim_timer.getTime() > 0:
           win.flip()
         win.callOnFlip(stimulus_text.setAutoDraw, False)
@@ -363,7 +486,13 @@ def rsvp_task(nBlocks    = 2,
           win.flip()
         win.callOnFlip(mask_text.setAutoDraw, False)
       
+      win.callOnFlip(send_ttl, ttl_library['end_present'], sendTTL)
       win.flip()
+
+      if tmp_nTargets == 1:
+        targetLog.append('mask')
+
+      print rsvp_dataFrame
 
       # wait to present the participant with the number query
       waitContinue = True
@@ -374,24 +503,49 @@ def rsvp_task(nBlocks    = 2,
           waitContinue = False
 
       # ask participant what numbers they saw
-      respLog = []
       respContinue = True
 
       # set text to ask people which numbers they saw
       askNumber_txt.text = 'Which numbers did you see?'
       askNumber_txt.setAutoDraw(True)
       
+      respLog      = []
       while respContinue:
         # prepare to record responses
         theseKeys = event.getKeys(keyList=task_params['stimuli']['keyPool'])
         if len(theseKeys) > 0:
           respLog.append(theseKeys[0])
 
+          # send the ttl
+          rsvp_signal.resp_ttl(targetLog[len(respLog)-1], theseKeys[0])
+          win.callOnFlip(send_ttl, rsvp_signal.accTTL, sendTTL=sendTTL)
+
         if len(respLog) == 2:
-          respContinue=False
+          respContinue = False
         
         win.flip()
-      print respLog
+      
+      # add the responses to the pd.DataFrame
+      for resp in range(len(respLog)):
+        try:
+          if respLog[resp] == targetLog[resp]:
+            temp_accuracy = 1
+          else:
+            temp_accuracy = 0
+        except:
+          temp_accuracy = 0
+        tmp_resp_row = pd.DataFrame({'Block'    : [' ']           , 
+                                     'Trial'    : [' ']           , 
+                                     'nTargets' : [' ']           ,
+                                     'Sep'      : [' ']           ,
+                                     'Iter'     : [' ']           , 
+                                     'Cond'     : [' ']           , 
+                                     'Stim'     : [' ']           ,
+                                     'Resp'     : [respLog[resp]] ,
+                                     'Acc'      : [temp_accuracy]},
+                                    columns=['Block','Trial','nTargets','Sep','Iter','Cond','Stim','Resp','Acc'])
+        rsvp_dataFrame = rsvp_dataFrame.append(tmp_resp_row, ignore_index=False)
+      
       askNumber_txt.setAutoDraw(False) # stop drawing the query once they've responded
 
 
@@ -471,8 +625,8 @@ templateTxt = visual.TextStim(
 # rsvp instructions
 dispText('RSVP, bitch.', template = templateTxt, nmText = 'instructions')
 
-# run teh rsvp
-rsvp_task(nBlocks=1)
+# run the rsvp
+rsvp_task(nBlocks=2)
 
 # ==============================================================================
 # RSVP Task
