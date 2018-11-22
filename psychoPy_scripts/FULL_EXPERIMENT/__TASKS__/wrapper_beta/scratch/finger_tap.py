@@ -16,7 +16,7 @@ import numpy as np  # whole numpy lib is available, prepend 'np.'
 from numpy import (sin, cos, tan, log, log10, pi, average,
                    sqrt, std, deg2rad, rad2deg, linspace, asarray)
 from numpy.random import random, randint, normal, shuffle
-from time import sleep
+from pathlib2 import Path
 import random       # allow the random selection of items from a list
 import os           # handy system and path functions
 import sys          # to get file system encoding
@@ -37,6 +37,13 @@ global sendTTL
 # taskName
 taskName = "John's Battery"
 
+# task settings
+
+nRuns  = 2
+nTasks = 2
+audioTracks = {"mm":"stimuli/body_scan_long_norm.ogg", 
+               "sr": 'stimuli/Newcastle Hospitals - unknown album - 00 - Progressive Muscle Relaxation - Male Voice.ogg'}
+
 # psychopy settings
 DEBUG               = False
 sendTTL             = False
@@ -48,13 +55,6 @@ refreshRate         = 60 # (Hz)
 colFont      = 'white'                    # font colour (rgb space)
 colBkgd      = 'black'                    # background colour (rgb space)
 colTest      = 'red'                      # background colour for when sendTTL = False (rgb space)
-
-# task settings
-durTask      = 5#240                        # duration of the main task
-durPractice  = 10                         # duration of the metronome practice
-tickGap      = 0.6                        # time in seconds seperating each metronome strike
-tickKey      = 'space'                    # key to press to record during the tapping task
-tickSound    = 'stimuli/clock-tick1.wav'  # file path to the ticking sound file
 
 # expInfo defaults
 expInfo         = {u'participant': u'10'}
@@ -130,7 +130,7 @@ def send_ttl(ttl, sendTTL):
     print "TTL: {}".format(str(ttl))
 
 # ==============================================================================
-# Functions
+# Support Functions
 # ==============================================================================
 
 def forceQuit():
@@ -147,7 +147,36 @@ def checkSubjID(subjID):
   if subjID <= 1000:
     raise ValueError('The participant ID must be greater than 1000.')
   return subjID
-    
+
+def getCondition(subjID):
+  conditions = ['mm', 'sr']
+  try:
+    subjID = int(subjID)
+  except:
+    raise TypeError("Subject ID must be entered in the form of an integer.")
+
+  if subjID % 2 == 0:
+    subjCond = 1 # TODO: add subjCond to documentation
+  else:
+    subjCond = 0
+  subjCond = conditions[subjCond]
+  return subjCond
+
+def getOrder(subjID):
+  allOrders = np.matrix([[0, 1, 0, 1],
+                         [0, 1, 1, 0],
+                         [1, 0, 0, 1],
+                         [1, 0, 1, 0]])
+  try:
+    subjID    = int(subjID)
+  except:
+    raise TypeError("Subject ID must be entered in the form of an integer.")
+  subjID    = float(subjID - 1000)
+  subjID    = int(round(subjID/2)) - 1
+  subjOrder = subjID % 4
+  subjOrder = allOrders[subjOrder]
+  return subjOrder
+
 def prepData(inData, colnames):
   # sanity checks to make sure data is properly formatted.
   if isinstance(colnames, str):
@@ -205,7 +234,11 @@ def dispText(inText, template, advKeys = ['space'], nmText = 'templateTxt'):
 
   instructText.setAutoDraw(False)
 
-def detectPress(durTask=240, durPractice = 10, gap=0.6, key='space', practice_ttl=10, task_ttl=100, audioFile = 'stimuli/clock-tick1.wav'):
+# ==============================================================================
+# Finger-Tapping Functions
+# ==============================================================================
+
+def tap_task(durTask=240, durPractice = 10, gap=0.6, key='space', practice_ttl=10, task_ttl=100, audioFile = 'stimuli/clock-tick1.wav'):
   # make sure the specified key is a valid option
   if not isinstance(key, str):
     raise TypeError("The specfied key must be entered in 'str' format.")
@@ -336,8 +369,6 @@ def rsvp_trial_setup(task_params, nTargets, sepLen):
 
   # return the stimuli
   return trialInfo
-
-
 
 def rsvp_task(nBlocks    = 2, 
               stimDur    = 0.05,                                          # duration of stimulus presentation in seconds (0.05)
@@ -547,8 +578,50 @@ def rsvp_task(nBlocks    = 2,
         rsvp_dataFrame = rsvp_dataFrame.append(tmp_resp_row, ignore_index=False)
       
       askNumber_txt.setAutoDraw(False) # stop drawing the query once they've responded
+  
+  # return the rsvp_dataFrame
+  return rsvp_dataFrame
 
+def audio_task(filePath, audioVol=1):
+  if not isinstance(filePath, str):
+    raise TypeError("The specfied key must be entered in 'str' format.")
+  if not os.path.isfile(filePath):
+    raise ValueError("The specified file does not exist.")
 
+  # start timers
+  routineTimer = core.CountdownTimer()
+
+  # cache the audio file
+  soundFile = sound.Sound(filePath, secs=-1)
+  soundFile.setVolume(audioVol)
+
+  # instruction screen
+  dispText(inText='Here be instructions. Follow them, or DIE.', template=templateTxt, nmText='Instructions')
+
+  # set the "Stay Still" instructions
+  stayStill      = templateTxt
+  stayStill.text = 'Please keep relatively still while still following the directions.'
+  stayStill.name = 'stayStill'
+  
+  win.callOnFlip(send_ttl, 1, sendTTL)
+  win.flip()
+  
+  routineTimer.reset()
+  routineTimer.add(soundFile.getDuration()) 
+  
+  # play the sound
+  soundFile.play()
+  stayStill.setAutoDraw(True)
+  
+  while routineTimer.getTime() > 0:
+    win.flip()
+  
+  win.callOnFlip(send_ttl, 255, sendTTL)
+  soundFile.stop()
+  stayStill.setAutoDraw(False)
+  win.flip()
+
+  # play the sound
 # ==============================================================================
 # Get participant information
 # ==============================================================================
@@ -610,23 +683,35 @@ templateTxt = visual.TextStim(
   )
 
 # ==============================================================================
-# Finger-Tapping Task
+# Get subject order and group (MM or SR)
 # ==============================================================================
+
+subj_order =     getOrder(expInfo['participant'])
+subj_group = getCondition(expInfo['participant'])
+
+# ==============================================================================
+# Running the task
+# ==============================================================================
+
+# for run in range(nRuns):
+#   pass
 
 # show the instructions
 # dispText('SURPRISE, MUTHAFUCKA!', template = templateTxt, nmText = 'instructions')
 
 # start the ticking
-# rt_list = detectPress(durTask=durTask, durPractice = durPractice, gap=tickGap, key=tickKey, audioFile = tickSound)
+# rt_list = tap_task()
 
 # write the data to a csv file
 # writeData(rt_list, ['RT', 'condition'])
 
 # rsvp instructions
-dispText('RSVP, bitch.', template = templateTxt, nmText = 'instructions')
+# dispText('RSVP, bitch.', template = templateTxt, nmText = 'instructions')
 
 # run the rsvp
-rsvp_task(nBlocks=2)
+# rsvp_task(nBlocks=2)
+
+audio_task(audioTracks['mm'])
 
 # ==============================================================================
 # RSVP Task
