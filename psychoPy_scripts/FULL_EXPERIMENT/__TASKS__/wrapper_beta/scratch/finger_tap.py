@@ -2,7 +2,8 @@
 # TODO
 # ==============================================================================
 #
-# - [ ] (RSVP) Announce the beginning of a new block.
+# - [x] (RSVP) Announce the beginning of a new block.
+# - [ ] Check if over-writing files
 
 # ==============================================================================
 # IMPORT PACKAGES
@@ -12,11 +13,8 @@ from __future__ import absolute_import, division
 from psychopy import locale_setup, sound, gui, visual, core, data, event, logging, clock
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
                                 STOPPED, FINISHED, PRESSED, RELEASED, FOREVER)
+from pygame import sndarray
 import numpy as np  # whole numpy lib is available, prepend 'np.'
-from numpy import (sin, cos, tan, log, log10, pi, average,
-                   sqrt, std, deg2rad, rad2deg, linspace, asarray)
-from numpy.random import random, randint, normal, shuffle
-from pathlib2 import Path
 import random       # allow the random selection of items from a list
 import os           # handy system and path functions
 import sys          # to get file system encoding
@@ -24,6 +22,7 @@ import csv          # to do the file saving
 import arrow        # to get the date
 import string       # get the alphabet
 import pandas as pd
+import time
 
 # ==============================================================================
 # DEFAULT PREFERENCES
@@ -35,14 +34,15 @@ global colFont
 global sendTTL
 
 # taskName
-taskName = "John's Battery"
+taskName = "Relaxation Task Battery"
 
 # task settings
 
 nRuns  = 2
 nTasks = 2
-audioTracks = {"mm":"stimuli/body_scan_long_norm.ogg", 
-               "sr": 'stimuli/Newcastle Hospitals - unknown album - 00 - Progressive Muscle Relaxation - Male Voice.ogg'}
+
+audioTracks = {"mm": "stimuli/audio_mm.wav", 
+               "sr": "stimuli/audio_sr.wav"}
 
 # psychopy settings
 DEBUG               = False
@@ -139,6 +139,11 @@ def forceQuit():
   # os.remove("tmp_stimuli.csv")
   core.quit()
 
+def pauseExperiment():
+  time.sleep(15)
+  event.clearEvents(eventType='keyboard')
+
+  
 def checkSubjID(subjID):
   try:
     subjID = int(subjID)
@@ -177,7 +182,7 @@ def getOrder(subjID):
   subjOrder = allOrders[subjOrder]
   return subjOrder
 
-def prepData(inData, colnames):
+def listToPD(inData, colnames):
   # sanity checks to make sure data is properly formatted.
   if isinstance(colnames, str):
     colnames = [colnames]
@@ -193,24 +198,15 @@ def prepData(inData, colnames):
   outData = pd.DataFrame(outData)
   return outData
 
-def writeData(rtData, colnames, outputDir = 'data'):
-  # Prepare the data for writing to a csv
-  outData = prepData(rtData, colnames)
-  
-  if not os.path.isdir(outputDir):
-    os.mkdir(outputDir)
-  outputFile = "_".join([expInfo['task'], expInfo['participant'], expInfo['date']])
-  outputFile = outputFile + '.csv'
-  outputFile = os.path.join('data', outputFile)
-
-  outData.to_csv(path_or_buf=outputFile)
-
 def dispText(inText, template, advKeys = ['space'], nmText = 'templateTxt'):  
   # check the advKeys to make sure they're in list format
   if isinstance(advKeys, str):
     advKeys = [advKeys]
   elif not isinstance(advKeys, list):
     raise TypeError("The advKeys used in %s must be either a 'str or a 'list'." % inspect.stack()[0][3]) 
+  
+  # clear the keyboard
+  event.clearEvents(eventType='keyboard')
 
   # prepare to start routie "instructions"
   instructText      = template
@@ -238,7 +234,7 @@ def dispText(inText, template, advKeys = ['space'], nmText = 'templateTxt'):
 # Finger-Tapping Functions
 # ==============================================================================
 
-def tap_task(durTask=240, durPractice = 10, gap=0.6, key='space', practice_ttl=10, task_ttl=100, audioFile = 'stimuli/clock-tick1.wav'):
+def tap_task(durTask=240, durPractice = 10, gap=0.6, key='space', practice_ttl=10, task_ttl=100, audioFile = 'stimuli/tick.wav'):
   # make sure the specified key is a valid option
   if not isinstance(key, str):
     raise TypeError("The specfied key must be entered in 'str' format.")
@@ -246,6 +242,9 @@ def tap_task(durTask=240, durPractice = 10, gap=0.6, key='space', practice_ttl=1
   # make sure the file exists
   if not os.path.isfile(audioFile):
     raise ValueError("The specified audio file '%s' does not exist." % audioFile)
+
+  # clear the kayboard
+  event.clearEvents(eventType='keyboard')
 
   durTask         = durTask + durPractice
 
@@ -269,6 +268,9 @@ def tap_task(durTask=240, durPractice = 10, gap=0.6, key='space', practice_ttl=1
     
     tick_timer = core.CountdownTimer()
     tick_timer.reset()
+
+  win.callOnFlip(send_ttl, 1, sendTTL)
+  win.flip()
 
   rt_Clock.reset()
   while continueRoutine:
@@ -306,6 +308,11 @@ def tap_task(durTask=240, durPractice = 10, gap=0.6, key='space', practice_ttl=1
       continueRoutine=False
     
     win.flip()
+  
+  tick.stop()
+  win.callOnFlip(send_ttl, 255, sendTTL)
+  win.flip()
+
   return [rt_list, tap_cond_list]
 
 # ==============================================================================
@@ -393,6 +400,9 @@ def rsvp_task(nBlocks    = 2,
                         sum(nSepTrials) * nTargets
   """
   
+  # clear the keyboard
+  event.clearEvents(eventType='keyboard')
+  
   # setup condition preferences (task_params) as a dictionary
   task_params={}
   task_params['nBlocks'] = nBlocks
@@ -431,6 +441,13 @@ def rsvp_task(nBlocks    = 2,
 
   # looping through blocks
   for block in range(nBlocks):
+
+    # add a break in between blocks
+    breakText = 'Take a quick break.\n\nPress SPACE to begin block %s.' % str(block + 1)
+    if block > 0:
+      dispText(breakText, template=templateTxt,nmText='break')
+      time_gap()
+
     # create pool of trial types to choose from
     trialList={}
     trialList['targets'] = []
@@ -449,6 +466,8 @@ def rsvp_task(nBlocks    = 2,
     # looping through trials
     numTrials_block=len(trialList['sep'])
     for trialNum in range(numTrials_block):
+      time_gap(gapDur=0.75)
+      
       tmp_select = random.choice(range(len(trialList['sep'])))
 
       # get the parameters for this trial
@@ -539,6 +558,9 @@ def rsvp_task(nBlocks    = 2,
       # set text to ask people which numbers they saw
       askNumber_txt.text = 'Which numbers did you see?'
       askNumber_txt.setAutoDraw(True)
+
+      # clear keyboard responses that occured before the text appeared
+      event.clearEvents(eventType='keyboard')
       
       respLog      = []
       while respContinue:
@@ -579,8 +601,15 @@ def rsvp_task(nBlocks    = 2,
       
       askNumber_txt.setAutoDraw(False) # stop drawing the query once they've responded
   
+  # signal the end of the experiment
+  send_ttl(255, sendTTL)
+  
   # return the rsvp_dataFrame
   return rsvp_dataFrame
+
+# ==============================================================================
+# Auditory Intervention task
+# ==============================================================================
 
 def audio_task(filePath, audioVol=1):
   if not isinstance(filePath, str):
@@ -588,15 +617,15 @@ def audio_task(filePath, audioVol=1):
   if not os.path.isfile(filePath):
     raise ValueError("The specified file does not exist.")
 
+  # clear the keyboard
+  event.clearEvents(eventType='keyboard')
+
   # start timers
   routineTimer = core.CountdownTimer()
 
   # cache the audio file
   soundFile = sound.Sound(filePath, secs=-1)
   soundFile.setVolume(audioVol)
-
-  # instruction screen
-  dispText(inText='Here be instructions. Follow them, or DIE.', template=templateTxt, nmText='Instructions')
 
   # set the "Stay Still" instructions
   stayStill      = templateTxt
@@ -616,12 +645,25 @@ def audio_task(filePath, audioVol=1):
   while routineTimer.getTime() > 0:
     win.flip()
   
+  # send the task
   win.callOnFlip(send_ttl, 255, sendTTL)
   soundFile.stop()
   stayStill.setAutoDraw(False)
+
+  del soundFile
+  
   win.flip()
 
-  # play the sound
+# ==============================================================================
+# Time-Gap function
+# ==============================================================================
+
+def time_gap(gapDur=1):
+  gap_remaining = core.CountdownTimer(gapDur)
+  gap_remaining.reset()
+  while gap_remaining.getTime() > 0:
+    win.flip()
+
 # ==============================================================================
 # Get participant information
 # ==============================================================================
@@ -665,8 +707,10 @@ win.mouseVisible = False
 # Global Key events (e.g., forcequit)
 # ==============================================================================
 
-event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit, name='forceQuit')
-event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit, name='forceQuit')
+event.globalKeys.add(key='escape', modifiers=['shift']           , func=forceQuit      , name='forceQuit')
+event.globalKeys.add(key='escape', modifiers=['shift', 'numlock'], func=forceQuit      , name='forceQuit')
+event.globalKeys.add(key='t'     , modifiers=['ctrl']            , func=pauseExperiment, name='pauseExperiment')
+event.globalKeys.add(key='t'     , modifiers=['ctrl' , 'numlock'], func=pauseExperiment, name='pauseExperiment')
 
 # ==============================================================================
 # Templates to modify
@@ -689,29 +733,60 @@ templateTxt = visual.TextStim(
 subj_order =     getOrder(expInfo['participant'])
 subj_group = getCondition(expInfo['participant'])
 
+print subj_order[0]
+
 # ==============================================================================
 # Running the task
 # ==============================================================================
 
-# for run in range(nRuns):
-#   pass
+taskCount = 0
+for run in range(nRuns):
+  
+  # the auditory intervention
+  if run > 0:
+    dispText(inText='audio plays now', template=templateTxt, nmText='audio instructions')
+    audio_task(audioTracks[subj_group])
+    time_gap()
 
-# show the instructions
-# dispText('SURPRISE, MUTHAFUCKA!', template = templateTxt, nmText = 'instructions')
+  for task in range(nTasks):
 
-# start the ticking
-# rt_list = tap_task()
+    taskInd=subj_order[0,taskCount]
 
-# write the data to a csv file
-# writeData(rt_list, ['RT', 'condition'])
+    if taskInd==0:
+      # rsvp task 
+      dispText('RSVP, bitch.', template = templateTxt, nmText = 'rsvp instructions')
+      rsvp_data = rsvp_task(nTrials={4:1, 8:1}) #, 
 
-# rsvp instructions
-# dispText('RSVP, bitch.', template = templateTxt, nmText = 'instructions')
+      # make csv file name
+      rsvp_outputFile = "_".join(['TAP', expInfo['participant'], 'run'+str(run), expInfo['date']])
+      rsvp_outputFile = rsvp_outputFile + '.csv'
+      rsvp_outputFile = os.path.join('data', rsvp_outputFile)
 
-# run the rsvp
-# rsvp_task(nBlocks=2)
+      # save the csv file
+      rsvp_data.to_csv(path_or_buf=rsvp_outputFile)
 
-audio_task(audioTracks['mm'])
+      time_gap()
+    elif taskInd==1:
+      # finger-tapping task
+      dispText('SURPRISE, MUTHAFUCKA!', template = templateTxt, nmText = 'tap instructions')
+      tap_data = tap_task(durTask=2)
+      tap_data = listToPD(tap_data, ['RT', 'condition']) 
+
+      # make csv file name
+      tap_outputFile = "_".join(['TAP', expInfo['participant'], 'run'+str(run), expInfo['date']])
+      tap_outputFile = tap_outputFile + '.csv'
+      tap_outputFile = os.path.join('data', tap_outputFile)
+
+      # save the csv file
+      tap_data.to_csv(path_or_buf=tap_outputFile)
+
+      time_gap()
+    
+    # increment the index
+    taskCount += 1
+
+# thank them for coming in
+dispText('Thank you for participating.', template=templateTxt, nmText="thanks")
 
 # ==============================================================================
 # RSVP Task
