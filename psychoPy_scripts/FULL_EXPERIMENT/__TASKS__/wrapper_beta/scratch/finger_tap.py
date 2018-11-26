@@ -798,4 +798,4 @@ dispText('Thank you for participating.', template=templateTxt, nmText="thanks")
 
 # close the window and quit PsychoPy
 win.close()
-# core.quit()
+core.quit()
