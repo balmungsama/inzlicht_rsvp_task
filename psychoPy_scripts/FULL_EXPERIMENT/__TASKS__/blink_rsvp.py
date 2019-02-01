@@ -68,8 +68,8 @@ fontSzStim = .5      # font size for the stimuli (starts at .1)
 sep_short = 4 # SHORT number of stimuli that should seperate T1 from T2
 sep_long  = 8 # LONG  number of stimuli that should seperate T1 from T2
 
-nShortTrials = 72  # number of short-interval trials
-nLongTrials  = 192 # number of long-interval trials
+nShortTrials = 10 #72  # number of short-interval trials
+nLongTrials  = 10 #192 # number of long-interval trials
 
 nBlocks = 2 # number of blocks in the task
 
@@ -161,8 +161,12 @@ block_count = 0
 #create an array of short/long interval conditions
 
 trialType_sep  = np.repeat(a = ['short', 'long'], repeats = [nLongTrials, nShortTrials])
-trialType_sep  = np.repeat(a = trialType_sep, repeats = len(trialType_stim))
-trialType_stim = np.repeat(a = trialType_stim, repeats = nLongTrials + nShortTrials)
+trialType_sep  = np.repeat(a = trialType_sep    , repeats = len(trialType_stim))
+trialType_stim = np.repeat(a = trialType_stim   , repeats = nLongTrials + nShortTrials)
+
+# randomly re-order the arrays
+np.random.shuffle(trialType_sep )
+np.random.shuffle(trialType_stim)
 
 #create an array of short/long interval conditions
 
@@ -525,7 +529,7 @@ for thisBlock in block:
         stim_count  = 0 # keep track of which stimulus to display
         nstim = randint(15,19)
 
-        trialType_cur = randint(0, np.shape(trialType_mat)[0]-1) # determine type of tral (eg. T2-present, long seperation)
+        trialType_cur = randint(0, np.shape(trialType_mat)[0]-1) # determine type of trial (eg. T2-present, long seperation)
         trialType_cur = trialType_mat[trialType_cur]
         stim_array    = [rand.choice(string.ascii_uppercase) for _ in range(nstim)] # begin building array of stimuli to be shown in this trial
 
